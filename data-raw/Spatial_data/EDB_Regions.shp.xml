@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20211026</CreaDate><CreaTime>12551600</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\Rename" Date="20211026" Time="125516">Rename C:\Repositories\01_Personal\EDBdata\data-raw\Spatial_data\EDB_Regions_4326.shp C:\Repositories\01_Personal\EDBdata\data-raw\Spatial_data\EDB_Regions.shp ShapeFile</Process></lineage></DataProperties></Esri></metadata>
