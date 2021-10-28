@@ -25,8 +25,8 @@ download_hab <- function(temp_path, hab_yr, hab_month) {
 hab_2020 <- c(5:12)
 for (i in hab_2020) {download_hab(temp_dir_hab, 2020, i)}
 
-# Download data for May-September 2021
-hab_2021 <- c(5:9)
+# Download data for May-October 2021
+hab_2021 <- c(5:10)
 for (i in hab_2021) {download_hab(temp_dir_hab, 2021, i)}
 
 # Create a vector of all file paths for the HAB satellite data
