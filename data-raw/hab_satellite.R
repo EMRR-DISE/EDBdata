@@ -57,7 +57,7 @@ sf_edb_reg <- read_sf("data-raw/Spatial_data/EDB_Regions.shp")
 
 # Clean up Franks-Mildred and EDB regions shapefiles to contain just the necessary variables
 sf_franks_mildred_clean <- sf_franks_mildred %>% select(Name = HNAME)
-sf_edb_reg_clean <- sf_edb_reg %>% select(-notes)
+sf_edb_reg_clean <- sf_edb_reg %>% select(Region = Regions)
 
 # Transform crs of Franks-Mildred and EDB region shapefiles to the crs of the HAB satellite data
 crs_hab_sat <- st_crs(df_hab_sat$strs_prx_obj[[1]])
@@ -153,7 +153,7 @@ hab_sat_ci_edb_reg <- df_hab_sat_clean %>%
   unnest(cols = df_edb) %>%
   rename(Date = strs_date) %>%
   # Fill in any missing date-region combinations grouped by year
-  fill_miss_dates(Regions)
+  fill_miss_dates(Region)
 
 # Delete temporary directory containing HAB satellite data
 unlink(temp_dir_hab, recursive = TRUE)
