@@ -13,7 +13,12 @@ data.
 
 This package provides the following data tables:
 
--   Nothing final right now since its in early development
+-   `hab_sat_ci_fr_mil`: daily average Cyano Index pixel values for
+    Franks Tract and Mildred Island for the spring through late fall
+    (May-Dec) in 2020 and 2021
+-   `hab_sat_ci_edb_reg`: daily average Cyano Index pixel values for the
+    Emergency Drought Barrier (EDB) regions for the spring through late
+    fall (May-Dec) in 2020 and 2021
 
 ## Installation
 
@@ -25,15 +30,7 @@ with:
 devtools::install_github("mountaindboz/EDBdata")
 ```
 
-## Example - needs updating
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(EDBdata)
-## basic example code
-```
-
 ## Data Sources
 
-Nothing yet! In early development.
+San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis
+Tool. <https://fhab.sfei.org/>
