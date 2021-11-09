@@ -11,35 +11,49 @@ library(stars)
 library(lubridate)
 library(exactextractr)
 
-# Create a subfolder in a temporary directory to temporarily store .tif files for the R session
-dir.create(temp_dir_hab <- file.path(tempdir(), "hab_data"))
+# Set download to TRUE if need to download harmful algal bloom (HAB) satellite data
+download <- FALSE
 
-# Function to download and unzip harmful algal bloom (HAB) satellite data (cyanobacteria abundance)
-  # from the https://fhab.sfei.org/ website
-download_hab <- function(temp_path, hab_yr, hab_month) {
-  hab_url <- glue("https://fhab.sfei.org/lib/download.php?request=download&dltype=month&year={hab_yr}&month={hab_month}&product=Mosaic")
-  out_path <- file.path(temp_path, glue("mosaic_{hab_yr}_{hab_month}.zip"))
+# Download HAB satellite data if necessary
+if (download) {
+  # Create a subfolder in data-raw to store .tif files on local computer if it doesn't already exist
+  if (!dir.exists("data-raw/HAB_satellite_data")) {
+    dir.create(file.path("data-raw", "HAB_satellite_data"))
+  }
 
-  curl_download(hab_url, out_path)
-  unzip(out_path, exdir = temp_path)
-  Sys.sleep(5)
+  # Define subfolder directory to store .tif files
+  dir_hab_sat <- file.path("data-raw", "HAB_satellite_data")
+
+  # Function to download and unzip harmful algal bloom (HAB) satellite data (cyanobacteria abundance)
+    # from the https://fhab.sfei.org/ website
+  download_hab <- function(hab_yr, hab_month) {
+    hab_url <- glue("https://fhab.sfei.org/lib/download.php?request=download&dltype=month&year={hab_yr}&month={hab_month}&product=Mosaic")
+    out_path <- file.path(dir_hab_sat, glue("mosaic_{hab_yr}_{hab_month}.zip"))
+
+    curl_download(hab_url, out_path)
+    unzip(out_path, exdir = dir_hab_sat)
+    Sys.sleep(5)
+  }
+
+  # Download data for May-December 2020
+  hab_2020 <- c(5:12)
+  for (i in hab_2020) {download_hab(2020, i)}
+
+  # Download data for May-October 2021
+  hab_2021 <- c(5:10)
+  for (i in hab_2021) {download_hab(2021, i)}
+
+  # Remove .zip files
+  invisible(file.remove(dir(path = dir_hab_sat, pattern = "zip$", full.names = TRUE)))
 }
 
-# Download data for May-December 2020
-hab_2020 <- c(5:12)
-for (i in hab_2020) {download_hab(temp_dir_hab, 2020, i)}
-
-# Download data for May-October 2021
-hab_2021 <- c(5:10)
-for (i in hab_2021) {download_hab(temp_dir_hab, 2021, i)}
-
 # Create a vector of all file paths for the HAB satellite data
-fp_hab <- dir(path = temp_dir_hab, pattern = "tif$", full.names = TRUE)
+fp_hab_sat <- dir(path = "data-raw/HAB_satellite_data", pattern = "tif$", full.names = TRUE)
 
 # Create a nested data frame to store and clean the HAB satellite data
 df_hab_sat <-
   tibble(
-    fp = fp_hab,
+    fp = fp_hab_sat,
     strs_prx_obj = map(fp, read_stars, proxy = TRUE)
   ) %>%
   # pull out date components and convert to date
@@ -154,9 +168,6 @@ hab_sat_ci_edb_reg <- df_hab_sat_clean %>%
   rename(Date = strs_date) %>%
   # Fill in any missing date-region combinations grouped by year
   fill_miss_dates(Region)
-
-# Delete temporary directory containing HAB satellite data
-unlink(temp_dir_hab, recursive = TRUE)
 
 # Save final data sets containing daily averages as csv files for easier diffing
 write_csv(hab_sat_ci_fr_mil, "data-raw/hab_sat_ci_fr_mil.csv")
