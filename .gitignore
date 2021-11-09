@@ -3,3 +3,6 @@
 .Rdata
 .httr-oauth
 .DS_Store
+
+# All tif files in the HAB_satellite/data directory
+HAB_satellite_data/
