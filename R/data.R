@@ -1,37 +1,38 @@
-#' @title Daily average Cyano Index values for Franks Tract and Mildred Island
-#' @description A data set containing daily average Cyano Index pixel values for
-#'   Franks Tract and Mildred Island for the spring through late fall (May-Dec)
-#'   in 2020 and 2021. Zonal statistics were calculated from satellite data
-#'   downloaded from the Harmful Algal Blooms Analysis Tool (see Source section
-#'   below). Used in the analyses for the Emergency Drought Barrier (EDB).
+#' @title Counts of pixel values within Cyano Index categories for Franks Tract
+#'   and Mildred Island
+#' @description A data set containing counts of pixel values within 5 Cyano
+#'   Index categories for Franks Tract and Mildred Island for the spring through
+#'   late fall (May-Dec) in 2020 and 2021. The Cyano Index categories were based
+#'   on WHO recreational guidance level thresholds. Counts only include pixels
+#'   that were completely within the polygons for the two regions. The data set
+#'   only includes date-region combinations where there were greater than 25%
+#'   valid pixels within the region. Zonal statistics were calculated from
+#'   satellite data downloaded from the Harmful Algal Blooms Analysis Tool (see
+#'   Source section below). Used in the analyses for the Emergency Drought
+#'   Barrier (EDB).
 #'
-#' @format data frame with 852 rows and 3 columns
+#' @format data frame with 329 rows and 3 columns
 #' \describe{
 #'   \item{Date}{Date of satellite imagery}
-#'   \item{Name}{Name of the polygon area. Either Franks Tract or Mildred
+#'   \item{Name}{Name of the polygon region. Either Franks Tract or Mildred
 #'     Island.}
-#'   \item{mean_pixel_val}{Daily average Cyano Index pixel value for the area in `Name`}
+#'   \item{Non_detect}{Count of the number of pixels below the detection limit
+#'     for the method which is less than or equal to 6,310 cells/mL}
+#'   \item{Low}{Count of the number of pixels in the Low Cyano Index category
+#'     defined as having greater than 6,310 cells/mL but less than 19,999
+#'     cells/mL}
+#'   \item{Moderate}{Count of the number of pixels in the Moderate Cyano Index
+#'     category defined as having between 19,999 and 99,999 cells/mL}
+#'   \item{High}{Count of the number of pixels in the High Cyano Index category
+#'     defined as having between 99,999 and 999,999 cells/mL}
+#'   \item{Very_high}{Count of the number of pixels in the Very High Cyano Index
+#'     category defined as having greater than 999,999 cells/mL}
+#'   \item{Invalid_or_missing}{Count of the number of pixels that were either
+#'     invalid (land, adjacency) or missing (clouds, no data, or some other
+#'     reason)}
 #' }
 #'
 #' @source San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis
 #'   Tool. <https://fhab.sfei.org/>
-"hab_sat_ci_fr_mil"
-
-#' @title Daily average Cyano Index values for the EDB regions
-#' @description A data set containing daily average Cyano Index pixel values for
-#'   the Emergency Drought Barrier (EDB) regions for the spring through late
-#'   fall (May-Dec) in 2020 and 2021. Zonal statistics were calculated from
-#'   satellite data downloaded from the Harmful Algal Blooms Analysis Tool (see
-#'   Source section below). Used in the analyses for the EDB.
-#'
-#' @format data frame with 1278 rows and 3 columns
-#' \describe{
-#'   \item{Date}{Date of satellite imagery}
-#'   \item{Region}{Name of the EDB region. Either Sacramento, San Joaquin, or
-#'     Central Delta.}
-#'   \item{mean_pixel_val}{Daily average Cyano Index pixel value for the area in `Region`}
-#' }
-#'
-#' @inherit hab_sat_ci_fr_mil return source
-"hab_sat_ci_edb_reg"
+"sat_ci_count_fr_mil"
 
