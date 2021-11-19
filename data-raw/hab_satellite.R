@@ -1,6 +1,8 @@
 # Code to prepare HAB satellite data sets:
-  # 1) `hab_sat_ci_fr_mil` - daily average Cyano Index pixel values within Franks Tract and Mildred Island
-  # 2) `hab_sat_ci_edb_reg` - daily average Cyano Index pixel values within the EDB regions
+  # 1) `sat_ci_count_fr_mil` - counts of pixel values within each CI category for Franks Tract
+    # and Mildred Island
+  # 2) Kept placeholder code to perform same procedure for the EDB regions, but no data object
+    # exists for this currently
 
 
 # Load packages
@@ -90,16 +92,14 @@ bbox_edb_reg[4] <- bbox_edb_reg[4] + (bbox_edb_reg_yrange * 0.05)
 
 # Create a vector of dates to exclude from the analysis since the imagery doesn't cover the Delta region
 dates_rm <-
-  tibble(
-    dates = c(
+  ymd(
+    c(
       "2020-12-22",
       "2021-07-19",
       "2021-07-22",
       "2021-08-16"
     )
-  ) %>%
-  mutate(dates = ymd(dates)) %>%
-  pull(dates)
+  )
 
 # Prepare HAB satellite data for zonal statistics
 df_hab_sat_clean <- df_hab_sat %>%
@@ -113,8 +113,6 @@ df_hab_sat_clean <- df_hab_sat %>%
         setNames("pixel_val") %>%
         # Convert factor to numeric
         mutate(pixel_val = as.numeric(as.character(pixel_val))) %>%
-        # Convert indices greater than 250 to NA values since these represent "no data"
-        mutate(pixel_val = replace(pixel_val, pixel_val > 250, NA_real_)) %>%
         # Convert to raster object
         st_as_stars() %>%
         as("Raster")
@@ -122,57 +120,105 @@ df_hab_sat_clean <- df_hab_sat %>%
   ) %>%
   select(-strs_prx_obj)
 
-# Function to calculate average pixel values within polygons - converting NaN values to
-  # numeric NA values
-calc_avg_pixel_val <- function(sf_obj, rast_obj) {
-  sf_obj %>%
-    mutate(mean_pixel_val = exact_extract(rast_obj, sf_obj, "mean")) %>%
-    mutate(mean_pixel_val = if_else(!is.nan(mean_pixel_val), mean_pixel_val, NA_real_))
+# Function to count number of pixels within each CI category and the percentage of valid pixels
+  # only for the pixels completely within the polygon (100% coverage fraction)
+count_ci_cat <- function(df) {
+  # Count pixels within each CI category
+  df_count <- df %>%
+    filter(coverage_fraction == 1) %>%
+    mutate(
+      ci_category = case_when(
+        value == 0 ~ "Non_detect",
+        value <= 41 ~ "Low",
+        value <= 99 ~ "Moderate",
+        value <= 183 ~ "High",
+        value <= 250 ~ "Very_high",
+        TRUE ~ "Invalid_or_missing"
+      )
+    ) %>%
+    count(ci_category) %>%
+    rename(pixel_count = n)
+
+  # Calculate total number of pixels counted
+  vec_pixel_sum <- sum(df_count$pixel_count)
+
+  df_f <- df_count %>%
+    # Restructure data frame into wide format
+    pivot_wider(names_from = ci_category, values_from = pixel_count) %>%
+    # Add total number of pixels counted and the percent of pixels with valid data (<= 250)
+    mutate(
+      pixel_sum = vec_pixel_sum,
+      perc_valid = (1 - Invalid_or_missing/pixel_sum) * 100
+    )
+
+  return(df_f)
 }
 
-# Function to convert sf object to a tibble
-conv_sf2tbl <- function(sf_obj) {
-  sf_obj %>% as_tibble() %>% select(-geometry)
-}
-
-# Function to fill in any missing date-polygon combinations grouped by year
-fill_miss_dates <- function(df, poly_var) {
+# Function to replace NA counts with zeros for the CI categories
+repl_ci_count_na <- function(df) {
   df %>%
-    mutate(Year_tmp = year(Date)) %>%
-    group_by(Year_tmp) %>%
-    complete(Date = seq.Date(min(Date), max(Date), by = "1 day"), {{ poly_var }}) %>%
-    ungroup() %>%
-    select(-Year_tmp)
+    replace_na(
+      list(
+        Non_detect = 0,
+        Low = 0,
+        Moderate = 0,
+        High = 0,
+        Very_high = 0,
+        Invalid_or_missing = 0
+      )
+    )
 }
 
-# Calculate daily average pixel values within Franks Tract and Mildred Island
-hab_sat_ci_fr_mil <- df_hab_sat_clean %>%
+# Function to fill in any missing date-polygon combinations grouped by year -
+  # Keeping this function in case I decide to use it in the future
+# fill_miss_dates <- function(df, poly_var) {
+#   df %>%
+#     mutate(Year_tmp = year(Date)) %>%
+#     group_by(Year_tmp) %>%
+#     complete(Date = seq.Date(min(Date), max(Date), by = "1 day"), {{ poly_var }}) %>%
+#     ungroup() %>%
+#     select(-Year_tmp)
+# }
+
+# Calculate counts of pixel values within each CI category for Franks Tract and Mildred Island
+sat_ci_count_fr_mil <- df_hab_sat_clean %>%
   mutate(sf_fr_mil = list(sf_franks_mildred_32611)) %>%
-  mutate(sf_fr_mil = map2(sf_fr_mil, rast_obj_crop, calc_avg_pixel_val)) %>%
-  # Simplify to a summary data frame
-  mutate(df_fr_mil = map(sf_fr_mil, conv_sf2tbl)) %>%
-  select(strs_date, df_fr_mil) %>%
+  # Extract pixels from within each polygon
+  mutate(sf_fr_mil = map2(sf_fr_mil, rast_obj_crop, ~mutate(.x, rast_extract = exact_extract(.y, .x)))) %>%
+  # Convert sf object to data frame
+  mutate(df_fr_mil = map(sf_fr_mil, st_drop_geometry)) %>%
+  select(Date = strs_date, df_fr_mil) %>%
   unnest(cols = df_fr_mil) %>%
-  rename(Date = strs_date) %>%
-  # Fill in any missing date-name combinations grouped by year
-  fill_miss_dates(Name)
-
-# Calculate daily average pixel values within the EDB regions
-hab_sat_ci_edb_reg <- df_hab_sat_clean %>%
-  mutate(sf_edb = list(sf_edb_reg_32611)) %>%
-  mutate(sf_edb = map2(sf_edb, rast_obj_crop, calc_avg_pixel_val)) %>%
+  # Count number of pixels in each CI category, totals, and percent valid pixels
+  mutate(rast_extract = map(rast_extract, count_ci_cat)) %>%
   # Simplify to a summary data frame
-  mutate(df_edb = map(sf_edb, conv_sf2tbl)) %>%
-  select(strs_date, df_edb) %>%
-  unnest(cols = df_edb) %>%
-  rename(Date = strs_date) %>%
-  # Fill in any missing date-region combinations grouped by year
-  fill_miss_dates(Region)
+  unnest(cols = rast_extract) %>%
+  # Only include days where there were greater than 25% valid pixels
+  filter(perc_valid > 25) %>%
+  # Reorder and select variables
+  select(
+    Date,
+    Name,
+    Non_detect,
+    Low,
+    Moderate,
+    High,
+    Very_high,
+    Invalid_or_missing
+  ) %>%
+  # Replace NA counts with zeros
+  repl_ci_count_na() #%>%
+  # Fill in any missing date-name combinations grouped by year - not including this for now
+  # fill_miss_dates(Name)
 
-# Save final data sets containing daily averages as csv files for easier diffing
-write_csv(hab_sat_ci_fr_mil, "data-raw/hab_sat_ci_fr_mil.csv")
-write_csv(hab_sat_ci_edb_reg, "data-raw/hab_sat_ci_edb_reg.csv")
+# Calculate counts of pixel values within each CI category for the EDB regions
+  # Not including this for now, but keeping it as a placeholder
 
-# Save final data sets containing daily averages as objects in the data package
-usethis::use_data(hab_sat_ci_fr_mil, hab_sat_ci_edb_reg, overwrite = TRUE)
+# Save final data set containing counts of pixel values within each CI category as csv file
+  # for easier diffing
+write_csv(sat_ci_count_fr_mil, "data-raw/sat_ci_count_fr_mil.csv")
+
+# Save final data sets containing counts of pixel values within each CI category as objects
+  # in the data package
+usethis::use_data(sat_ci_count_fr_mil, overwrite = TRUE)
 
