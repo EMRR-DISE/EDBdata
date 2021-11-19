@@ -35,15 +35,19 @@ Tool. \url{https://fhab.sfei.org/}
 sat_ci_count_fr_mil
 }
 \description{
-A data set containing counts of pixel values within 5 Cyano
+A data set containing counts of pixel values within 4 Cyano
 Index categories for Franks Tract and Mildred Island for the spring through
-late fall (May-Dec) in 2020 and 2021. The Cyano Index categories were based
-on WHO recreational guidance level thresholds. Counts only include pixels
-that were completely within the polygons for the two regions. The data set
-only includes date-region combinations where there were greater than 25\%
-valid pixels within the region. Zonal statistics were calculated from
-satellite data downloaded from the Harmful Algal Blooms Analysis Tool (see
-Source section below). Used in the analyses for the Emergency Drought
-Barrier (EDB).
+late fall (May-Dec) in 2020 and 2021. The Cyano Index categories (Low,
+Moderate, High, and Very High) were based on WHO recreational guidance
+level thresholds. The data set also includes counts of pixels that were
+below the detection limit for the imagery processing method and counts of
+pixels that were either invalid or missing.
+
+Counts only include pixels that were completely within the polygons for the
+two regions. The data set only includes date-region combinations where
+there were greater than 25\% valid pixels within the region. Zonal
+statistics were calculated from satellite data downloaded from the Harmful
+Algal Blooms Analysis Tool (see Source section below). Used in the analyses
+for the Emergency Drought Barrier (EDB).
 }
 \keyword{datasets}
