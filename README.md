@@ -13,7 +13,7 @@ data.
 
 This package provides the following data tables:
 
--   `sat_ci_count_fr_mil`: Counts of pixel values within 4 Cyano Index
+-   `hab_sat_fr_mil`: Counts of pixel values within 4 Cyano Index
     categories for Franks Tract and Mildred Island for the spring
     through late fall (May-Dec) in 2020 and 2021
 

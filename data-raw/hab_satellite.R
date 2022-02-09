@@ -1,5 +1,5 @@
 # Code to prepare HAB satellite data sets:
-  # 1) `sat_ci_count_fr_mil` - counts of pixel values within each CI category for Franks Tract
+  # 1) `hab_sat_fr_mil` - counts of pixel values within each CI category for Franks Tract
     # and Mildred Island
   # 2) Kept placeholder code to perform same procedure for the EDB regions, but no data object
     # exists for this currently
@@ -181,7 +181,7 @@ repl_ci_count_na <- function(df) {
 # }
 
 # Calculate counts of pixel values within each CI category for Franks Tract and Mildred Island
-sat_ci_count_fr_mil <- df_hab_sat_clean %>%
+hab_sat_fr_mil <- df_hab_sat_clean %>%
   mutate(sf_fr_mil = list(sf_franks_mildred_32611)) %>%
   # Extract pixels from within each polygon
   mutate(sf_fr_mil = map2(sf_fr_mil, rast_obj_crop, ~mutate(.x, rast_extract = exact_extract(.y, .x)))) %>%
@@ -216,9 +216,9 @@ sat_ci_count_fr_mil <- df_hab_sat_clean %>%
 
 # Save final data set containing counts of pixel values within each CI category as csv file
   # for easier diffing
-write_csv(sat_ci_count_fr_mil, "data-raw/sat_ci_count_fr_mil.csv")
+write_csv(hab_sat_fr_mil, "data-raw/hab_sat_fr_mil.csv")
 
 # Save final data sets containing counts of pixel values within each CI category as objects
   # in the data package
-usethis::use_data(sat_ci_count_fr_mil, overwrite = TRUE)
+usethis::use_data(hab_sat_fr_mil, overwrite = TRUE)
 

@@ -38,7 +38,7 @@
 #'
 #' @source San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis
 #'   Tool. <https://fhab.sfei.org/>
-"sat_ci_count_fr_mil"
+"hab_sat_fr_mil"
 
 #' @title Phytoplankton community data from 2014-2021 for stations within the
 #'   EDB regions
