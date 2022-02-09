@@ -50,9 +50,9 @@ df_phyto_early_c <- df_phyto_early %>%
   ) %>%
   # Reorder and rename variables
   select(
-    DateTime,
-    Date = SampleDate,
     Station = StationCode,
+    Date = SampleDate,
+    DateTime,
     Taxon,
     Genus,
     Species,
@@ -96,9 +96,9 @@ df_phyto_recent <- lst_phyto_recent %>%
     OrganismsPerMl = Factor * Count
   ) %>%
   select(
-    DateTime,
-    Date,
     Station = StationCode,
+    Date,
+    DateTime,
     Taxon,
     Genus,
     Species,
@@ -188,11 +188,11 @@ df_phyto_all_c4 %>% filter(is.na(AlgalType)) %>% distinct(Genus)
 phyto_edb <- df_phyto_all_c4 %>%
   mutate(Year = year(Date)) %>%
   select(
-    DateTime,
-    Date,
-    Year,
     Station,
     Region,
+    Year,
+    Date,
+    DateTime,
     Taxon,
     Genus,
     Species,
