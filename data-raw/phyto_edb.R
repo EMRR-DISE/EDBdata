@@ -212,7 +212,7 @@ for (n in names(phyto_edb)) {
 
 # Save final data set containing phytoplankton community data for the EDB analysis as csv file
   # for easier diffing
-write_csv(phyto_edb, "data-raw/phyto_edb.csv")
+write_csv(phyto_edb, "data-raw/Final/phyto_edb.csv")
 
 # Save final data set containing phytoplankton community data for the EDB analysis as objects
   # in the data package

@@ -216,7 +216,7 @@ hab_sat_fr_mil <- df_hab_sat_clean %>%
 
 # Save final data set containing counts of pixel values within each CI category as csv file
   # for easier diffing
-write_csv(hab_sat_fr_mil, "data-raw/hab_sat_fr_mil.csv")
+write_csv(hab_sat_fr_mil, "data-raw/Final/hab_sat_fr_mil.csv")
 
 # Save final data sets containing counts of pixel values within each CI category as objects
   # in the data package
