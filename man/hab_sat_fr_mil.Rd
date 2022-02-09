@@ -6,7 +6,7 @@
 \title{Counts of pixel values within Cyano Index categories for Franks Tract
 and Mildred Island}
 \format{
-data frame with 329 rows and 3 columns
+data frame with 329 rows and 8 columns
 \describe{
 \item{Date}{Date of satellite imagery}
 \item{Name}{Name of the polygon region. Either Franks Tract or Mildred

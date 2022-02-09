@@ -15,7 +15,7 @@
 #'   Algal Blooms Analysis Tool (see Source section below). Used in the analyses
 #'   for the Emergency Drought Barrier (EDB).
 #'
-#' @format data frame with 329 rows and 3 columns
+#' @format data frame with 329 rows and 8 columns
 #' \describe{
 #'   \item{Date}{Date of satellite imagery}
 #'   \item{Name}{Name of the polygon region. Either Franks Tract or Mildred
