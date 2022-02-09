@@ -40,3 +40,30 @@
 #'   Tool. <https://fhab.sfei.org/>
 "sat_ci_count_fr_mil"
 
+#' @title Phytoplankton community data from 2014-2021 for stations within the
+#'   EDB regions
+#' @description A data set containing phytoplankton community data collected by
+#'   DWR's Environmental Monitoring Program from 2014 - October 2021 for the
+#'   stations within the designated Emergency Drought Barrier (EDB) regions.
+#'   Used in the analyses for the EDB.
+#'
+#' @format data frame with 4,254 rows and 11 columns
+#' \describe{
+#'   \item{Station}{Location where sample was collected}
+#'   \item{Region}{Region designation of `Station` for the Emergency Drought
+#'     Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+#'   \item{Year}{Calendar year of the sample}
+#'   \item{Date}{Calendar date of the sample}
+#'   \item{DateTime}{Date and time of the sample in PST}
+#'   \item{Taxon}{Taxonomic designation of the organism as "Genus species"}
+#'   \item{Genus}{Genus designation of the organism}
+#'   \item{Species}{Species designation of the organism}
+#'   \item{AlgalType}{General Algal Type classification of the organism}
+#'   \item{Count}{Number of organisms found in the sample}
+#'   \item{OrganismsPerMl}{Estimated number of organisms per milliliter of
+#'     sample}
+#' }
+#'
+#' @source Acquired from DWR's Environmental Monitoring Program through direct
+#'   data requests
+"phyto_edb"
