@@ -16,6 +16,9 @@ This package provides the following data tables:
 -   `hab_sat_fr_mil`: Counts of pixel values within 4 Cyano Index
     categories for Franks Tract and Mildred Island for the spring
     through late fall (May-Dec) in 2020 and 2021
+-   `phyto_edb`: Phytoplankton community data collected by DWR’s
+    Environmental Monitoring Program from 2014-2021 for stations within
+    the Emergency Drought Barrier regions
 
 ## Installation
 
@@ -31,3 +34,6 @@ devtools::install_github("mountaindboz/EDBdata")
 
 San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis
 Tool. <https://fhab.sfei.org/>
+
+Phytoplankton data was acquired from DWR’s Environmental Monitoring
+Program through direct data requests
