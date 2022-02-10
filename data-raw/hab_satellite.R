@@ -4,13 +4,18 @@
   # 2) Kept placeholder code to perform same procedure for the EDB regions, but no data object
     # exists for this currently
 
-
 # Load packages
-library(tidyverse)
-library(curl)
-library(glue)
-library(stars)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(purrr)
+library(stringr)
+library(tibble)
 library(lubridate)
+library(glue)
+library(curl)
+library(stars)
+library(sf)
 library(exactextractr)
 
 # Set download to TRUE if need to download harmful algal bloom (HAB) satellite data
