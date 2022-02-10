@@ -15,7 +15,7 @@ library(sf)
 df_phyto_early <-
   read_csv(
     "data-raw/Phyto_data/EMP_phyto_data.csv",
-    col_types = "-DTcdcccd--d-----------"
+    col_types = "-DTc-cccd--d-----------"
   )
 
 # Import phytoplankton data collected from Dec 2020 - Oct 2021:
@@ -41,22 +41,10 @@ df_coord_emp <- read_csv("https://portal.edirepository.org/nis/dataviewer?packag
 df_phyto_early_c <- df_phyto_early %>%
   # filter to years 2014-2020, don't include Dec 2020 through 2021 since there is some overlap
   filter(SampleDate >= "2014-01-01" & SampleDate < "2020-12-01") %>%
-  # Create DateTime variable in PST
-  mutate(
-    DateTime = ymd_hm(
-      paste0(SampleDate, " ", hour(SampleTime), ":", minute(SampleTime)),
-      tz = "Etc/GMT+8"
-    )
-  ) %>%
-  # Reorder and rename variables
-  select(
-    Station = StationCode,
+  # Rename some variables
+  rename(
     Date = SampleDate,
-    DateTime,
-    Taxon,
-    Genus,
-    Species,
-    Count,
+    Station = StationCode,
     OrganismsPerMl = Organisms_per_mL
   )
 
@@ -85,30 +73,17 @@ df_phyto_recent <- lst_phyto_recent %>%
   bind_rows() %>%
   # Remove rows with all NA's
   filter(!if_all(everything(), is.na)) %>%
+  # Convert SampleDate to date and calculate Organisms/mL
   mutate(
-    # Create DateTime variable in PST
     Date = date(SampleDate),
-    DateTime = ymd_hm(
-      paste0(Date, " ", hour(SampleTime), ":", minute(SampleTime)),
-      tz = "Etc/GMT+8"
-    ),
-    # Calculate Organisms/mL
     OrganismsPerMl = Factor * Count
   ) %>%
-  select(
-    Station = StationCode,
-    Date,
-    DateTime,
-    Taxon,
-    Genus,
-    Species,
-    Count,
-    OrganismsPerMl
-  )
+  # Rename and remove some variables
+  rename(Station = StationCode) %>%
+  select(-c(SampleDate, Factor))
 
 # Combine recent data to earlier data
 df_phyto_all <- bind_rows(df_phyto_early_c, df_phyto_recent)
-# To add to all data: Year, Month?, EDB Region
 
 
 # 3. Clean All Data -------------------------------------------------------
@@ -125,23 +100,17 @@ df_region_emp <- df_coord_emp %>%
   # Assign "Outside" to stations without region assignments
   replace_na(list(Region = "Outside"))
 
-# Add EDB regions to all phytoplankton data
-df_phyto_all_c1 <- df_phyto_all %>% left_join(df_region_emp, by = "Station")
-
-# Look for any Stations without region assignments
-df_phyto_all_c1 %>% filter(is.na(Region)) %>% count(Station)
-# The EZ stations are all without regions because they are not fixed stations -
-  # We won't include the data for the EZ stations.
-# Stations C3A-Hood and C3A-HOOD are without regions but represent station C3A -
-  # C3A is located outside of the area of interest, so we won't include the data for these
-  # two stations.
-# Additionally, two other stations (NZ328, NZ542) are also without regions -
-  # These are most likely typos. The two stations these most likely represent (NZ325, NZS42)
-  # are located outside of the area of interest. Therefore, we won't include the data
-  # for these two stations as well.
-
-# Remove data for stations outside of the EDB regions
-df_phyto_all_c2 <- df_phyto_all_c1 %>% filter(Region != "Outside")
+# Three genera need to be added to the taxonomy table: Mayamaea, Acanthoceras, and Lindavia
+  # I looked up these three genera in AlgaeBase: https://www.algaebase.org/
+  # Also adding a placeholder for unknown Genera
+df_add_genera <-
+  tribble(
+    ~Genus, ~AlgalType,
+    "Mayamaea", "Pennate Diatom",
+    "Acanthoceras", "Centric Diatom",
+    "Lindavia", "Centric Diatom",
+    "Unknown", "Unknown"
+  )
 
 # Prepare phytoplankton classification table to be joined to data
 df_phyto_taxonomy_c1 <- df_phyto_taxonomy %>%
@@ -154,39 +123,42 @@ df_phyto_taxonomy_c1 <- df_phyto_taxonomy %>%
     !(Genus == "Leptocylindrus" & AlgalType =="Centric diatom"),
     Genus != "Unknown"
   ) %>%
-  add_row(
-    Genus = "Unknown",
-    AlgalType = "Unknown"
-  )
+  # Add additional genera to the classification table
+  bind_rows(df_add_genera)
 
-# Add taxonomic information to all phytoplankton data
-df_phyto_all_c3 <- df_phyto_all_c2 %>% left_join(df_phyto_taxonomy_c1, by = "Genus")
-
-# Look for any genera without taxonomic information
-df_phyto_all_c3 %>% filter(is.na(AlgalType)) %>% distinct(Genus)
-# Three genera need to be added to the taxonomy table: Mayamaea, Acanthoceras, and Lindavia
-  # I looked up these three genera in AlgaeBase: https://www.algaebase.org/
-df_add_genera <-
-  tribble(
-    ~Genus, ~AlgalType,
-    "Mayamaea", "Pennate Diatom",
-    "Acanthoceras", "Centric Diatom",
-    "Lindavia", "Centric Diatom"
-  )
-
-# Add two info for additional genera to the phytoplankton classification table
-df_phyto_taxonomy_c2 <- bind_rows(df_phyto_taxonomy_c1, df_add_genera)
-
-# Add updated taxonomic information to all phytoplankton data
-df_phyto_all_c4 <- df_phyto_all_c2 %>% left_join(df_phyto_taxonomy_c2, by = "Genus")
-
-# Look for any genera without taxonomic information
-df_phyto_all_c4 %>% filter(is.na(AlgalType)) %>% distinct(Genus)
-# All genera are accounted for now
-
-# Add variable for year to all phytoplankton data and reorder columns
-phyto_edb <- df_phyto_all_c4 %>%
-  mutate(Year = year(Date)) %>%
+# Finish cleaning up the phytoplankton data
+phyto_edb <- df_phyto_all %>%
+  mutate(
+    # Create DateTime variable in PST
+    DateTime = ymd_hm(
+      paste0(Date, " ", hour(SampleTime), ":", minute(SampleTime)),
+      tz = "Etc/GMT+8"
+    ),
+    # Fix a few erroneous Station names:
+      # Stations C3A-Hood and C3A-HOOD represent station C3A,
+      # Stations NZ328 and NZ542 are most likely typos and most likely represent NZ325 and NZS42
+    Station = case_when(
+      Station == "C3A-HOOD" ~ "C3A",
+      Station == "C3A-Hood" ~ "C3A",
+      Station == "NZ328" ~ "NZ325",
+      Station == "NZ542" ~ "NZS42",
+      TRUE ~ Station
+    ),
+    # Add variable for year
+    Year = year(Date)
+  ) %>%
+  # Add EDB regions to all phytoplankton data
+  left_join(df_region_emp, by = "Station") %>%
+  # Remove data for stations outside of the EDB regions keeping NA values in
+    # Region to catch errors during testing
+    # Also remove the EZ stations since they are not fixed
+  filter(
+    Region != "Outside" | is.na(Region),
+    !str_detect(Station, "^EZ")
+  ) %>%
+  # Add taxonomic information to all phytoplankton data
+  left_join(df_phyto_taxonomy_c1, by = "Genus") %>%
+  # Reorder columns
   select(
     Station,
     Region,
@@ -200,15 +172,6 @@ phyto_edb <- df_phyto_all_c4 %>%
     Count,
     OrganismsPerMl
   )
-
-# Look for NA values in each variable
-for (n in names(phyto_edb)) {
-  print(n)
-  phyto_edb %>%
-    summarize(num_na = sum(is.na(.data[[n]]))) %>%
-    pull(num_na) %>%
-    print()
-}
 
 # Save final data set containing phytoplankton community data for the EDB analysis as csv file
   # for easier diffing

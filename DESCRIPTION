@@ -2,14 +2,12 @@ Package: EDBdata
 Title: Emergency Drought Barrier Data
 Version: 0.1.0.9000
 Authors@R: 
-    person(given = "Dave",
-           family = "Bosworth",
-           role = c("aut", "cre"),
-           email = "David.Bosworth@water.ca.gov",
+    person("Dave", "Bosworth", , "David.Bosworth@water.ca.gov", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0740-3390"))
-Description: Contains data sets used in the Emergency Drought Barrier (EDB) analysis. This data package
-  also contains useful metadata describing the data sets and the processing scripts used to derive the
-  data sets.
+Description: Contains data sets used in the Emergency Drought Barrier
+    (EDB) analysis. This data package also contains useful metadata
+    describing the data sets and the processing scripts used to derive the
+    data sets.
 License: Apache License (>= 2)
 URL: https://github.com/mountaindboz/EDBdata
 BugReports: https://github.com/mountaindboz/EDBdata/issues
@@ -17,6 +15,11 @@ Depends:
     R (>= 2.10)
 Imports: 
     tibble
+Suggests: 
+    dplyr,
+    lubridate,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
