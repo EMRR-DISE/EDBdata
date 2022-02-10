@@ -174,17 +174,6 @@ repl_ci_count_na <- function(df) {
     )
 }
 
-# Function to fill in any missing date-polygon combinations grouped by year -
-  # Keeping this function in case I decide to use it in the future
-# fill_miss_dates <- function(df, poly_var) {
-#   df %>%
-#     mutate(Year_tmp = year(Date)) %>%
-#     group_by(Year_tmp) %>%
-#     complete(Date = seq.Date(min(Date), max(Date), by = "1 day"), {{ poly_var }}) %>%
-#     ungroup() %>%
-#     select(-Year_tmp)
-# }
-
 # Calculate counts of pixel values within each CI category for Franks Tract and Mildred Island
 hab_sat_fr_mil <- df_hab_sat_clean %>%
   mutate(sf_fr_mil = list(sf_franks_mildred_32611)) %>%
@@ -212,9 +201,7 @@ hab_sat_fr_mil <- df_hab_sat_clean %>%
     Invalid_or_missing
   ) %>%
   # Replace NA counts with zeros
-  repl_ci_count_na() #%>%
-  # Fill in any missing date-name combinations grouped by year - not including this for now
-  # fill_miss_dates(Name)
+  repl_ci_count_na()
 
 # Calculate counts of pixel values within each CI category for the EDB regions
   # Not including this for now, but keeping it as a placeholder
