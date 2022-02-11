@@ -17,6 +17,10 @@ library(curl)
 library(stars)
 library(sf)
 library(exactextractr)
+library(here)
+
+# Check if we are in the correct working directory
+i_am("data-raw/hab_satellite.R")
 
 # Set download to TRUE if need to download harmful algal bloom (HAB) satellite data
 download <- FALSE
@@ -24,12 +28,12 @@ download <- FALSE
 # Download HAB satellite data if necessary
 if (download) {
   # Create a subfolder in data-raw to store .tif files on local computer if it doesn't already exist
-  if (!dir.exists("data-raw/HAB_satellite_data")) {
-    dir.create(file.path("data-raw", "HAB_satellite_data"))
+  if (!dir.exists(here("data-raw/HAB_satellite_data"))) {
+    dir.create(here("data-raw/HAB_satellite_data"))
   }
 
   # Define subfolder directory to store .tif files
-  dir_hab_sat <- file.path("data-raw", "HAB_satellite_data")
+  dir_hab_sat <- here("data-raw/HAB_satellite_data")
 
   # Function to download and unzip harmful algal bloom (HAB) satellite data (cyanobacteria abundance)
     # from the https://fhab.sfei.org/ website
@@ -55,7 +59,7 @@ if (download) {
 }
 
 # Create a vector of all file paths for the HAB satellite data
-fp_hab_sat <- dir(path = "data-raw/HAB_satellite_data", pattern = "tif$", full.names = TRUE)
+fp_hab_sat <- dir(here("data-raw/HAB_satellite_data"), pattern = "tif$", full.names = TRUE)
 
 # Create a nested data frame to store and clean the HAB satellite data
 df_hab_sat <-
@@ -73,8 +77,8 @@ df_hab_sat <-
   select(strs_date, strs_prx_obj)
 
 # Import the polygon shapefiles for Franks-Mildred and the EDB regions
-sf_franks_mildred <- read_sf("data-raw/Spatial_data/Franks_Mildred.shp")
-sf_edb_reg <- read_sf("data-raw/Spatial_data/EDB_Regions.shp")
+sf_franks_mildred <- read_sf(here("data-raw/Spatial_data/Franks_Mildred.shp"))
+sf_edb_reg <- read_sf(here("data-raw/Spatial_data/EDB_Regions.shp"))
 
 # Clean up Franks-Mildred and EDB regions shapefiles to contain just the necessary variables
 sf_franks_mildred_clean <- sf_franks_mildred %>% select(Name = HNAME)
@@ -208,7 +212,7 @@ hab_sat_fr_mil <- df_hab_sat_clean %>%
 
 # Save final data set containing counts of pixel values within each CI category as csv file
   # for easier diffing
-write_csv(hab_sat_fr_mil, "data-raw/Final/hab_sat_fr_mil.csv")
+write_csv(hab_sat_fr_mil, here("data-raw/Final/hab_sat_fr_mil.csv"))
 
 # Save final data sets containing counts of pixel values within each CI category as objects
   # in the data package

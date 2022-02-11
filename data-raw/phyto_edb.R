@@ -12,29 +12,32 @@ library(tibble)
 library(lubridate)
 library(readxl)
 library(sf)
+library(here)
 
+# Check if we are in the correct working directory
+i_am("data-raw/phyto_edb.R")
 
 # 1. Import Data ----------------------------------------------------------
+
+# Create a vector of all file paths within the data-raw/Phyto_data folder
+fp_phyto_data <- dir(here("data-raw/Phyto_data/"), recursive = TRUE, full.names = TRUE)
 
 # Import earlier phytoplankton data
 df_phyto_early <-
   read_csv(
-    "data-raw/Phyto_data/EMP_phyto_data.csv",
+    str_subset(fp_phyto_data, "EMP_phyto_data.csv$"),
     col_types = "-DTc-cccd--d-----------"
   )
 
-# Import phytoplankton data collected from Dec 2020 - Oct 2021:
-# Create a vector of all file paths for the recent data
-fp_phyto_recent <- dir("data-raw/Phyto_data", pattern = "202[01]\\.xlsx$", full.names = TRUE)
-
-# Import recent phytoplankton data into a list where each element represents a file
-lst_phyto_recent <- map(fp_phyto_recent, read_excel)
+# Import phytoplankton data collected from Dec 2020 - Oct 2021
+lst_phyto_recent <- map(str_subset(fp_phyto_data, "202[01]\\.xlsx$"), read_excel)
 
 # Import phytoplankton classification table (copied from the DroughtSynthesis repository)
-df_phyto_taxonomy <- read_excel("data-raw/Phyto_data/Phyto Classification.xlsx")
+df_phyto_taxonomy <- read_excel(str_subset(fp_phyto_data, "Phyto Classification.xlsx$"))
 
 # Import the polygon shapefile for the EDB regions
-sf_edb_reg <- read_sf("data-raw/Spatial_data/EDB_Regions.shp") %>% select(Region = Regions)
+sf_edb_reg <- read_sf(here("data-raw/Spatial_data/EDB_Regions.shp")) %>%
+  select(Region = Regions)
 
 # Import EMP station coordinates from EDI
 df_coord_emp <- read_csv("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.4&entityid=827aa171ecae79731cc50ae0e590e5af")
@@ -180,7 +183,7 @@ phyto_edb <- df_phyto_all %>%
 
 # Save final data set containing phytoplankton community data for the EDB analysis as csv file
   # for easier diffing
-write_csv(phyto_edb, "data-raw/Final/phyto_edb.csv")
+write_csv(phyto_edb, here("data-raw/Final/phyto_edb.csv"))
 
 # Save final data set containing phytoplankton community data for the EDB analysis as objects
   # in the data package
