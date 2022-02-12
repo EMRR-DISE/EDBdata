@@ -1,26 +1,39 @@
 
 test_that("No variables contain `NA` values", {
-  count_na <- function(var) {
+  count_na <- function(test_var) {
     phyto_edb %>%
-      dplyr::summarize(n_na = sum(is.na(.data[[var]]))) %>%
+      dplyr::summarize(n_na = sum(is.na(.data[[test_var]]))) %>%
       dplyr::pull(n_na)
   }
 
-  expect_no_NAs <- function(test_var) {
-    eval(bquote(expect_equal(count_na(.(test_var)), 0)))
+  expect_no_NAs <- function(test_var2) {
+    eval(bquote(expect_equal(count_na(.(test_var2)), 0)))
   }
 
   # Test all variables except for Species
-  expect_no_NAs("Station")
-  expect_no_NAs("Region")
-  expect_no_NAs("Year")
-  expect_no_NAs("Date")
-  expect_no_NAs("DateTime")
-  expect_no_NAs("Taxon")
-  expect_no_NAs("Genus")
-  expect_no_NAs("AlgalType")
-  expect_no_NAs("Count")
-  expect_no_NAs("OrganismsPerMl")
+  vars_no_NAs <- stringr::str_subset(names(phyto_edb), "Species", negate = TRUE)
+  purrr::map(vars_no_NAs, expect_no_NAs)
+})
+
+test_that("Data dimensions are correct", {
+  expect_equal(nrow(phyto_edb), 4254)
+  expect_equal(ncol(phyto_edb), 11)
+
+  name_check <- c(
+    "Station",
+    "Region",
+    "Year",
+    "Date",
+    "DateTime",
+    "Taxon",
+    "Genus",
+    "Species",
+    "AlgalType",
+    "Count",
+    "OrganismsPerMl"
+  )
+
+  expect_equal(names(phyto_edb), name_check)
 })
 
 test_that("All variables are correct class", {
@@ -37,22 +50,45 @@ test_that("All variables are correct class", {
   expect_equal(class(phyto_edb$OrganismsPerMl), "numeric")
 })
 
+test_that("All Stations are as expected", {
+  stations_check <- c("C9", "D12", "D16", "D19", "D22", "D24", "D26", "D28A", "D4", "NZ068")
+  expect_equal(sort(unique(phyto_edb$Station)), stations_check)
+})
+
+test_that("All Region names are as expected", {
+  regions_check <- c("Central Delta", "Sacramento", "San Joaquin")
+  expect_equal(sort(unique(phyto_edb$Region)), regions_check)
+})
+
+test_that("Data is present for all years between 2014 and 2021", {
+  expect_equal(sort(unique(phyto_edb$Year)), c(2014:2021))
+})
+
+test_that("Date is formatted correctly", {
+  expect_true(all(stringr::str_detect(
+    as.character(phyto_edb$Date),
+    "[0-9]{4}-[0-9]{2}-[0-9]{2}"
+  )))
+})
+
+test_that("DateTime is formatted correctly", {
+  expect_true(all(stringr::str_detect(
+    as.character(phyto_edb$DateTime),
+    "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"
+  )))
+})
+
+test_that("The Date and DateTime variables are in alignment", {
+  phyto_edb_t <- phyto_edb %>% dplyr::mutate(Date_t = lubridate::date(DateTime))
+  expect_true(all(phyto_edb_t$Date == phyto_edb_t$Date_t))
+})
+
 test_that("The time zone of DateTime is PST", {
   expect_equal(lubridate::tz(phyto_edb$DateTime), "Etc/GMT+8")
 })
 
-test_that("There are no zeros in Count and OrganismsPerMl", {
-  expect_true(!any(phyto_edb$Count == 0))
-  expect_true(!any(phyto_edb$OrganismsPerMl == 0))
-})
-
-test_that("All Region names are as expected", {
-  Regions <- c("Central Delta", "Sacramento", "San Joaquin")
-  expect_equal(sort(unique(phyto_edb$Region)), Regions)
-})
-
 test_that("All AlgalType names are as expected", {
-  AlgalTypes <- c(
+  AlgalTypes_check <- c(
     "Centric Diatom",
     "Chrysophyte",
     "Ciliate",
@@ -66,19 +102,11 @@ test_that("All AlgalType names are as expected", {
     "Synurophyte"
   )
 
-  expect_equal(sort(unique(phyto_edb$AlgalType)), AlgalTypes)
+  expect_equal(sort(unique(phyto_edb$AlgalType)), AlgalTypes_check)
 })
 
-test_that("All Stations are as expected", {
-  Stations <- c("C9", "D12", "D16", "D19", "D22", "D24", "D26", "D28A", "D4", "NZ068")
-  expect_equal(sort(unique(phyto_edb$Station)), Stations)
+test_that("There are no zeros in Count and OrganismsPerMl", {
+  expect_false(any(phyto_edb$Count == 0))
+  expect_false(any(phyto_edb$OrganismsPerMl == 0))
 })
 
-test_that("The Date and DateTime variables are in alignment", {
-  phyto_edb_t <- phyto_edb %>% dplyr::mutate(Date_t = lubridate::date(DateTime))
-  expect_true(all(phyto_edb_t$Date == phyto_edb_t$Date_t))
-})
-
-test_that("Data is present for all years between 2014 and 2021", {
-  expect_equal(sort(unique(phyto_edb$Year)), c(2014:2021))
-})
