@@ -71,12 +71,12 @@ test_that("All Names are as expected", {
 })
 
 test_that("All pixel count values are in their expected range", {
-  count_min_max <- function(name, test_var, min_max = c("min", "max")) {
+  count_min_max <- function(name, test_var, min_max = c("minimum", "maximum")) {
     hab_sat_fr_mil %>%
       dplyr::filter(Name == name) %>%
-      {if (min_max == "min") {
+      {if (min_max == "minimum") {
         dplyr::summarize(., stat_val = min(.data[[test_var]]))
-      } else if (min_max == "max") {
+      } else if (min_max == "maximum") {
         dplyr::summarize(., stat_val = max(.data[[test_var]]))
       }} %>%
       dplyr::pull(stat_val)
@@ -93,7 +93,7 @@ test_that("All pixel count values are in their expected range", {
 
   # Test pixel count variables - minimum is greater than or equal to zero
   expect_min <- function(name2, test_var2) {
-    eval(bquote(expect_gte(count_min_max(.(name2), .(test_var2), "min"), 0)))
+    eval(bquote(expect_gte(count_min_max(.(name2), .(test_var2), "mininum"), 0)))
   }
   expect_min_fr <- purrr::partial(expect_min, name2 = "Franks Tract")
   purrr::map(pixel_vars, expect_min_fr)
@@ -102,7 +102,7 @@ test_that("All pixel count values are in their expected range", {
 
   # Test pixel count variables - maximum is less than or equal to 166 (Franks) or 42 (Mildred)
   expect_max <- function(name2, test_var2, test_val) {
-    eval(bquote(expect_lte(count_min_max(.(name2), .(test_var2), "max"), .(test_val))))
+    eval(bquote(expect_lte(count_min_max(.(name2), .(test_var2), "maximum"), .(test_val))))
   }
   expect_max_fr <- purrr::partial(expect_max, name2 = "Franks Tract", test_val = 166)
   purrr::map(pixel_vars, expect_max_fr)
