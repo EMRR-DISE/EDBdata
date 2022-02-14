@@ -93,7 +93,7 @@ test_that("All pixel count values are in their expected range", {
 
   # Test pixel count variables - minimum is greater than or equal to zero
   expect_min <- function(name2, test_var2) {
-    eval(bquote(expect_gte(count_min_max(.(name2), .(test_var2), "mininum"), 0)))
+    eval(bquote(expect_gte(count_min_max(.(name2), .(test_var2), "minimum"), 0)))
   }
   expect_min_fr <- purrr::partial(expect_min, name2 = "Franks Tract")
   purrr::map(pixel_vars, expect_min_fr)
