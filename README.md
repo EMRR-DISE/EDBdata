@@ -4,6 +4,8 @@
 # EDBdata
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/mountaindboz/EDBdata/workflows/R-CMD-check/badge.svg)](https://github.com/mountaindboz/EDBdata/actions)
 <!-- badges: end -->
 
 An R data package containing data sets used in the Emergency Drought

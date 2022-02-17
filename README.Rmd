@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # EDBdata
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/mountaindboz/EDBdata/workflows/R-CMD-check/badge.svg)](https://github.com/mountaindboz/EDBdata/actions)
 <!-- badges: end -->
 
 An R data package containing data sets used in the Emergency Drought Barrier (EDB) analysis. This data package also contains useful metadata describing the data sets and the processing scripts used to derive the data. 
