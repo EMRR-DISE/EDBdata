@@ -26,12 +26,14 @@ Suggests:
     readr,
     readxl,
     sf,
+    spelling,
     stars,
     stringr,
     testthat (>= 3.0.0),
     tidyr
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
