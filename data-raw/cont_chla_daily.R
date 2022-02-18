@@ -121,7 +121,6 @@ if (download == TRUE) {
   # Export raw data as .csv files for each site
   lst(MDM, SJJ) %>%
     map(as_tibble) %>%
-    # map(~ mutate(.x, dateTime = as.character(dateTime))) %>%
     iwalk(
       .f = ~ write_csv(
         .x,
@@ -132,7 +131,7 @@ if (download == TRUE) {
 }
 
 # Create a vector of file paths for the continuous chlorophyll data collected by USGS
-fp_chla_usgs <- sort(dir(here("data-raw/Cont_chla_data"), full.names = TRUE))
+fp_chla_usgs <- sort(dir(here("data-raw/Cont_chla_data"), pattern = "\\.csv$", full.names = TRUE))
 
 # Import continuous chlorophyll data from USGS into a nested dataframe
 ndf_chla_usgs <-
@@ -214,10 +213,10 @@ df_chla_clean2 <- df_chla_clean1 %>%
   # averages and medians
 
 # Look for duplicated time stamps
-df_chla_clean2 %>%
-  mutate(DateTime = round_date(DateTime, unit = "15 minute")) %>%
-  count(Station, DateTime) %>%
-  filter(n > 1)
+# df_chla_clean2 %>%
+#   mutate(DateTime = round_date(DateTime, unit = "15 minute")) %>%
+#   count(Station, DateTime) %>%
+#   filter(n > 1)
 # No duplicated time stamps present in data set
 
 # Look at min and max values for each station
@@ -229,7 +228,7 @@ qc_min_max <- df_chla_clean2 %>%
   ) %>%
   ungroup()
 
-View(qc_min_max)
+# View(qc_min_max)
 # 2 stations have some values equal to zero
 # 3 stations have some values greater than 100
 # A few of the stations have noisy data at times
