@@ -1,4 +1,4 @@
-# EDBdata (development version)
+# EDBdata 0.2.0
 
 * Added `phyto_edb` - phytoplankton community data collected by DWR-EMP from 2014-2021 for the stations within the designated EDB regions
 * Added `cont_chla_daily` - daily average and median values of continuous chlorophyll fluorescence data collected by DWR and USGS from 2020-2021 for the stations within the designated EDB regions

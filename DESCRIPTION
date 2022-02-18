@@ -1,6 +1,6 @@
 Package: EDBdata
 Title: Emergency Drought Barrier Data
-Version: 0.1.0.9000
+Version: 0.2.0
 Authors@R: 
     person("Dave", "Bosworth", , "David.Bosworth@water.ca.gov", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0740-3390"))
