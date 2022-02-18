@@ -17,6 +17,7 @@ Imports:
     tibble
 Suggests: 
     curl,
+    dataRetrieval,
     dplyr,
     exactextractr,
     glue,
