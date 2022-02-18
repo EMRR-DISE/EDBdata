@@ -21,6 +21,10 @@ This package provides the following data tables:
 -   `phyto_edb`: Phytoplankton community data collected by DWR’s
     Environmental Monitoring Program from 2014-2021 for stations within
     the Emergency Drought Barrier regions
+-   `cont_chla_daily`: Daily average and median values of continuous
+    chlorophyll fluorescence data collected by DWR and USGS from
+    2020-2021 for the stations within the Emergency Drought Barrier
+    regions
 
 ## Installation
 
@@ -39,3 +43,9 @@ Tool. <https://fhab.sfei.org/>
 
 Phytoplankton data was acquired from DWR’s Environmental Monitoring
 Program through direct data requests
+
+California Department of Water Resources (DWR) Water Data Library (WDL):
+<https://wdl.water.ca.gov/WaterDataLibrary/>
+
+USGS National Water Information System (NWIS):
+<https://nwis.waterdata.usgs.gov/nwis>
