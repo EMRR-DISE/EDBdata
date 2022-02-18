@@ -148,9 +148,6 @@ ndf_chla_orig2 <-
 # Import coordinates for stations
 df_coords_orig <- read_excel(here("data-raw/Cont_chla_data/Cont_chla_ station_coord.xlsx"))
 
-# Import the polygon shapefile for the EDB regions
-sf_edb_reg <- read_sf(here("data-raw/Spatial_data/EDB_Regions.shp"))
-
 
 # 2. Clean and Integrate Data ---------------------------------------------
 
@@ -248,13 +245,11 @@ df_region_assign <- df_coords_orig %>%
   ) %>%
   # Convert to sf object
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
-  st_join(st_make_valid(sf_edb_reg), join = st_intersects) %>%
+  st_join(st_make_valid(EDBdata:::sf_edb_reg), join = st_intersects) %>%
   # Drop sf geometry column since it's no longer needed
   st_drop_geometry() %>%
-  select(-notes) %>%
   # Assign "Outside" to stations without region assignments
-  replace_na(list(Regions = "Outside")) %>%
-  rename(Region = Regions)
+  replace_na(list(Region = "Outside"))
 
 # Calculate daily means and medians of continuous chlorophyll data for each station
 cont_chla_daily <- df_chla_clean2 %>%

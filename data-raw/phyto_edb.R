@@ -35,10 +35,6 @@ lst_phyto_recent <- map(str_subset(fp_phyto_data, "202[01]\\.xlsx$"), read_excel
 # Import phytoplankton classification table (copied from the DroughtSynthesis repository)
 df_phyto_taxonomy <- read_excel(str_subset(fp_phyto_data, "Phyto Classification.xlsx$"))
 
-# Import the polygon shapefile for the EDB regions
-sf_edb_reg <- read_sf(here("data-raw/Spatial_data/EDB_Regions.shp")) %>%
-  select(Region = Regions)
-
 # Import EMP station coordinates from EDI
 df_coord_emp <- read_csv("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.4&entityid=827aa171ecae79731cc50ae0e590e5af")
 
@@ -102,7 +98,7 @@ df_region_emp <- df_coord_emp %>%
   filter(!if_any(c(Latitude, Longitude), is.na)) %>%
   # Convert to sf object
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
-  st_join(st_make_valid(sf_edb_reg), join = st_intersects) %>%
+  st_join(st_make_valid(EDBdata:::sf_edb_reg), join = st_intersects) %>%
   # Drop sf geometry column since it's no longer needed
   st_drop_geometry() %>%
   # Assign "Outside" to stations without region assignments
