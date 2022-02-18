@@ -66,12 +66,12 @@ test_that("All Stations are as expected", {
 
 test_that("Data is present for years 2020 and 2021 for each station", {
   cont_chla_daily_summ <- cont_chla_daily %>% dplyr::distinct(Station, Year)
-  station_por <- function(sta_name) {
+  year_por <- function(sta_name) {
     cont_chla_daily_summ %>% dplyr::filter(Station == sta_name) %>% dplyr::pull(Year)
   }
 
   expect_all_yrs <- function(sta_name2, yrs_expect) {
-    eval(bquote(expect_equal(station_por(.(sta_name2)), .(yrs_expect))))
+    eval(bquote(expect_equal(year_por(.(sta_name2)), .(yrs_expect))))
   }
 
   # Define expected years for data
