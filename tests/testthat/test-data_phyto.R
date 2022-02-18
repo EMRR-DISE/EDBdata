@@ -105,8 +105,11 @@ test_that("All AlgalType names are as expected", {
   expect_equal(sort(unique(phyto_edb$AlgalType)), AlgalTypes_check)
 })
 
-test_that("There are no zeros in Count and OrganismsPerMl", {
-  expect_false(any(phyto_edb$Count == 0))
-  expect_false(any(phyto_edb$OrganismsPerMl == 0))
+test_that("Count is at least 1", {
+  expect_gte(min(phyto_edb$Count), 1)
+})
+
+test_that("OrganismsPerMl is greater than zero", {
+  expect_gt(min(phyto_edb$OrganismsPerMl), 0)
 })
 
