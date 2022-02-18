@@ -13,8 +13,10 @@ data frame with 7,611 rows and 6 columns
 Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
 \item{Year}{Calendar year of the value}
 \item{Date}{Calendar date of the value}
-\item{Chla_avg}{Daily average chlorophyll fluorescence value in ug/L}
-\item{Chla_med}{Daily median chlorophyll fluorescence value in ug/L}
+\item{Chla_avg}{Daily average chlorophyll fluorescence value in micrograms
+per liter}
+\item{Chla_med}{Daily median chlorophyll fluorescence value in micrograms
+per liter}
 }
 }
 \source{
