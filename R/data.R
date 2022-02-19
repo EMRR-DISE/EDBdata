@@ -82,7 +82,7 @@
 #'   from the National Water Information System (NWIS) using the `dataRetrieval` R
 #'   package. Some of the data from USGS is considered provisional.
 #'
-#' @format data frame with 7,611 rows and 6 columns
+#' @format data frame with 7,612 rows and 6 columns
 #' \describe{
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought

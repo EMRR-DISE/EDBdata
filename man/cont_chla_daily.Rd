@@ -6,7 +6,7 @@
 \title{Daily values of continuous chlorophyll fluorescence data from
 2020-2021}
 \format{
-data frame with 7,611 rows and 6 columns
+data frame with 7,612 rows and 6 columns
 \describe{
 \item{Station}{Location where measurement was collected}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
