@@ -121,6 +121,7 @@ if (download == TRUE) {
   # Export raw data as .csv files for each site
   lst(MDM, SJJ) %>%
     map(as_tibble) %>%
+    map(~ mutate(.x, dateTime = as.character(dateTime))) %>%
     iwalk(
       .f = ~ write_csv(
         .x,
