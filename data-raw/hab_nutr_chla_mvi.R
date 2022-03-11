@@ -956,7 +956,9 @@ hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c2 %>%
   rm_flagged(Chlorophyll) %>%
   # Clean up and reorder variables
   select(!c(Region, ends_with("_flag"))) %>%
-  relocate(Chlorophyll_Sign, .before = Chlorophyll)
+  relocate(Chlorophyll_Sign, .before = Chlorophyll) %>%
+  # Convert Microcystis to integer
+  mutate(Microcystis = as.integer(Microcystis))
 
 # Identify periods of record ----------------------------------------------
 
