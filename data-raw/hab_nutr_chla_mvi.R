@@ -960,33 +960,6 @@ hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c2 %>%
   # Convert Microcystis to integer
   mutate(Microcystis = as.integer(Microcystis))
 
-# Identify periods of record ----------------------------------------------
-
-# df_por <- df_nutr_chla_all_c2 %>%
-#   select(!ends_with("_Sign")) %>%
-#   pivot_longer(
-#     cols = c(starts_with("Diss"), Chlorophyll),
-#     names_to = "Parameter",
-#     values_to = "Value"
-#   ) %>%
-#   filter(!is.na(Value)) %>%
-#   mutate(
-#     Month = month(Date, label = TRUE),
-#     Year = year(Date)
-#   ) %>%
-#   count(Source, Station, Parameter, Year, Month) %>%
-#   arrange(Month) %>%
-#   pivot_wider(names_from = Month, values_from = n) %>%
-#   complete(nesting(Source, Station), Parameter, Year) %>%
-#   arrange(Source, Year, Station, Parameter)
-#
-# df_por %>% write_csv(here("hab_nutr_chla_por.csv"), na = "-")
-#
-# # Temporarily export station coordinates to create a map
-# df_coord_all <- df_nutr_chla_all_c2 %>% distinct(Source, Station, Latitude, Longitude)
-#
-# df_coord_all %>% write_csv(here("hab_nutr_chla_coords.csv"))
-
 
 # 4. Save and Export Data -------------------------------------------------
 
