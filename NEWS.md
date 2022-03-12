@@ -1,3 +1,5 @@
+# EDBdata 0.3.0
+
 
 * Added `hab_nutr_chla_mvi` - discrete nutrient concentrations (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and Dissolved Ortho-phosphate), chlorophyll-a concentrations, and *Microcystis* visual index values in the San Francisco Estuary east of Suisun Marsh for 2014-2021
 
