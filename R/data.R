@@ -101,3 +101,108 @@
 #' * USGS National Water Information System (NWIS):
 #'   <https://nwis.waterdata.usgs.gov/nwis>
 "cont_chla_daily"
+
+#' @title Discrete nutrient and chlorophyll-a concentrations and *Microcystis*
+#'   visual index values for 2014-2021
+#' @description A data set containing concentrations of chlorophyll-a and three
+#'   nutrient parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and
+#'   Dissolved Ortho-phosphate) in the San Francisco Estuary (Delta) east of
+#'   Suisun Marsh for 2014-2021. This data set also contains Microcystis visual
+#'   index values for the surveys (DWR_EMP and DWR_NCRO) that have collected
+#'   this data. Used in the analyses for the Spring-Summer version of the 2022
+#'   HABs/Weeds report for the Emergency Drought Barrier.
+#'
+#'   Most of the nutrient, chlorophyll-a, and Microcystis visual index data from
+#'   DWR_EMP (DWR's Environmental Monitoring Program) and all the data from
+#'   USGS_SFBS (USGS's San Francisco Bay Water Quality Survey) are from the
+#'   `discretewq` data package. DWR_EMP data collected in 2021 was acquired
+#'   through a direct data request and should be considered provisional. All
+#'   data collected by DWR_NCRO was also acquired through a direct data request;
+#'   however, most of this data is available for download from the Water
+#'   Data Library (WDL). Some of the most recent DWR_NCRO data collected in 2021
+#'   should be considered provisional. Data from USGS_CAWSC were downloaded
+#'   directly from the Water Quality Portal using the `dataRetrieval` R package.
+#'   Some of the data from USGS_CAWSC is also considered provisional.
+#'
+#'   This data set contains only one sample or measurement per `Station` and
+#'   `Date` and only includes stations where all three nutrient parameters and
+#'   chlorophyll-a have been collected during their periods of record from
+#'   2014-2021. This data set excludes any nitrate + nitrite and ortho-phosphate
+#'   data that have modified Z-scores greater than 15 grouped by three broad
+#'   regions in the Delta. Outlier removal was not performed on the ammonia and
+#'   chlorophyll-a data because all the higher values appeared to be real based
+#'   on best professional judgment.
+#'
+#'   There were a few instances where nutrient values were below the reporting
+#'   limit (RL) but the RL values were greater than the 75th quantile of the
+#'   overall data. These values were excluded from this data set. In addition,
+#'   some of the nutrient values that were below the RL in the USGS_CAWSC data
+#'   set did not have RL values provided from the data source. In these
+#'   instances, this data set uses the most common RL for each nutrient
+#'   parameter and laboratory method to fill in the missing RL values.
+#'
+#' @format data frame with 3,273 rows and 15 columns
+#' \describe{
+#'   \item{Source}{Name of the source dataset. Either DWR_EMP (DWR's
+#'     Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
+#'     Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey), or
+#'     USGS_CAWSC (USGS's California Water Science Center)}
+#'   \item{Station}{Location where measurement was collected}
+#'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Date}{Calendar date of the measurement}
+#'   \item{Datetime}{Date and time of the measurement in PST}
+#'   \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia
+#'     value is below the reporting limit or above it. Contains one of four
+#'     symbols: "<", "< (estimated)", "=", or "= (unreliable)". See the section
+#'     below for more information about what these symbols represent.}
+#'   \item{DissAmmonia}{Dissolved Ammonia concentration in milligrams per liter
+#'     as N}
+#'   \item{DissNitrateNitrite_Sign}{A symbol representing whether the Dissolved
+#'     Nitrate + Nitrite value is below the reporting limit or above it. Contains
+#'     one of four symbols: "<", "< (estimated)", "=", or "= (unreliable)". See
+#'     the section below for more information about what these symbols represent.}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate + Nitrite concentration in
+#'     milligrams per liter as N}
+#'   \item{DissOrthophos_Sign}{A symbol representing whether the Dissolved
+#'     Ortho-phosphate value is below the reporting limit or above it. Contains
+#'     one of four symbols: "<", "< (estimated)", "=", or "= (unreliable)". See
+#'     the section below for more information about what these symbols represent.}
+#'   \item{DissOrthophos}{Dissolved Ortho-phosphate concentration in milligrams
+#'     per liter as P}
+#'   \item{Chlorophyll_Sign}{A symbol representing whether the chlorophyll-a
+#'     value is below the reporting limit or above it. Contains one of three
+#'     symbols: "<", "= (estimated)", or "=". See the section below for more
+#'     information about what these symbols represent.}
+#'   \item{Chlorophyll}{Chlorophyll-a concentration in micrograms per liter}
+#'   \item{Microcystis}{*Microcystis* visual index value on a qualitative scale
+#'     from 1 to 5, where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very
+#'     high}
+#' }
+#'
+#' @section More information about the `_Sign` columns:
+#' For the columns that have the _Sign suffix, the symbols in these columns
+#' represent five conditions of the value contained in its corresponding result
+#' column.
+#' * "<" - The value is below the Reporting Limit (RL) with the value in the
+#' corresponding result column equal to the RL.
+#' * "< (estimated)" - The value is below the RL, but the RL is unknown. The
+#' value in the corresponding result column is the estimated RL value.
+#' * "=" - The value is above the RL with the value in the corresponding result
+#' column equal to the actual value measured by the laboratory. An `NA` value
+#' in the corresponding result column indicates that the value is missing or
+#' wasn't collected.
+#' * "= (estimated)" - The value in the corresponding result column is estimated
+#' (extrapolated at low end)
+#' * "= (unreliable)" - The value in the corresponding result column was
+#' determined to be an outlier and is excluded from the data set.
+#'
+#' @source
+#' * `discretewq` data package (version 2.3.1):
+#'   <https://github.com/sbashevkin/discretewq/tree/258dd2591a695710067fb29b4e8cbd9ffab54aa9>
+#' * California Department of Water Resources (DWR) Water Data Library (WDL):
+#'   <https://wdl.water.ca.gov/WaterDataLibrary/>
+#' * Water Quality Portal hosted by the National Water Quality Monitoring
+#'   Council: <https://www.waterqualitydata.us/>
+"hab_nutr_chla_mvi"
+
