@@ -25,6 +25,11 @@ This package provides the following data tables:
     chlorophyll fluorescence data collected by DWR and USGS from
     2020-2021 for the stations within the Emergency Drought Barrier
     regions
+-   `hab_nutr_chla_mvi`: Discrete nutrient concentrations (Dissolved
+    Ammonia, Dissolved Nitrate + Nitrite, and Dissolved
+    Ortho-phosphate), chlorophyll-a concentrations, and *Microcystis*
+    visual index values in the San Francisco Estuary east of Suisun
+    Marsh for 2014-2021
 
 ## Installation
 
@@ -49,3 +54,9 @@ California Department of Water Resources (DWR) Water Data Library (WDL):
 
 USGS National Water Information System (NWIS):
 <https://nwis.waterdata.usgs.gov/nwis>
+
+`discretewq` data package (version 2.3.1):
+<https://github.com/sbashevkin/discretewq/tree/258dd2591a695710067fb29b4e8cbd9ffab54aa9>
+
+Water Quality Portal hosted by the National Water Quality Monitoring
+Council: <https://www.waterqualitydata.us/>
