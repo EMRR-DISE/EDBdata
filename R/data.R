@@ -120,9 +120,9 @@
 #'   data collected by DWR_NCRO was also acquired through a direct data request;
 #'   however, most of this data is available for download from the Water
 #'   Data Library (WDL). Some of the most recent DWR_NCRO data collected in 2021
-#'   should be considered provisional. Data from USGS_CASWC were downloaded
+#'   should be considered provisional. Data from USGS_CAWSC were downloaded
 #'   directly from the Water Quality Portal using the `dataRetrieval` R package.
-#'   Some of the data from USGS_CASWC is also considered provisional.
+#'   Some of the data from USGS_CAWSC is also considered provisional.
 #'
 #'   This data set contains only one sample or measurement per `Station` and
 #'   `Date` and only includes stations where all three nutrient parameters and
