@@ -147,7 +147,7 @@ ndf_chla_orig2 <-
   arrange(Station)
 
 # Import coordinates for stations
-df_coords_orig <- read_excel(here("data-raw/Cont_chla_data/Cont_chla_ station_coord.xlsx"))
+df_coords_orig <- read_excel(here("data-raw/Cont_chla_data/Cont_chla_station_coord.xlsx"))
 
 
 # 2. Clean and Integrate Data ---------------------------------------------
