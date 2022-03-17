@@ -13,7 +13,7 @@ data frame with 4,353 rows and 11 columns
 Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
 \item{Year}{Calendar year of the sample}
 \item{Date}{Calendar date of the sample}
-\item{DateTime}{Date and time of the sample in PST}
+\item{Datetime}{Date and time of the sample in PST}
 \item{Taxon}{Taxonomic designation of the organism as "Genus species"}
 \item{Genus}{Genus designation of the organism}
 \item{Species}{Species designation of the organism}

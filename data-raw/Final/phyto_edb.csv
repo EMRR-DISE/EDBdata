@@ -1,4 +1,4 @@
-Station,Region,Year,Date,DateTime,Taxon,Genus,Species,AlgalType,Count,OrganismsPerMl
+Station,Region,Year,Date,Datetime,Taxon,Genus,Species,AlgalType,Count,OrganismsPerMl
 D19,Central Delta,2014,2014-01-08,2014-01-08 11:23:00,cf. Bacillaria paxillifer,Bacillaria,NA,Pennate Diatom,1,56.2
 D19,Central Delta,2014,2014-01-08,2014-01-08 11:23:00,cf. Navicula sp.,Navicula,NA,Pennate Diatom,1,56.2
 D19,Central Delta,2014,2014-01-08,2014-01-08 11:23:00,Chroococcus microscopicus,Chroococcus,NA,Cyanobacterium,413,23210.47

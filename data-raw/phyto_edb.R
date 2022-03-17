@@ -142,8 +142,8 @@ phyto_edb <- df_phyto_all %>%
   mutate(
     # Fix an erroneous Date
     Date = if_else(Date == "2022-11-17", as_date("2021-11-17"), Date),
-    # Create DateTime variable in PST
-    DateTime = ymd_hm(
+    # Create Datetime variable in PST
+    Datetime = ymd_hm(
       paste0(Date, " ", hour(SampleTime), ":", minute(SampleTime)),
       tz = "Etc/GMT+8"
     ),
@@ -177,7 +177,7 @@ phyto_edb <- df_phyto_all %>%
     Region,
     Year,
     Date,
-    DateTime,
+    Datetime,
     Taxon,
     Genus,
     Species,
@@ -189,8 +189,8 @@ phyto_edb <- df_phyto_all %>%
 # Save final data set containing phytoplankton community data for the EDB analysis as csv file
   # for easier diffing
 phyto_edb %>%
-  # Convert DateTime to character so that it isn't converted to UTC upon export
-  mutate(DateTime = as.character(DateTime)) %>%
+  # Convert Datetime to character so that it isn't converted to UTC upon export
+  mutate(Datetime = as.character(Datetime)) %>%
   write_csv(here("data-raw/Final/phyto_edb.csv"))
 
 # Save final data set containing phytoplankton community data for the EDB analysis as objects
