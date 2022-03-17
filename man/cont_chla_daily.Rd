@@ -33,14 +33,14 @@ cont_chla_daily
 \description{
 A data set containing daily average and median values of
 continuous chlorophyll fluorescence data collected by DWR and USGS from
-2020 - 2021 for the stations within the designated Emergency Drought
-Barrier (EDB) regions. Used in the analyses for the EDB.
+2020-2021 for the stations within the designated Emergency Drought Barrier
+(EDB) regions. Used in the analyses for the EDB.
 
-All chlorophyll data collected by DWR-NCRO (DWR's North Central Regional
+All chlorophyll data collected by DWR-NCRO (DWR's North Central Region
 Office) was downloaded from the Water Data Library (WDL). Data collected by
 DWR-CEMP (DWR's Continuous Environmental Monitoring Program) was acquired
 through direct data requests. And data from USGS were downloaded directly
-from the National Water Information System (NWIS) using the \code{dataRetrieval} R
-package. Some of the data from USGS is considered provisional.
+from the National Water Information System (NWIS) using the \code{dataRetrieval}
+R package. Some of the data from USGS is considered provisional.
 }
 \keyword{datasets}

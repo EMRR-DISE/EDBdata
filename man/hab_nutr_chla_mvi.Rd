@@ -72,12 +72,13 @@ DWR_EMP (DWR's Environmental Monitoring Program) and all the data from
 USGS_SFBS (USGS's San Francisco Bay Water Quality Survey) are from the
 \code{discretewq} data package. DWR_EMP data collected in 2021 was acquired
 through a direct data request and should be considered provisional. All
-data collected by DWR_NCRO was also acquired through a direct data request;
-however, most of this data is available for download from the Water
-Data Library (WDL). Some of the most recent DWR_NCRO data collected in 2021
-should be considered provisional. Data from USGS_CAWSC were downloaded
-directly from the Water Quality Portal using the \code{dataRetrieval} R package.
-Some of the data from USGS_CAWSC is also considered provisional.
+data collected by DWR_NCRO (DWR's North Central Region Office) was also
+acquired through a direct data request; however, most of this data is
+available for download from the Water Data Library (WDL). Some of the most
+recent DWR_NCRO data collected in 2021 should be considered provisional.
+Data from USGS_CAWSC (USGS's California Water Science Center) were
+downloaded directly from the Water Quality Portal using the \code{dataRetrieval}
+R package. Some of the data from USGS_CAWSC is also considered provisional.
 
 This data set contains only one sample or measurement per \code{Station} and
 \code{Date} and only includes stations where all three nutrient parameters and

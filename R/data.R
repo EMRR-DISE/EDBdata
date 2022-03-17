@@ -72,15 +72,15 @@
 #'   2020-2021
 #' @description A data set containing daily average and median values of
 #'   continuous chlorophyll fluorescence data collected by DWR and USGS from
-#'   2020 - 2021 for the stations within the designated Emergency Drought
-#'   Barrier (EDB) regions. Used in the analyses for the EDB.
+#'   2020-2021 for the stations within the designated Emergency Drought Barrier
+#'   (EDB) regions. Used in the analyses for the EDB.
 #'
-#'   All chlorophyll data collected by DWR-NCRO (DWR's North Central Regional
+#'   All chlorophyll data collected by DWR-NCRO (DWR's North Central Region
 #'   Office) was downloaded from the Water Data Library (WDL). Data collected by
 #'   DWR-CEMP (DWR's Continuous Environmental Monitoring Program) was acquired
 #'   through direct data requests. And data from USGS were downloaded directly
-#'   from the National Water Information System (NWIS) using the `dataRetrieval` R
-#'   package. Some of the data from USGS is considered provisional.
+#'   from the National Water Information System (NWIS) using the `dataRetrieval`
+#'   R package. Some of the data from USGS is considered provisional.
 #'
 #' @format data frame with 7,612 rows and 6 columns
 #' \describe{
@@ -117,12 +117,13 @@
 #'   USGS_SFBS (USGS's San Francisco Bay Water Quality Survey) are from the
 #'   `discretewq` data package. DWR_EMP data collected in 2021 was acquired
 #'   through a direct data request and should be considered provisional. All
-#'   data collected by DWR_NCRO was also acquired through a direct data request;
-#'   however, most of this data is available for download from the Water
-#'   Data Library (WDL). Some of the most recent DWR_NCRO data collected in 2021
-#'   should be considered provisional. Data from USGS_CAWSC were downloaded
-#'   directly from the Water Quality Portal using the `dataRetrieval` R package.
-#'   Some of the data from USGS_CAWSC is also considered provisional.
+#'   data collected by DWR_NCRO (DWR's North Central Region Office) was also
+#'   acquired through a direct data request; however, most of this data is
+#'   available for download from the Water Data Library (WDL). Some of the most
+#'   recent DWR_NCRO data collected in 2021 should be considered provisional.
+#'   Data from USGS_CAWSC (USGS's California Water Science Center) were
+#'   downloaded directly from the Water Quality Portal using the `dataRetrieval`
+#'   R package. Some of the data from USGS_CAWSC is also considered provisional.
 #'
 #'   This data set contains only one sample or measurement per `Station` and
 #'   `Date` and only includes stations where all three nutrient parameters and
