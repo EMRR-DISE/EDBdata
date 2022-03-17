@@ -188,7 +188,10 @@ phyto_edb <- df_phyto_all %>%
 
 # Save final data set containing phytoplankton community data for the EDB analysis as csv file
   # for easier diffing
-write_csv(phyto_edb, here("data-raw/Final/phyto_edb.csv"))
+phyto_edb %>%
+  # Convert DateTime to character so that it isn't converted to UTC upon export
+  mutate(DateTime = as.character(DateTime)) %>%
+  write_csv(here("data-raw/Final/phyto_edb.csv"))
 
 # Save final data set containing phytoplankton community data for the EDB analysis as objects
   # in the data package
