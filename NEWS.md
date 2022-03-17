@@ -1,5 +1,10 @@
 # EDBdata (development version)
 
+* Updates to `phyto_edb` data set:
+  * Added November - December 2021 data so it contains all data collected in 2021
+  * Removed *Microcystis* surface tow data collected in September 2021
+  * Renamed `DateTime` column to `Datetime` to have a consistent naming convention across all drought-related data sets
+
 # EDBdata 0.3.0
 
 * Added `hab_nutr_chla_mvi` - discrete nutrient concentrations (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and Dissolved Ortho-phosphate), chlorophyll-a concentrations, and *Microcystis* visual index values in the San Francisco Estuary east of Suisun Marsh for 2014-2021
