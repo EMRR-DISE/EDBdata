@@ -80,7 +80,7 @@ test_that("Datetime is formatted correctly", {
 
 test_that("The Date and Datetime variables are in alignment", {
   phyto_edb_t <- phyto_edb %>% dplyr::mutate(Date_t = lubridate::date(Datetime))
-  expect_true(all(phyto_edb_t$Date == phyto_edb_t$Date_t))
+  expect_equal(phyto_edb_t$Date, phyto_edb_t$Date_t)
 })
 
 test_that("The time zone of Datetime is PST", {
