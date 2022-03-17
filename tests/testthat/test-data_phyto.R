@@ -24,7 +24,7 @@ test_that("Data dimensions are correct", {
     "Region",
     "Year",
     "Date",
-    "DateTime",
+    "Datetime",
     "Taxon",
     "Genus",
     "Species",
@@ -41,7 +41,7 @@ test_that("All variables are correct class", {
   expect_equal(class(phyto_edb$Region), "character")
   expect_equal(class(phyto_edb$Year), "numeric")
   expect_equal(class(phyto_edb$Date), "Date")
-  expect_equal(class(phyto_edb$DateTime), c("POSIXct", "POSIXt"))
+  expect_equal(class(phyto_edb$Datetime), c("POSIXct", "POSIXt"))
   expect_equal(class(phyto_edb$Taxon), "character")
   expect_equal(class(phyto_edb$Genus), "character")
   expect_equal(class(phyto_edb$Species), "character")
@@ -71,20 +71,20 @@ test_that("Date is formatted correctly", {
   )))
 })
 
-test_that("DateTime is formatted correctly", {
+test_that("Datetime is formatted correctly", {
   expect_true(all(stringr::str_detect(
-    as.character(phyto_edb$DateTime),
+    as.character(phyto_edb$Datetime),
     "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"
   )))
 })
 
-test_that("The Date and DateTime variables are in alignment", {
-  phyto_edb_t <- phyto_edb %>% dplyr::mutate(Date_t = lubridate::date(DateTime))
+test_that("The Date and Datetime variables are in alignment", {
+  phyto_edb_t <- phyto_edb %>% dplyr::mutate(Date_t = lubridate::date(Datetime))
   expect_true(all(phyto_edb_t$Date == phyto_edb_t$Date_t))
 })
 
-test_that("The time zone of DateTime is PST", {
-  expect_equal(lubridate::tz(phyto_edb$DateTime), "Etc/GMT+8")
+test_that("The time zone of Datetime is PST", {
+  expect_equal(lubridate::tz(phyto_edb$Datetime), "Etc/GMT+8")
 })
 
 test_that("All AlgalType names are as expected", {
