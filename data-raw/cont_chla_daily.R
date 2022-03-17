@@ -199,8 +199,15 @@ df_chla_clean2 <- df_chla_clean1 %>%
     DateTime = DateTime2,
     Chla = Chla2
   ) %>%
-  # Add Year variable
-  mutate(Year = year(DateTime)) %>%
+  # Add Year and Source variables
+  mutate(
+    Year = year(DateTime),
+    Source = case_when(
+      Station %in% c("BLP", "FAL", "HLT", "ORI", "OSJ", "WCI") ~ "DWR_NCRO",
+      Station %in% c("FRK", "RVB", "SSI", "TWI") ~ "DWR_CEMP",
+      Station %in% c("MDM", "SJJ") ~ "USGS"
+    )
+  ) %>%
   # Only include years 2020 and 2021
   filter(Year %in% 2020:2021) %>%
   # Remove NA values, values less than zero, and records with Qual code of "X" (Bad data)
@@ -255,7 +262,7 @@ df_region_assign <- df_coords_orig %>%
 # Calculate daily means and medians of continuous chlorophyll data for each station
 cont_chla_daily <- df_chla_clean2 %>%
   mutate(Date = date(DateTime)) %>%
-  group_by(Station, Year, Date) %>%
+  group_by(Source, Station, Year, Date) %>%
   summarize(
     Chla_avg = mean(Chla),
     Chla_med = median(Chla)
@@ -268,6 +275,7 @@ cont_chla_daily <- df_chla_clean2 %>%
   filter(Region != "Outside" | is.na(Region)) %>%
   # Reorder columns
   select(
+    Source,
     Station,
     Region,
     Year,

@@ -16,9 +16,10 @@ test_that("No variables contain `NA` values", {
 
 test_that("Data dimensions are correct", {
   expect_equal(nrow(cont_chla_daily), 7612)
-  expect_equal(ncol(cont_chla_daily), 6)
+  expect_equal(ncol(cont_chla_daily), 7)
 
   name_check <- c(
+    "Source",
     "Station",
     "Region",
     "Year",
@@ -36,12 +37,18 @@ test_that("There are no duplicate records", {
 })
 
 test_that("All variables are correct class", {
+  expect_equal(class(cont_chla_daily$Source), "character")
   expect_equal(class(cont_chla_daily$Station), "character")
   expect_equal(class(cont_chla_daily$Region), "character")
   expect_equal(class(cont_chla_daily$Year), "numeric")
   expect_equal(class(cont_chla_daily$Date), "Date")
   expect_equal(class(cont_chla_daily$Chla_avg), "numeric")
   expect_equal(class(cont_chla_daily$Chla_med), "numeric")
+})
+
+test_that("All Sources are as expected", {
+  sources_check <- c("DWR_CEMP", "DWR_NCRO", "USGS")
+  expect_equal(sort(unique(cont_chla_daily$Source)), sources_check)
 })
 
 # Provide a vector of stations for the two following tests

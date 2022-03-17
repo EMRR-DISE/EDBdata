@@ -6,8 +6,11 @@
 \title{Daily values of continuous chlorophyll fluorescence data from
 2020-2021}
 \format{
-data frame with 7,612 rows and 6 columns
+data frame with 7,612 rows and 7 columns
 \describe{
+\item{Source}{Name of the source dataset. Either DWR_CEMP (DWR's Continuous
+Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
+Office), or USGS}
 \item{Station}{Location where measurement was collected}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
 Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
@@ -36,9 +39,9 @@ continuous chlorophyll fluorescence data collected by DWR and USGS from
 2020-2021 for the stations within the designated Emergency Drought Barrier
 (EDB) regions. Used in the analyses for the EDB.
 
-All chlorophyll data collected by DWR-NCRO (DWR's North Central Region
+All chlorophyll data collected by DWR_NCRO (DWR's North Central Region
 Office) was downloaded from the Water Data Library (WDL). Data collected by
-DWR-CEMP (DWR's Continuous Environmental Monitoring Program) was acquired
+DWR_CEMP (DWR's Continuous Environmental Monitoring Program) was acquired
 through direct data requests. And data from USGS were downloaded directly
 from the National Water Information System (NWIS) using the \code{dataRetrieval}
 R package. Some of the data from USGS is considered provisional.

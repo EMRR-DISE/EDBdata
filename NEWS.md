@@ -4,6 +4,7 @@
   * Added November - December 2021 data so it contains all data collected in 2021
   * Removed *Microcystis* surface tow data collected in September 2021
   * Renamed `DateTime` column to `Datetime` to have a consistent naming convention across all drought-related data sets
+* Added a `Source` column to the `cont_chla_daily` data set
 
 # EDBdata 0.3.0
 
