@@ -29,7 +29,7 @@ df_phyto_early <-
     col_types = "-DTc-cccd--d-----------"
   )
 
-# Import phytoplankton data collected from Dec 2020 - Oct 2021
+# Import phytoplankton data collected from Dec 2020 - Dec 2021
 lst_phyto_recent <- map(str_subset(fp_phyto_data, "202[01]\\.xlsx$"), read_excel)
 
 # Import phytoplankton classification table (copied from the DroughtSynthesis repository)
@@ -52,18 +52,20 @@ df_phyto_early_c <- df_phyto_early %>%
     OrganismsPerMl = Organisms_per_mL
   )
 
-# Recent data (Dec 2020 - Oct 2021):
+# Recent data (Dec 2020 - Dec 2021):
 # Create a vector of variable names to keep in each list element
 vec_vars_keep <-
   c(
     "SampleDate",
     "SampleTime",
+    "Full Code",
     "StationCode",
     "Taxon",
     "Genus",
     "Species",
     "Factor",
     "Count",
+    "Unit Abundance",
     "Unit Abundance (# of Natural Units)"
   )
 
@@ -71,12 +73,17 @@ df_phyto_recent <- lst_phyto_recent %>%
   # Select and rename variables in each element
   map(
     ~ select(.x, any_of(vec_vars_keep)) %>%
-      rename(Count = contains("Abundance"))
+      rename(
+        Count = contains("Abundance"),
+        SampleCode = contains("Full Code")
+      )
   ) %>%
   # Combine data now that all variable names and types are consistent
   bind_rows() %>%
   # Remove rows with all NA's
   filter(!if_all(everything(), is.na)) %>%
+  # Remove Microcystis surface tow data
+  filter(is.na(SampleCode) | !str_detect(SampleCode, "Tow|TOW")) %>%
   # Convert SampleDate to date and calculate Organisms/mL
   mutate(
     Date = date(SampleDate),
@@ -84,7 +91,7 @@ df_phyto_recent <- lst_phyto_recent %>%
   ) %>%
   # Rename and remove some variables
   rename(Station = StationCode) %>%
-  select(-c(SampleDate, Factor))
+  select(-c(SampleDate, Factor, SampleCode))
 
 # Combine recent data to earlier data
 df_phyto_all <- bind_rows(df_phyto_early_c, df_phyto_recent)
@@ -133,6 +140,8 @@ df_phyto_taxonomy_c1 <- df_phyto_taxonomy %>%
 # Finish cleaning up the phytoplankton data
 phyto_edb <- df_phyto_all %>%
   mutate(
+    # Fix an erroneous Date
+    Date = if_else(Date == "2022-11-17", as_date("2021-11-17"), Date),
     # Create DateTime variable in PST
     DateTime = ymd_hm(
       paste0(Date, " ", hour(SampleTime), ":", minute(SampleTime)),

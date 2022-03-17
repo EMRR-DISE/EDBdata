@@ -16,7 +16,7 @@ test_that("No variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(phyto_edb), 4254)
+  expect_equal(nrow(phyto_edb), 4353)
   expect_equal(ncol(phyto_edb), 11)
 
   name_check <- c(
