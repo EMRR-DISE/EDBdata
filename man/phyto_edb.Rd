@@ -6,7 +6,7 @@
 \title{Phytoplankton community data from 2014-2021 for stations within the
 EDB regions}
 \format{
-data frame with 4,254 rows and 11 columns
+data frame with 4,353 rows and 11 columns
 \describe{
 \item{Station}{Location where sample was collected}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
@@ -32,8 +32,8 @@ phyto_edb
 }
 \description{
 A data set containing phytoplankton community data collected by
-DWR's Environmental Monitoring Program from 2014 - October 2021 for the
-stations within the designated Emergency Drought Barrier (EDB) regions.
-Used in the analyses for the EDB.
+DWR's Environmental Monitoring Program from 2014-2021 for the stations
+within the designated Emergency Drought Barrier (EDB) regions. Used in the
+analyses for the EDB.
 }
 \keyword{datasets}
