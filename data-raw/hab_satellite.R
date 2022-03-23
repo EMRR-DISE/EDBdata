@@ -1,8 +1,9 @@
 # Code to prepare HAB satellite data sets:
-  # 1) `hab_sat_fr_mil` - counts of pixel values within each CI category for Franks Tract
-    # and Mildred Island
-  # 2) Kept placeholder code to perform same procedure for the EDB regions, but no data object
-    # exists for this currently
+  # 1) `hab_sat_fr_mil` - Counts of pixel values within each Cyano Index (CI)
+    # category for Franks Tract and Mildred Island. Also includes a calculated
+    # average Cyano Index value for each region and date in the data set.
+  # 2) Kept placeholder code to perform same procedure for the EDB regions, but
+    # no data object exists for this currently
 
 # Load packages
 library(dplyr)
@@ -35,7 +36,7 @@ if (download) {
   # Define subfolder directory to store .tif files
   dir_hab_sat <- here("data-raw/HAB_satellite_data")
 
-  # Function to download and unzip harmful algal bloom (HAB) satellite data (cyanobacteria abundance)
+  # Function to download and unzip harmful algal bloom (HAB) satellite data (Cyano Index)
     # from the https://fhab.sfei.org/ website
   download_hab <- function(hab_yr, hab_month) {
     hab_url <- glue("https://fhab.sfei.org/lib/download.php?request=download&dltype=month&year={hab_yr}&month={hab_month}&product=Mosaic")
