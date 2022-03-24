@@ -77,28 +77,20 @@ df_hab_sat <-
   ) %>%
   select(strs_date, strs_prx_obj)
 
-# Import the polygon shapefiles for Franks-Mildred and the EDB regions
+# Import the polygon shapefile for Franks Tract and Mildred Island
 sf_franks_mildred <- read_sf(here("data-raw/Spatial_data/Franks_Mildred.shp"))
-sf_edb_reg <- read_sf(here("data-raw/Spatial_data/EDB_Regions.shp"))
 
-# Clean up Franks-Mildred and EDB regions shapefiles to contain just the necessary variables
+# Clean up Franks-Mildred shapefile to contain just the necessary variables
 sf_franks_mildred_clean <- sf_franks_mildred %>% select(Name = HNAME)
-sf_edb_reg_clean <- sf_edb_reg %>% select(Region = Regions)
 
-# Transform crs of Franks-Mildred and EDB region shapefiles to the crs of the HAB satellite data
+# Transform crs of Franks-Mildred shapefile to the crs of the HAB satellite data
 crs_hab_sat <- st_crs(df_hab_sat$strs_prx_obj[[1]])
 sf_franks_mildred_32611 <- st_transform(sf_franks_mildred_clean, crs = crs_hab_sat)
-sf_edb_reg_32611 <- st_transform(sf_edb_reg_clean, crs = crs_hab_sat)
 
-# Create a bounding box of the EDB regions shapefile which will be used to crop the satellite data
-  # and extend it by 5% on each side
-bbox_edb_reg <- st_bbox(sf_edb_reg_32611)
-bbox_edb_reg_xrange <- bbox_edb_reg$xmax - bbox_edb_reg$xmin
-bbox_edb_reg_yrange <- bbox_edb_reg$ymax - bbox_edb_reg$ymin
-bbox_edb_reg[1] <- bbox_edb_reg[1] - (bbox_edb_reg_xrange * 0.05)
-bbox_edb_reg[3] <- bbox_edb_reg[3] + (bbox_edb_reg_xrange * 0.05)
-bbox_edb_reg[2] <- bbox_edb_reg[2] - (bbox_edb_reg_yrange * 0.05)
-bbox_edb_reg[4] <- bbox_edb_reg[4] + (bbox_edb_reg_yrange * 0.05)
+# Create a bounding box of the Franks-Mildred shapefile which will be used to
+  # crop the satellite data. Add a 1 km buffer to slightly expand the bounding box
+  # to ensure no desired data is removed.
+bbox_fr_mil <- st_bbox(st_buffer(sf_franks_mildred_32611, 1000))
 
 # Create a vector of dates to exclude from the analysis since the imagery doesn't cover the Delta region
 dates_rm <-
@@ -117,8 +109,9 @@ df_hab_sat_clean <- df_hab_sat %>%
   filter(!strs_date %in% dates_rm) %>%
   mutate(
     rast_obj_crop =
-      # Crop HAB satellite data to bounding box of the EDB regions to make it easier to work with
-      map(strs_prx_obj, ~st_crop(.x, bbox_edb_reg) %>%
+      # Crop HAB satellite data to bounding box of the Franks-Mildred shapefile
+        # to make it easier to work with
+      map(strs_prx_obj, ~st_crop(.x, bbox_fr_mil) %>%
         # rename attribute to be more descriptive
         setNames("pixel_val") %>%
         # Convert factor to numeric
