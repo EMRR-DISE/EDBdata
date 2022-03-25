@@ -16,17 +16,18 @@ test_that("No variables contain `NA` values", {
 
 test_that("Data dimensions are correct", {
   expect_equal(nrow(hab_sat_fr_mil), 329)
-  expect_equal(ncol(hab_sat_fr_mil), 8)
+  expect_equal(ncol(hab_sat_fr_mil), 9)
 
   name_check <- c(
     "Date",
     "Name",
-    "Non_detect",
+    "AvgCI",
+    "NonDetect",
     "Low",
     "Moderate",
     "High",
-    "Very_high",
-    "Invalid_or_missing"
+    "VeryHigh",
+    "InvalidOrMissing"
   )
 
   expect_equal(names(hab_sat_fr_mil), name_check)
@@ -40,12 +41,13 @@ test_that("There are no duplicate records", {
 test_that("All variables are correct class", {
   expect_equal(class(hab_sat_fr_mil$Date), "Date")
   expect_equal(class(hab_sat_fr_mil$Name), "character")
-  expect_equal(class(hab_sat_fr_mil$Non_detect), "numeric")
-  expect_equal(class(hab_sat_fr_mil$Low), "numeric")
-  expect_equal(class(hab_sat_fr_mil$Moderate), "numeric")
-  expect_equal(class(hab_sat_fr_mil$High), "numeric")
-  expect_equal(class(hab_sat_fr_mil$Very_high), "numeric")
-  expect_equal(class(hab_sat_fr_mil$Invalid_or_missing), "numeric")
+  expect_equal(class(hab_sat_fr_mil$AvgCI), "numeric")
+  expect_equal(class(hab_sat_fr_mil$NonDetect), "integer")
+  expect_equal(class(hab_sat_fr_mil$Low), "integer")
+  expect_equal(class(hab_sat_fr_mil$Moderate), "integer")
+  expect_equal(class(hab_sat_fr_mil$High), "integer")
+  expect_equal(class(hab_sat_fr_mil$VeryHigh), "integer")
+  expect_equal(class(hab_sat_fr_mil$InvalidOrMissing), "integer")
 })
 
 test_that("Date is formatted correctly", {
@@ -91,6 +93,11 @@ test_that("Periods of record for each polygon are as expected", {
   purrr::map(polygon_names_check, expect_all_months, yr_val2 = 2021, months_expect = months2021_check)
 })
 
+test_that("All average Cyano Index values are in their expected range", {
+  expect_gte(min(hab_sat_fr_mil$AvgCI), 0)
+  expect_lte(max(hab_sat_fr_mil$AvgCI), 0.06327)
+})
+
 test_that("All pixel count values are in their expected range", {
   count_min_max <- function(polygon_name, test_var, min_max = c("minimum", "maximum")) {
     hab_sat_fr_mil %>%
@@ -104,12 +111,12 @@ test_that("All pixel count values are in their expected range", {
   }
 
   pixel_vars <- c(
-    "Non_detect",
+    "NonDetect",
     "Low",
     "Moderate",
     "High",
-    "Very_high",
-    "Invalid_or_missing"
+    "VeryHigh",
+    "InvalidOrMissing"
   )
 
   # Test pixel count variables - minimum is greater than or equal to zero
