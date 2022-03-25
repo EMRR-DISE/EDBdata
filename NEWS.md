@@ -6,7 +6,7 @@
   * Renamed `DateTime` column to `Datetime` to have a consistent naming convention across all drought-related data sets
 * Added a `Source` column to the `cont_chla_daily` data set
 * Updates to the `hab_sat_fr_mil` data set:
-  * Added a calculated Cyano Index value for each region and date
+  * Calculated and added an average Cyano Index value (`AvgCI`) for each region and date
   * Renamed columns to upper camel case (UpperCamelCase) to have consistent naming convention across all drought-related data sets
 
 # EDBdata 0.3.0
