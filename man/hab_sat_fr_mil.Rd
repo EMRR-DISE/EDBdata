@@ -58,7 +58,7 @@ pixels were excluded when calculating the average.
 
 Counts and averages only include pixels that were completely within the
 polygons for the two regions. In addition, the data set only includes
-date-region combinations where there were greater than 25\% valid pixels
+date-region combinations for when there were greater than 25\% valid pixels
 within the region.
 }
 \keyword{datasets}
