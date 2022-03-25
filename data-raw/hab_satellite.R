@@ -123,83 +123,78 @@ df_hab_sat_clean <- df_hab_sat %>%
   ) %>%
   select(-strs_prx_obj)
 
-# Function to count number of pixels within each CI category and the percentage of valid pixels
-  # only for the pixels completely within the polygon (100% coverage fraction)
+# Function to count the number of pixels within each CI category for the pixels
+  # completely within the polygon (100% coverage fraction)
 count_ci_cat <- function(df) {
-  # Count pixels within each CI category
-  df_count <- df %>%
-    filter(coverage_fraction == 1) %>%
-    mutate(
-      ci_category = case_when(
-        value == 0 ~ "Non_detect",
-        value <= 41 ~ "Low",
-        value <= 99 ~ "Moderate",
-        value <= 183 ~ "High",
-        value <= 250 ~ "Very_high",
-        TRUE ~ "Invalid_or_missing"
-      )
-    ) %>%
-    count(ci_category) %>%
-    rename(pixel_count = n)
-
-  # Calculate total number of pixels counted
-  vec_pixel_sum <- sum(df_count$pixel_count)
-
-  df_f <- df_count %>%
-    # Restructure data frame into wide format
-    pivot_wider(names_from = ci_category, values_from = pixel_count) %>%
-    # Add total number of pixels counted and the percent of pixels with valid data (<= 250)
-    mutate(
-      pixel_sum = vec_pixel_sum,
-      perc_valid = (1 - Invalid_or_missing/pixel_sum) * 100
-    )
-
-  return(df_f)
-}
-
-# Function to replace NA counts with zeros for the CI categories
-repl_ci_count_na <- function(df) {
   df %>%
-    replace_na(
-      list(
-        Non_detect = 0,
-        Low = 0,
-        Moderate = 0,
-        High = 0,
-        Very_high = 0,
-        Invalid_or_missing = 0
-      )
-    )
+    filter(coverage_fraction == 1) %>%
+    left_join(EDBdata:::df_hab_sat_pixel_key, by = c("value" = "PixelValue")) %>%
+    count(CICategory, name = "pixel_count") %>%
+    pivot_wider(names_from = CICategory, values_from = pixel_count)
 }
 
-# Calculate counts of pixel values within each CI category for Franks Tract and Mildred Island
+# Function to calculate the average Cyano Index of valid pixels completely
+  # within the polygon (100% coverage fraction)
+calc_avg_ci <- function(df) {
+  df %>%
+    filter(coverage_fraction == 1) %>%
+    left_join(EDBdata:::df_hab_sat_pixel_key, by = c("value" = "PixelValue")) %>%
+    summarize(AvgCI = mean(CyanoIndex, na.rm = TRUE)) %>%
+    pull(AvgCI)
+}
+
+# Finish preparing the HAB satellite data for Franks Tract and Mildred Island
 hab_sat_fr_mil <- df_hab_sat_clean %>%
   mutate(sf_fr_mil = list(sf_franks_mildred_32611)) %>%
   # Extract pixels from within each polygon
-  mutate(sf_fr_mil = map2(sf_fr_mil, rast_obj_crop, ~mutate(.x, rast_extract = exact_extract(.y, .x)))) %>%
+  mutate(
+    sf_fr_mil = map2(
+      sf_fr_mil,
+      rast_obj_crop,
+      ~ mutate(.x, df_rast_extract = exact_extract(.y, .x))
+    )
+  ) %>%
   # Convert sf object to data frame
   mutate(df_fr_mil = map(sf_fr_mil, st_drop_geometry)) %>%
   select(Date = strs_date, df_fr_mil) %>%
   unnest(cols = df_fr_mil) %>%
-  # Count number of pixels in each CI category, totals, and percent valid pixels
-  mutate(rast_extract = map(rast_extract, count_ci_cat)) %>%
-  # Simplify to a summary data frame
-  unnest(cols = rast_extract) %>%
+  # Count number of pixels in each CI category for each region and date
+  mutate(df_ci_count = map(df_rast_extract, count_ci_cat)) %>%
+  # Unnest CI category counts into data frame
+  unnest(cols = df_ci_count) %>%
+  # Replace NA values in the CI category counts with zeros
+  replace_na(
+    list(
+      NonDetect = 0,
+      Low = 0,
+      Moderate = 0,
+      High = 0,
+      VeryHigh = 0,
+      InvalidOrMissing = 0
+    )
+  ) %>%
+  # Calculate total number of pixels counted for each row and the percent of
+    # pixels with valid data (<= 250)
+  mutate(
+    PixelSum = rowSums(across(where(is.integer))),
+    PercValid = (1 - InvalidOrMissing/PixelSum) * 100
+  ) %>%
   # Only include days where there were greater than 25% valid pixels
-  filter(perc_valid > 25) %>%
+  filter(PercValid > 25) %>%
+  # Calculate the average Cyano Index value for each region and date
+  mutate(AvgCI = map_dbl(df_rast_extract, calc_avg_ci)) %>%
   # Reorder and select variables
   select(
     Date,
     Name,
-    Non_detect,
+    AvgCI,
+    NonDetect,
     Low,
     Moderate,
     High,
-    Very_high,
-    Invalid_or_missing
-  ) %>%
-  # Replace NA counts with zeros
-  repl_ci_count_na()
+    VeryHigh,
+    InvalidOrMissing
+  )
 
 # Calculate counts of pixel values within each CI category for the EDB regions
   # Not including this for now, but keeping it as a placeholder
