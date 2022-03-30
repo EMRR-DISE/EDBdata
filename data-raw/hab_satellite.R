@@ -1,9 +1,9 @@
 # Code to prepare HAB satellite data sets:
-  # 1) `hab_sat_fr_mil` - Counts of pixel values within each Cyano Index (CI)
-    # category for Franks Tract and Mildred Island. Also includes a calculated
-    # average Cyano Index value for each region and date in the data set.
-  # 2) Kept placeholder code to perform same procedure for the EDB regions, but
-    # no data object exists for this currently
+# 1) `hab_sat_ow_delta` - Pixel counts within each Cyano Index (CI) category for
+  # 4 open water regions in the upper San Francisco Estuary: Franks Tract, Mildred
+  # Island, Clifton Court Forebay, and Liberty Island. Also includes a calculated
+  # average Cyano Index value for each region and date in the data set. Summary
+  # statistics cover the spring through late fall (May-Dec) in 2020 and 2021.
 
 # Load packages
 library(dplyr)
@@ -77,20 +77,20 @@ df_hab_sat <-
   ) %>%
   select(strs_date, strs_prx_obj)
 
-# Import the polygon shapefile for Franks Tract and Mildred Island
-sf_franks_mildred <- read_sf(here("data-raw/Spatial_data/Franks_Mildred.shp"))
+# Import the polygon shapefile for the four open water regions in the Delta
+sf_ow_delta <- read_sf(here("data-raw/Spatial_data/Franks_Mildr_CCF_LibIsl.shp"))
 
-# Clean up Franks-Mildred shapefile to contain just the necessary variables
-sf_franks_mildred_clean <- sf_franks_mildred %>% select(Name = HNAME)
+# Clean up shapefile of the open water regions with a more descriptive column header
+sf_ow_delta_c <- sf_ow_delta %>% rename(Region = HNAME)
 
-# Transform crs of Franks-Mildred shapefile to the crs of the HAB satellite data
+# Transform crs of open water regions shapefile to the crs of the HAB satellite data
 crs_hab_sat <- st_crs(df_hab_sat$strs_prx_obj[[1]])
-sf_franks_mildred_32611 <- st_transform(sf_franks_mildred_clean, crs = crs_hab_sat)
+sf_ow_delta_32611 <- st_transform(sf_ow_delta_c, crs = crs_hab_sat)
 
-# Create a bounding box of the Franks-Mildred shapefile which will be used to
+# Create a bounding box of the open water regions shapefile which will be used to
   # crop the satellite data. Add a 1 km buffer to slightly expand the bounding box
   # to ensure no desired data is removed.
-bbox_fr_mil <- st_bbox(st_buffer(sf_franks_mildred_32611, 1000))
+bbox_ow_delta <- st_bbox(st_buffer(sf_ow_delta_32611, 1000))
 
 # Create a vector of dates to exclude from the analysis since the imagery doesn't cover the Delta region
 dates_rm <-
@@ -109,9 +109,9 @@ df_hab_sat_clean <- df_hab_sat %>%
   filter(!strs_date %in% dates_rm) %>%
   mutate(
     rast_obj_crop =
-      # Crop HAB satellite data to bounding box of the Franks-Mildred shapefile
-        # to make it easier to work with
-      map(strs_prx_obj, ~st_crop(.x, bbox_fr_mil) %>%
+      # Crop HAB satellite data to bounding box of the open water regions
+        # shapefile to make it easier to work with
+      map(strs_prx_obj, ~st_crop(.x, bbox_ow_delta) %>%
         # rename attribute to be more descriptive
         setNames("pixel_val") %>%
         # Convert factor to numeric
@@ -143,21 +143,21 @@ calc_avg_ci <- function(df) {
     pull(AvgCI)
 }
 
-# Finish preparing the HAB satellite data for Franks Tract and Mildred Island
-hab_sat_fr_mil <- df_hab_sat_clean %>%
-  mutate(sf_fr_mil = list(sf_franks_mildred_32611)) %>%
+# Finish preparing the HAB satellite data for the four open water regions in the Delta
+hab_sat_ow_delta <- df_hab_sat_clean %>%
+  mutate(sf_fr_mil_ccf_lib = list(sf_ow_delta_32611)) %>%
   # Extract pixels from within each polygon
   mutate(
-    sf_fr_mil = map2(
-      sf_fr_mil,
+    sf_fr_mil_ccf_lib = map2(
+      sf_fr_mil_ccf_lib,
       rast_obj_crop,
       ~ mutate(.x, df_rast_extract = exact_extract(.y, .x))
     )
   ) %>%
   # Convert sf object to data frame
-  mutate(df_fr_mil = map(sf_fr_mil, st_drop_geometry)) %>%
-  select(Date = strs_date, df_fr_mil) %>%
-  unnest(cols = df_fr_mil) %>%
+  mutate(df_fr_mil_ccf_lib = map(sf_fr_mil_ccf_lib, st_drop_geometry)) %>%
+  select(Date = strs_date, df_fr_mil_ccf_lib) %>%
+  unnest(cols = df_fr_mil_ccf_lib) %>%
   # Count number of pixels in each CI category for each region and date
   mutate(df_ci_count = map(df_rast_extract, count_ci_cat)) %>%
   # Unnest CI category counts into data frame
@@ -186,7 +186,7 @@ hab_sat_fr_mil <- df_hab_sat_clean %>%
   # Reorder and select variables
   select(
     Date,
-    Name,
+    Region,
     AvgCI,
     NonDetect,
     Low,
@@ -196,14 +196,11 @@ hab_sat_fr_mil <- df_hab_sat_clean %>%
     InvalidOrMissing
   )
 
-# Calculate counts of pixel values within each CI category for the EDB regions
-  # Not including this for now, but keeping it as a placeholder
-
-# Save final data set containing counts of pixel values within each CI category as csv file
+# Save final data set containing counts and averages of Cyano Index values as csv file
   # for easier diffing
-write_csv(hab_sat_fr_mil, here("data-raw/Final/hab_sat_fr_mil.csv"))
+write_csv(hab_sat_ow_delta, here("data-raw/Final/hab_sat_ow_delta.csv"))
 
-# Save final data sets containing counts of pixel values within each CI category as objects
+# Save final data set containing counts and averages of Cyano Index values as object
   # in the data package
-usethis::use_data(hab_sat_fr_mil, overwrite = TRUE)
+usethis::use_data(hab_sat_ow_delta, overwrite = TRUE)
 
