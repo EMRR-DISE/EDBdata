@@ -23,7 +23,7 @@ An R data package containing data sets used in the Emergency Drought Barrier (ED
 
 This package provides the following data tables:
 
-* `hab_sat_fr_mil`: Summary of Cyano Index values derived from HAB satellite data for Franks Tract and Mildred Island for the spring through late fall (May-Dec) in 2020 and 2021. Includes averages of Cyano Index for each region and date in addition to pixel counts within 4 Cyano Index categories.
+* `hab_sat_ow_delta`: Summary of Cyano Index values derived from HAB satellite data for four open water regions in the upper San Francisco Estuary (Delta): Franks Tract, Mildred Island, Clifton Court Forebay, and Liberty Island. Summary statistics cover the spring through late fall (May-Dec) in 2020 and 2021. Includes averages of Cyano Index for each region and date in addition to pixel counts within 4 Cyano Index categories.
 * `phyto_edb`: Phytoplankton community data collected by DWR's Environmental Monitoring Program from 2014-2021 for stations within the Emergency Drought Barrier regions
 * `cont_chla_daily`: Daily average and median values of continuous chlorophyll fluorescence data collected by DWR and USGS from 2020-2021 for the stations within the Emergency Drought Barrier regions
 * `hab_nutr_chla_mvi`: Discrete nutrient concentrations (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and Dissolved Ortho-phosphate), chlorophyll-a concentrations, and *Microcystis* visual index values in the San Francisco Estuary east of Suisun Marsh for 2014-2021
