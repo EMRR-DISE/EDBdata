@@ -8,12 +8,13 @@
 \format{
 data frame with 7,612 rows and 7 columns
 \describe{
-\item{Source}{Name of the source dataset. Either DWR_CEMP (DWR's Continuous
-Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
-Office), or USGS}
+\item{Source}{Name of the source dataset. Is one of the following: DWR_CEMP
+(DWR's Continuous Environmental Monitoring Program), DWR_NCRO (DWR's North
+Central Region Office), or USGS}
 \item{Station}{Location where measurement was collected}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
-Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+Barrier analysis. Is one of the following: Central Delta, Sacramento, or
+San Joaquin.}
 \item{Year}{Calendar year of the value}
 \item{Date}{Calendar date of the value}
 \item{Chla_avg}{Daily average chlorophyll fluorescence value in micrograms

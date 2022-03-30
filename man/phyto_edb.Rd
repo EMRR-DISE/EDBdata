@@ -10,7 +10,8 @@ data frame with 4,353 rows and 11 columns
 \describe{
 \item{Station}{Location where sample was collected}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
-Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+Barrier analysis. Is one of the following: Central Delta, Sacramento, or
+San Joaquin.}
 \item{Year}{Calendar year of the sample}
 \item{Date}{Calendar date of the sample}
 \item{Datetime}{Date and time of the sample in PST}

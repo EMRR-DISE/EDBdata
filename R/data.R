@@ -1,15 +1,16 @@
 #' @title Summary of Cyano Index values derived from HAB satellite data for
-#'   Franks Tract and Mildred Island
+#'   four open water regions in the Delta
 #' @description A data set containing counts and averages of Cyano Index values
 #'   from HAB satellite data downloaded from the Harmful Algal Blooms Analysis
 #'   Tool (see Source section below). Summary statistics cover the spring
-#'   through late fall (May-Dec) in 2020 and 2021 for two open water regions in
-#'   the upper San Francisco Estuary: Franks Tract and Mildred Island. Used in
-#'   the analyses for the Emergency Drought Barrier (EDB).
+#'   through late fall (May-Dec) in 2020 and 2021 for four open water regions in
+#'   the upper San Francisco Estuary (Delta): Franks Tract, Mildred Island,
+#'   Clifton Court Forebay, and Liberty Island. Used in the analyses for the
+#'   Emergency Drought Barrier (EDB).
 #'
 #'   The data set contains averages of Cyano Index for each region and date in
-#'   addition to pixel counts within 4 Cyano Index categories. The Cyano Index
-#'   categories (Low, Moderate, High, and Very High) were based on WHO
+#'   addition to pixel counts within four Cyano Index categories. The Cyano
+#'   Index categories (Low, Moderate, High, and Very High) were based on WHO
 #'   recreational guidance level thresholds. The data set also includes counts
 #'   of pixels that were below the detection limit for the imagery processing
 #'   method and counts of pixels that were either invalid or missing. Zeros were
@@ -21,11 +22,11 @@
 #'   date-region combinations for when there were greater than 25% valid pixels
 #'   within the region.
 #'
-#' @format data frame with 329 rows and 9 columns
+#' @format data frame with 708 rows and 9 columns
 #' \describe{
 #'   \item{Date}{Date of satellite imagery}
-#'   \item{Name}{Name of the polygon region. Either Franks Tract or Mildred
-#'     Island.}
+#'   \item{Region}{Name of the polygon region. Is one of the following: Franks
+#'     Tract, Mildred Island, Clifton Court Forebay, or Liberty Island.}
 #'   \item{AvgCI}{Average Cyano Index value of all valid pixels within the
 #'     region. The Cyano Index is a exponential and unitless metric.}
 #'   \item{NonDetect}{Count of the number of pixels below the detection limit
@@ -49,7 +50,7 @@
 #'
 #' @source San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis
 #'   Tool. <https://fhab.sfei.org/>
-"hab_sat_fr_mil"
+"hab_sat_ow_delta"
 
 #' @title Phytoplankton community data from 2014-2021 for stations within the
 #'   EDB regions
@@ -62,7 +63,8 @@
 #' \describe{
 #'   \item{Station}{Location where sample was collected}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
-#'     Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+#'     Barrier analysis. Is one of the following: Central Delta, Sacramento, or
+#'     San Joaquin.}
 #'   \item{Year}{Calendar year of the sample}
 #'   \item{Date}{Calendar date of the sample}
 #'   \item{Datetime}{Date and time of the sample in PST}
@@ -95,12 +97,13 @@
 #'
 #' @format data frame with 7,612 rows and 7 columns
 #' \describe{
-#'   \item{Source}{Name of the source dataset. Either DWR_CEMP (DWR's Continuous
-#'     Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
-#'     Office), or USGS}
+#'   \item{Source}{Name of the source dataset. Is one of the following: DWR_CEMP
+#'     (DWR's Continuous Environmental Monitoring Program), DWR_NCRO (DWR's North
+#'     Central Region Office), or USGS}
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
-#'     Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+#'     Barrier analysis. Is one of the following: Central Delta, Sacramento, or
+#'     San Joaquin.}
 #'   \item{Year}{Calendar year of the value}
 #'   \item{Date}{Calendar date of the value}
 #'   \item{Chla_avg}{Daily average chlorophyll fluorescence value in micrograms
@@ -158,10 +161,10 @@
 #'
 #' @format data frame with 3,273 rows and 15 columns
 #' \describe{
-#'   \item{Source}{Name of the source dataset. Either DWR_EMP (DWR's
-#'     Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
-#'     Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey), or
-#'     USGS_CAWSC (USGS's California Water Science Center)}
+#'   \item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
+#'     (DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
+#'     Region Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey),
+#'     or USGS_CAWSC (USGS's California Water Science Center)}
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}

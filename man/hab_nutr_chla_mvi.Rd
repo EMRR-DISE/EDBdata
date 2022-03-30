@@ -8,10 +8,10 @@ visual index values for 2014-2021}
 \format{
 data frame with 3,273 rows and 15 columns
 \describe{
-\item{Source}{Name of the source dataset. Either DWR_EMP (DWR's
-Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
-Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey), or
-USGS_CAWSC (USGS's California Water Science Center)}
+\item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
+(DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
+Region Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey),
+or USGS_CAWSC (USGS's California Water Science Center)}
 \item{Station}{Location where measurement was collected}
 \item{Latitude}{Latitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
 \item{Longitude}{Longitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
