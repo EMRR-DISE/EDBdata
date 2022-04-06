@@ -1,4 +1,4 @@
-Source,Station,Region,Year,Date,Chla_avg,Chla_med
+Source,Station,Region,Year,Date,ChlaAvg,ChlaMed
 DWR_CEMP,FRK,Central Delta,2020,2020-04-01,2.0738541666666666,2.06
 DWR_CEMP,FRK,Central Delta,2020,2020-04-02,2.1085416666666665,2.035
 DWR_CEMP,FRK,Central Delta,2020,2020-04-03,2.021875,2

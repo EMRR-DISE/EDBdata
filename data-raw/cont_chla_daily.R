@@ -264,8 +264,8 @@ cont_chla_daily <- df_chla_clean2 %>%
   mutate(Date = date(DateTime)) %>%
   group_by(Source, Station, Year, Date) %>%
   summarize(
-    Chla_avg = mean(Chla),
-    Chla_med = median(Chla)
+    ChlaAvg = mean(Chla),
+    ChlaMed = median(Chla)
   ) %>%
   ungroup() %>%
   # Add regions
@@ -280,8 +280,8 @@ cont_chla_daily <- df_chla_clean2 %>%
     Region,
     Year,
     Date,
-    Chla_avg,
-    Chla_med
+    ChlaAvg,
+    ChlaMed
   )
 
 # Save final data set containing continuous chlorophyll data for the EDB analysis as csv file

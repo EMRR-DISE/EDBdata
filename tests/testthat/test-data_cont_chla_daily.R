@@ -24,8 +24,8 @@ test_that("Data dimensions are correct", {
     "Region",
     "Year",
     "Date",
-    "Chla_avg",
-    "Chla_med"
+    "ChlaAvg",
+    "ChlaMed"
   )
 
   expect_equal(names(cont_chla_daily), name_check)
@@ -42,8 +42,8 @@ test_that("All variables are correct class", {
   expect_equal(class(cont_chla_daily$Region), "character")
   expect_equal(class(cont_chla_daily$Year), "numeric")
   expect_equal(class(cont_chla_daily$Date), "Date")
-  expect_equal(class(cont_chla_daily$Chla_avg), "numeric")
-  expect_equal(class(cont_chla_daily$Chla_med), "numeric")
+  expect_equal(class(cont_chla_daily$ChlaAvg), "numeric")
+  expect_equal(class(cont_chla_daily$ChlaMed), "numeric")
 })
 
 test_that("All Sources are as expected", {
@@ -101,7 +101,7 @@ test_that("Date is formatted correctly", {
 })
 
 test_that("Daily averages and medians are greater than or equal to zero", {
-  expect_gte(min(cont_chla_daily$Chla_avg), 0)
-  expect_gte(min(cont_chla_daily$Chla_med), 0)
+  expect_gte(min(cont_chla_daily$ChlaAvg), 0)
+  expect_gte(min(cont_chla_daily$ChlaMed), 0)
 })
 
