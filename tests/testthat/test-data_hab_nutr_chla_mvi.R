@@ -16,6 +16,7 @@ test_that("No expected variables contain `NA` values", {
     "Station",
     "Latitude",
     "Longitude",
+    "Region",
     "Date",
     "Datetime",
     "DissAmmonia_Sign",
@@ -29,13 +30,14 @@ test_that("No expected variables contain `NA` values", {
 
 test_that("Data dimensions are correct", {
   expect_equal(nrow(hab_nutr_chla_mvi), 3273)
-  expect_equal(ncol(hab_nutr_chla_mvi), 15)
+  expect_equal(ncol(hab_nutr_chla_mvi), 16)
 
   name_check <- c(
     "Source",
     "Station",
     "Latitude",
     "Longitude",
+    "Region",
     "Date",
     "Datetime",
     "DissAmmonia_Sign",
@@ -86,6 +88,7 @@ test_that("All variables are correct class", {
   expect_equal(class(hab_nutr_chla_mvi$Station), "character")
   expect_equal(class(hab_nutr_chla_mvi$Latitude), "numeric")
   expect_equal(class(hab_nutr_chla_mvi$Longitude), "numeric")
+  expect_equal(class(hab_nutr_chla_mvi$Region), "character")
   expect_equal(class(hab_nutr_chla_mvi$Date), "Date")
   expect_equal(class(hab_nutr_chla_mvi$Datetime), c("POSIXct", "POSIXt"))
   expect_equal(class(hab_nutr_chla_mvi$DissAmmonia_Sign), "character")
@@ -173,6 +176,21 @@ test_that("All Latitude and Longitude values are within expected ranges", {
   expect_lte(max(hab_nutr_chla_mvi$Latitude), 39)
   expect_gte(min(hab_nutr_chla_mvi$Longitude), -122)
   expect_lte(max(hab_nutr_chla_mvi$Longitude), -121)
+})
+
+test_that("All Region names are as expected", {
+  regions_check <- c(
+    "Cache/Liberty",
+    "East Delta",
+    "Lower SJ",
+    "Lower Sac",
+    "SDWSC",
+    "South Delta",
+    "Suisun Bay",
+    "Upper Sac"
+  )
+
+  expect_equal(sort(unique(hab_nutr_chla_mvi$Region)), regions_check)
 })
 
 test_that("Date is formatted correctly", {

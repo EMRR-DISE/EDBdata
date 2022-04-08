@@ -6,7 +6,7 @@
 \title{Discrete nutrient and chlorophyll-a concentrations and \emph{Microcystis}
 visual index values for 2014-2021}
 \format{
-data frame with 3,273 rows and 15 columns
+data frame with 3,273 rows and 16 columns
 \describe{
 \item{Source}{Name of the source dataset. Either DWR_EMP (DWR's
 Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
@@ -15,6 +15,9 @@ USGS_CAWSC (USGS's California Water Science Center)}
 \item{Station}{Location where measurement was collected}
 \item{Latitude}{Latitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
 \item{Longitude}{Longitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
+\item{Region}{Region designation of \code{Station} for the Emergency Drought
+Barrier analysis. Is one of the following: Cache/Liberty, East Delta, Lower
+Sac, Lower SJ, SDWSC, South Delta, Suisun Bay, or Upper Sac.}
 \item{Date}{Calendar date of the measurement}
 \item{Datetime}{Date and time of the measurement in PST}
 \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia

@@ -145,7 +145,7 @@
 #'   instances, this data set uses the most common RL for each nutrient
 #'   parameter and laboratory method to fill in the missing RL values.
 #'
-#' @format data frame with 3,273 rows and 15 columns
+#' @format data frame with 3,273 rows and 16 columns
 #' \describe{
 #'   \item{Source}{Name of the source dataset. Either DWR_EMP (DWR's
 #'     Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
@@ -154,6 +154,9 @@
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Region}{Region designation of `Station` for the Emergency Drought
+#'     Barrier analysis. Is one of the following: Cache/Liberty, East Delta, Lower
+#'     Sac, Lower SJ, SDWSC, South Delta, Suisun Bay, or Upper Sac.}
 #'   \item{Date}{Calendar date of the measurement}
 #'   \item{Datetime}{Date and time of the measurement in PST}
 #'   \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia

@@ -925,8 +925,8 @@ df_nutr_chla_mvi_all_c2 <- df_nutr_chla_mvi_all_c1 %>%
     # We waited to remove these stations until after running the modified z-score
     # test to have the most data possible for each region
   filter(!str_detect(Station, "^EZ")) %>%
-  # Remove mod z-score variables
-  select(!ends_with("_mod_zscore"))
+  # Remove mod z-score and Region variables
+  select(-c(ends_with("_mod_zscore"), Region))
 
 # We will only keep stations where all three nutrients and chlorophyll-a have been collected
 # This doesn't require that all parameters were collected on the same day though
@@ -957,8 +957,33 @@ hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c2 %>%
   rm_flagged(DissNitrateNitrite) %>%
   rm_flagged(DissOrthophos) %>%
   rm_flagged(Chlorophyll) %>%
-  # Clean up and reorder variables
-  select(!c(Region, ends_with("_flag"))) %>%
+  # Add Regions from the R_EDSM_Strata_1718P1 shapefile which were used in the
+    # analysis of this data
+  # Convert to sf object
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
+  # Change to crs of R_EDSM_Strata_1718P1
+  st_transform(crs = st_crs(R_EDSM_Strata_1718P1)) %>%
+  # Add Strata from R_EDSM_Strata_1718P1
+  st_join(R_EDSM_Strata_1718P1, join = st_intersects) %>%
+  # Drop sf geometry column since it's no longer needed
+  st_drop_geometry() %>%
+  # Rename Strata to shorter names
+  mutate(
+    Region = recode(
+      Stratum,
+      "Cache Slough/Liberty Island" = "Cache/Liberty",
+      "Eastern Delta" = "East Delta",
+      "Lower Sacramento" = "Lower Sac",
+      "Lower San Joaquin" = "Lower SJ",
+      "Sac Deep Water Shipping Channel" = "SDWSC",
+      "Southern Delta" = "South Delta",
+      "Suisun Bay" = "Suisun Bay",
+      "Upper Sacramento" = "Upper Sac"
+    )
+  ) %>%
+  # Remove and reorder variables
+  select(-c(ends_with("_flag"), Stratum)) %>%
+  relocate(Region, .before = Date) %>%
   relocate(Chlorophyll_Sign, .before = Chlorophyll) %>%
   # Convert Microcystis to integer
   mutate(Microcystis = as.integer(Microcystis))
