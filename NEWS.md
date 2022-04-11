@@ -1,4 +1,4 @@
-# EDBdata (development version)
+# EDBdata 0.4.0
 
 * Updates to `phyto_edb` data set:
   * Added November - December 2021 data so it contains all data collected in 2021
