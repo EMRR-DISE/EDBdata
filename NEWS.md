@@ -4,9 +4,10 @@
   * Added November - December 2021 data so it contains all data collected in 2021
   * Removed *Microcystis* surface tow data collected in September 2021
   * Renamed `DateTime` column to `Datetime` to have a consistent naming convention across all drought-related data sets
-* Updates to `cont_chla_daily` data set:
-  * Added a `Source` column
-  * Renamed columns to upper camel case (UpperCamelCase) to have consistent naming convention across all drought-related data sets
+* Added a `Source` column to the `cont_chla_daily` data set
+* Added two regions (Clifton Court Forebay and Liberty Island) to the `hab_sat_fr_mil` data set. This data set is now called `hab_sat_ow_delta` to better describe its contents.
+* Calculated and added an average Cyano Index value (`AvgCI`) for each region and date in the `hab_sat_ow_delta` data set
+* Renamed columns in `cont_chla_daily` and `hab_sat_ow_delta` to upper camel case (UpperCamelCase) to have consistent naming convention across all drought-related data sets
 
 # EDBdata 0.3.0
 

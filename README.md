@@ -15,9 +15,13 @@ data.
 
 This package provides the following data tables:
 
--   `hab_sat_fr_mil`: Counts of pixel values within 4 Cyano Index
-    categories for Franks Tract and Mildred Island for the spring
-    through late fall (May-Dec) in 2020 and 2021
+-   `hab_sat_ow_delta`: Summary of Cyano Index values derived from HAB
+    satellite data for four open water regions in the upper San
+    Francisco Estuary (Delta): Franks Tract, Mildred Island, Clifton
+    Court Forebay, and Liberty Island. Summary statistics cover the
+    spring through late fall (May-Dec) in 2020 and 2021. Includes
+    averages of Cyano Index for each region and date in addition to
+    pixel counts within 4 Cyano Index categories.
 -   `phyto_edb`: Phytoplankton community data collected by DWR’s
     Environmental Monitoring Program from 2014-2021 for stations within
     the Emergency Drought Barrier regions

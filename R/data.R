@@ -1,44 +1,56 @@
-#' @title Counts of pixel values within Cyano Index categories for Franks Tract
-#'   and Mildred Island
-#' @description A data set containing counts of pixel values within 4 Cyano
-#'   Index categories for Franks Tract and Mildred Island for the spring through
-#'   late fall (May-Dec) in 2020 and 2021. The Cyano Index categories (Low,
-#'   Moderate, High, and Very High) were based on WHO recreational guidance
-#'   level thresholds. The data set also includes counts of pixels that were
-#'   below the detection limit for the imagery processing method and counts of
-#'   pixels that were either invalid or missing.
+#' @title Summary of Cyano Index values derived from HAB satellite data for
+#'   four open water regions in the Delta
+#' @description A data set containing counts and averages of Cyano Index values
+#'   from HAB satellite data downloaded from the Harmful Algal Blooms Analysis
+#'   Tool (see Source section below). Summary statistics cover the spring
+#'   through late fall (May-Dec) in 2020 and 2021 for four open water regions in
+#'   the upper San Francisco Estuary (Delta): Franks Tract, Mildred Island,
+#'   Clifton Court Forebay, and Liberty Island. Used in the analyses for the
+#'   Emergency Drought Barrier (EDB).
 #'
-#'   Counts only include pixels that were completely within the polygons for the
-#'   two regions. The data set only includes date-region combinations where
-#'   there were greater than 25% valid pixels within the region. Zonal
-#'   statistics were calculated from satellite data downloaded from the Harmful
-#'   Algal Blooms Analysis Tool (see Source section below). Used in the analyses
-#'   for the Emergency Drought Barrier (EDB).
+#'   The data set contains averages of Cyano Index for each region and date in
+#'   addition to pixel counts within four Cyano Index categories. The Cyano
+#'   Index categories (Low, Moderate, High, and Very High) were based on WHO
+#'   recreational guidance level thresholds. The data set also includes counts
+#'   of pixels that were below the detection limit for the imagery processing
+#'   method and counts of pixels that were either invalid or missing. Zeros were
+#'   substituted for the values below the detection limit and invalid or missing
+#'   pixels were excluded when calculating the average.
 #'
-#' @format data frame with 329 rows and 8 columns
+#'   Counts and averages only include pixels that were completely within the
+#'   polygons for the two regions. In addition, the data set only includes
+#'   date-region combinations for when there were greater than 25% valid pixels
+#'   within the region.
+#'
+#' @format data frame with 708 rows and 9 columns
 #' \describe{
 #'   \item{Date}{Date of satellite imagery}
-#'   \item{Name}{Name of the polygon region. Either Franks Tract or Mildred
-#'     Island.}
-#'   \item{Non_detect}{Count of the number of pixels below the detection limit
-#'     for the method which is less than or equal to 6,310 cells/mL}
+#'   \item{Region}{Name of the polygon region. Is one of the following: Franks
+#'     Tract, Mildred Island, Clifton Court Forebay, or Liberty Island.}
+#'   \item{AvgCI}{Average Cyano Index value of all valid pixels within the
+#'     region. The Cyano Index is a exponential and unitless metric.}
+#'   \item{NonDetect}{Count of the number of pixels below the detection limit
+#'     for the method which is less than or equal to a Cyano Index of 0.0000631}
 #'   \item{Low}{Count of the number of pixels in the Low Cyano Index category
-#'     defined as having greater than 6,310 cells/mL but less than 19,999
-#'     cells/mL}
+#'     defined as having a Cyano Index of greater than 0.00006310 but less than
+#'     0.0002}
 #'   \item{Moderate}{Count of the number of pixels in the Moderate Cyano Index
-#'     category defined as having between 19,999 and 99,999 cells/mL}
+#'     category defined as having a Cyano Index greater than or equal to 0.0002
+#'     but less than 0.001}
 #'   \item{High}{Count of the number of pixels in the High Cyano Index category
-#'     defined as having between 99,999 and 999,999 cells/mL}
-#'   \item{Very_high}{Count of the number of pixels in the Very High Cyano Index
-#'     category defined as having greater than 999,999 cells/mL}
-#'   \item{Invalid_or_missing}{Count of the number of pixels that were either
+#'     defined as having a Cyano Index greater than or equal to 0.001 but less
+#'     than 0.01}
+#'   \item{VeryHigh}{Count of the number of pixels in the Very High Cyano Index
+#'     category defined as having a Cyano Index greater than or equal to 0.01. The
+#'     maximum detectable level for the Cyano Index is 0.06327.}
+#'   \item{InvalidOrMissing}{Count of the number of pixels that were either
 #'     invalid (land, adjacency) or missing (clouds, no data, or some other
 #'     reason)}
 #' }
 #'
 #' @source San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis
 #'   Tool. <https://fhab.sfei.org/>
-"hab_sat_fr_mil"
+"hab_sat_ow_delta"
 
 #' @title Phytoplankton community data from 2014-2021 for stations within the
 #'   EDB regions
@@ -51,7 +63,8 @@
 #' \describe{
 #'   \item{Station}{Location where sample was collected}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
-#'     Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+#'     Barrier analysis. Is one of the following: Central Delta, Sacramento, or
+#'     San Joaquin.}
 #'   \item{Year}{Calendar year of the sample}
 #'   \item{Date}{Calendar date of the sample}
 #'   \item{Datetime}{Date and time of the sample in PST}
@@ -84,12 +97,13 @@
 #'
 #' @format data frame with 7,612 rows and 7 columns
 #' \describe{
-#'   \item{Source}{Name of the source dataset. Either DWR_CEMP (DWR's Continuous
-#'     Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
-#'     Office), or USGS}
+#'   \item{Source}{Name of the source dataset. Is one of the following: DWR_CEMP
+#'     (DWR's Continuous Environmental Monitoring Program), DWR_NCRO (DWR's North
+#'     Central Region Office), or USGS}
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
-#'     Barrier analysis. Either Central Delta, Sacramento, or San Joaquin.}
+#'     Barrier analysis. Is one of the following: Central Delta, Sacramento, or
+#'     San Joaquin.}
 #'   \item{Year}{Calendar year of the value}
 #'   \item{Date}{Calendar date of the value}
 #'   \item{ChlaAvg}{Daily average chlorophyll fluorescence value in micrograms
@@ -147,10 +161,10 @@
 #'
 #' @format data frame with 3,273 rows and 16 columns
 #' \describe{
-#'   \item{Source}{Name of the source dataset. Either DWR_EMP (DWR's
-#'     Environmental Monitoring Program), DWR_NCRO (DWR's North Central Region
-#'     Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey), or
-#'     USGS_CAWSC (USGS's California Water Science Center)}
+#'   \item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
+#'     (DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
+#'     Region Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey),
+#'     or USGS_CAWSC (USGS's California Water Science Center)}
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
