@@ -1,5 +1,7 @@
 # EDBdata (development version)
 
+* Renamed columns for the daily mean and median values in `cont_chla_daily` to `AvgChla` and `MedianChla`, respectively, to have consistent naming convention across all drought-related data sets
+
 # EDBdata 0.4.0
 
 * Updates to `phyto_edb` data set:

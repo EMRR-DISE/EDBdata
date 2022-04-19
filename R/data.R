@@ -106,9 +106,9 @@
 #'     San Joaquin.}
 #'   \item{Year}{Calendar year of the value}
 #'   \item{Date}{Calendar date of the value}
-#'   \item{ChlaAvg}{Daily average chlorophyll fluorescence value in micrograms
+#'   \item{AvgChla}{Daily average chlorophyll fluorescence value in micrograms
 #'     per liter}
-#'   \item{ChlaMed}{Daily median chlorophyll fluorescence value in micrograms
+#'   \item{MedianChla}{Daily median chlorophyll fluorescence value in micrograms
 #'     per liter}
 #' }
 #'

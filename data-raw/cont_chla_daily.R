@@ -264,8 +264,8 @@ cont_chla_daily <- df_chla_clean2 %>%
   mutate(Date = date(DateTime)) %>%
   group_by(Source, Station, Year, Date) %>%
   summarize(
-    ChlaAvg = mean(Chla),
-    ChlaMed = median(Chla)
+    AvgChla = mean(Chla),
+    MedianChla = median(Chla)
   ) %>%
   ungroup() %>%
   # Add regions
@@ -280,8 +280,8 @@ cont_chla_daily <- df_chla_clean2 %>%
     Region,
     Year,
     Date,
-    ChlaAvg,
-    ChlaMed
+    AvgChla,
+    MedianChla
   )
 
 
