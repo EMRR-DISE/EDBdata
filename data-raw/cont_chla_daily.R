@@ -242,7 +242,7 @@ qc_min_max <- df_chla_clean2 %>%
   # instead of daily means
 
 
-# 4. Aggregate Values -----------------------------------------------------
+# 3. Aggregate Values -----------------------------------------------------
 
 # Assign EDB regions to each station
 df_region_assign <- df_coords_orig %>%
@@ -283,6 +283,9 @@ cont_chla_daily <- df_chla_clean2 %>%
     ChlaAvg,
     ChlaMed
   )
+
+
+# 4. Save and Export Data -------------------------------------------------
 
 # Save final data set containing continuous chlorophyll data for the EDB analysis as csv file
   # for easier diffing

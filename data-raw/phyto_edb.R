@@ -17,6 +17,7 @@ library(here)
 # Check if we are in the correct working directory
 i_am("data-raw/phyto_edb.R")
 
+
 # 1. Import Data ----------------------------------------------------------
 
 # Create a vector of all file paths within the data-raw/Phyto_data folder
@@ -185,6 +186,9 @@ phyto_edb <- df_phyto_all %>%
     Count,
     OrganismsPerMl
   )
+
+
+# 4. Save and Export Data -------------------------------------------------
 
 # Save final data set containing phytoplankton community data for the EDB analysis as csv file
   # for easier diffing
