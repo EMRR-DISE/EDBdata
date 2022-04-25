@@ -259,6 +259,11 @@ sf_delta <- R_EDSM_Subregions_Mahardja_FLOAT %>%
   filter(!str_detect(Region, "^Suisun")) %>%
   select(Region, SubRegion)
 
+# Import polygon shapefile for the HABs regions used in the analysis of this
+  # data set
+sf_hab_reg <- read_sf(here("data-raw/Spatial_data/HABregions.shp")) %>%
+  select(Region = Stratum2)
+
 
 # 2. Clean and Combine Data -----------------------------------------------
 
@@ -957,32 +962,19 @@ hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c2 %>%
   rm_flagged(DissNitrateNitrite) %>%
   rm_flagged(DissOrthophos) %>%
   rm_flagged(Chlorophyll) %>%
-  # Add Regions from the R_EDSM_Strata_1718P1 shapefile which were used in the
-    # analysis of this data
+  # Add Regions from the sf_hab_reg shapefile which were used in the analysis of
+    # this data
   # Convert to sf object
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
-  # Change to crs of R_EDSM_Strata_1718P1
-  st_transform(crs = st_crs(R_EDSM_Strata_1718P1)) %>%
-  # Add Strata from R_EDSM_Strata_1718P1
-  st_join(R_EDSM_Strata_1718P1, join = st_intersects) %>%
+  # Add Regions from sf_hab_reg
+  st_join(sf_hab_reg, join = st_intersects) %>%
   # Drop sf geometry column since it's no longer needed
   st_drop_geometry() %>%
-  # Rename Strata to shorter names
-  mutate(
-    Region = recode(
-      Stratum,
-      "Cache Slough/Liberty Island" = "Cache/Liberty",
-      "Eastern Delta" = "East Delta",
-      "Lower Sacramento" = "Lower Sac",
-      "Lower San Joaquin" = "Lower SJ",
-      "Sac Deep Water Shipping Channel" = "SDWSC",
-      "Southern Delta" = "South Delta",
-      "Suisun Bay" = "Suisun Bay",
-      "Upper Sacramento" = "Upper Sac"
-    )
-  ) %>%
+  # Remove three stations not within the regions in sf_hab_reg - these are
+    # located west of Chipps Island
+  filter(!is.na(Region)) %>%
   # Remove and reorder variables
-  select(-c(ends_with("_flag"), Stratum)) %>%
+  select(!ends_with("_flag")) %>%
   relocate(Region, .before = Date) %>%
   relocate(Chlorophyll_Sign, .before = Chlorophyll) %>%
   # Convert Microcystis to integer

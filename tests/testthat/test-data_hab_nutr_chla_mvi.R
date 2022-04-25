@@ -29,7 +29,7 @@ test_that("No expected variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(hab_nutr_chla_mvi), 3273)
+  expect_equal(nrow(hab_nutr_chla_mvi), 3047)
   expect_equal(ncol(hab_nutr_chla_mvi), 16)
 
   name_check <- c(
@@ -109,13 +109,11 @@ test_that("All Sources are as expected", {
 
 test_that("All Stations are as expected", {
   stations_check <- c(
-    "3",
     "649",
     "657",
     "BET",
     "C3A",
     "C9",
-    "D10",
     "D12",
     "D16",
     "D19",
@@ -161,7 +159,6 @@ test_that("All Stations are as expected", {
     "USGS-11455420",
     "USGS-11455478",
     "USGS-11455485",
-    "USGS-11455508",
     "USGS-381424121405601",
     "USGS-381614121415301",
     "USGS-382006121401601",
@@ -182,11 +179,11 @@ test_that("All Region names are as expected", {
   regions_check <- c(
     "Cache/Liberty",
     "East Delta",
+    "Franks",
     "Lower SJ",
     "Lower Sac",
-    "SDWSC",
+    "OMR",
     "South Delta",
-    "Suisun Bay",
     "Upper Sac"
   )
 

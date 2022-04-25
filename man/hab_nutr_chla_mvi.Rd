@@ -6,7 +6,7 @@
 \title{Discrete nutrient and chlorophyll-a concentrations and \emph{Microcystis}
 visual index values for 2014-2021}
 \format{
-data frame with 3,273 rows and 16 columns
+data frame with 3,047 rows and 16 columns
 \describe{
 \item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
 (DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
@@ -16,8 +16,8 @@ or USGS_CAWSC (USGS's California Water Science Center)}
 \item{Latitude}{Latitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
 \item{Longitude}{Longitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
-Barrier analysis. Is one of the following: Cache/Liberty, East Delta, Lower
-Sac, Lower SJ, SDWSC, South Delta, Suisun Bay, or Upper Sac.}
+Barrier analysis. Is one of the following: Cache/Liberty, East Delta,
+Franks, Lower Sac, Lower SJ, OMR, South Delta, or Upper Sac.}
 \item{Date}{Calendar date of the measurement}
 \item{Datetime}{Date and time of the measurement in PST}
 \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia
@@ -65,7 +65,7 @@ hab_nutr_chla_mvi
 A data set containing concentrations of chlorophyll-a and three
 nutrient parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and
 Dissolved Ortho-phosphate) in the San Francisco Estuary (Delta) east of
-Suisun Marsh for 2014-2021. This data set also contains Microcystis visual
+Chipps Island for 2014-2021. This data set also contains Microcystis visual
 index values for the surveys (DWR_EMP and DWR_NCRO) that have collected
 this data. Used in the analyses for the Spring-Summer version of the 2022
 HABs/Weeds report for the Emergency Drought Barrier.
