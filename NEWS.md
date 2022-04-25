@@ -1,6 +1,10 @@
 # EDBdata (development version)
 
 * Renamed columns for the daily mean and median values in `cont_chla_daily` to `AvgChla` and `MedianChla`, respectively, to have consistent naming convention across all drought-related data sets
+* Updated regions in `hab_nutr_chla_mvi` to be consistent with the regions used in the analysis. Changes to the regions includes:
+  * Removed regions and stations west of Chipps Island (this removes the "Suisun Bay" region and the three stations within it)
+  * Merged the "SDWSC" region with "Cache/Liberty"
+  * Divided the "South Delta" region into Franks Tract (Franks), Old/Middle River (OMR), and South Delta
 
 # EDBdata 0.4.0
 
@@ -9,6 +13,7 @@
   * Removed *Microcystis* surface tow data collected in September 2021
   * Renamed `DateTime` column to `Datetime` to have a consistent naming convention across all drought-related data sets
 * Added a `Source` column to the `cont_chla_daily` data set
+* Added regions to `hab_nutr_chla_mvi` which were used in the analysis of this data set
 * Added two regions (Clifton Court Forebay and Liberty Island) to the `hab_sat_fr_mil` data set. This data set is now called `hab_sat_ow_delta` to better describe its contents.
 * Calculated and added an average Cyano Index value (`AvgCI`) for each region and date in the `hab_sat_ow_delta` data set
 * Renamed columns in `cont_chla_daily` and `hab_sat_ow_delta` to upper camel case (UpperCamelCase) to have consistent naming convention across all drought-related data sets
