@@ -29,7 +29,7 @@ test_that("No expected variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(hab_nutr_chla_mvi), 3047)
+  expect_equal(nrow(hab_nutr_chla_mvi), 3133)
   expect_equal(ncol(hab_nutr_chla_mvi), 16)
 
   name_check <- c(
@@ -145,6 +145,8 @@ test_that("All Stations are as expected", {
     "USGS-11447890",
     "USGS-11455095",
     "USGS-11455136",
+    "USGS-11455139",
+    "USGS-11455140",
     "USGS-11455142",
     "USGS-11455143",
     "USGS-11455146",

@@ -6,7 +6,7 @@
 \title{Discrete nutrient and chlorophyll-a concentrations and \emph{Microcystis}
 visual index values for 2014-2021}
 \format{
-data frame with 3,047 rows and 16 columns
+data frame with 3,133 rows and 16 columns
 \describe{
 \item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
 (DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
@@ -87,10 +87,10 @@ This data set contains only one sample or measurement per \code{Station} and
 \code{Date} and only includes stations where all three nutrient parameters and
 chlorophyll-a have been collected during their periods of record from
 2014-2021. This data set excludes any nitrate + nitrite and ortho-phosphate
-data that have modified Z-scores greater than 15 grouped by three broad
-regions in the Delta. Outlier removal was not performed on the ammonia and
-chlorophyll-a data because all the higher values appeared to be real based
-on best professional judgment.
+data that have modified Z-scores greater than 15 grouped by \code{Region}.
+Outlier removal was not performed on the ammonia and chlorophyll-a data
+because all the higher values appeared to be real based on best
+professional judgment.
 
 There were a few instances where nutrient values were below the reporting
 limit (RL) but the RL values were greater than the 75th quantile of the

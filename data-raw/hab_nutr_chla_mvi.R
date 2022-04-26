@@ -243,24 +243,36 @@ df_ncro_coord <-
     range = "A38:E44"
   )
 
-# Import region assignments from the Drought Synthesis project - we'll use this
-  # to define which stations to include and to assign regions for QA purposes
-df_regions <- read_csv(str_subset(fp_nutr_chla_mvi, "Rosies_regions")) %>%
-  distinct(Region, SubRegion)
-
 # Load Delta regions shapefile from Brian and prepare it to use for processing
-  # this data set
-sf_delta <- R_EDSM_Subregions_Mahardja_FLOAT %>%
-  select(SubRegion) %>%
-  left_join(df_regions, by = "SubRegion") %>%
-  # Remove SubRegions outside of Regions
-  filter(!is.na(Region)) %>%
-  # Remove Suisun regions
-  filter(!str_detect(Region, "^Suisun")) %>%
-  select(Region, SubRegion)
+  # the VIMS data set - we'll use this to define which stations to include in the
+  # data set we'll provide to the VIMS group
+sf_delta_vims <- R_EDSM_Subregions_Mahardja_FLOAT %>%
+  # Remove SubRegions outside of our area of interest for the VIMS group
+  filter(
+    !SubRegion %in% c(
+      "Carquinez Strait",
+      "Grant Line Canal and Old River",
+      "Lower Napa River",
+      "Grizzly Bay",
+      "Honker Bay",
+      "Mid Suisun Bay",
+      "Rock Slough and Discovery Bay",
+      "San Francisco Bay",
+      "San Pablo Bay",
+      "South Bay",
+      "Suisun Marsh",
+      "Upper Napa River",
+      "Upper Sacramento River",
+      "Upper Yolo Bypass",
+      "West Suisun Bay"
+    )
+  ) %>%
+  select(SubRegion)
 
-# Import polygon shapefile for the HABs regions used in the analysis of this
-  # data set
+# Import polygon shapefile for the HABs regions - we'll use this to define which
+  # stations to include in the data set for the HABs/Weeds report and to assign
+  # regions for QA purposes (for both the VIMS and HABs/Weeds data sets). These
+  # regions are also used in the analysis of the HABs/Weeds data set.
 sf_hab_reg <- read_sf(here("data-raw/Spatial_data/HABregions.shp")) %>%
   select(Region = Stratum2)
 
@@ -760,33 +772,7 @@ df_nutr_chla_mvi_all <- bind_rows(df_package_c2, df_cawsc_c, df_emp_all_2021, df
 
 # 3. Clean All Raw Data ---------------------------------------------------
 
-# 3.1 Global Cleaning Steps -----------------------------------------------
-
-# Begin to clean all raw data
-df_nutr_chla_mvi_all_c1 <- df_nutr_chla_mvi_all %>%
-  # Remove records where all nutrient parameters, chlorophyll-a, and Microcystis are NA
-  filter(
-    !if_all(
-      c(DissAmmonia, DissNitrateNitrite, DissOrthophos, Chlorophyll, Microcystis),
-      is.na
-    )
-  ) %>%
-  # Remove records without latitude-longitude coordinates
-  drop_na(Latitude, Longitude) %>%
-  # Convert to sf object
-  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
-  # Change to crs of sf_delta
-  st_transform(crs = st_crs(sf_delta)) %>%
-  # Add Delta regions
-  st_join(sf_delta, join = st_intersects) %>%
-  # Remove any data outside our regions of interest
-  filter(!is.na(Region)) %>%
-  # Drop sf geometry column since it's no longer needed
-  st_drop_geometry() %>%
-  # Remove SubRegion variable
-  select(-SubRegion)
-
-# 3.2 Create Outlier Functions --------------------------------------------
+# 3.1 Create Outlier Functions --------------------------------------------
 
 # Create function to flag data points with modified z-scores greater than a
   # specified threshold
@@ -860,7 +846,7 @@ rm_flagged <- function(df, data_var) {
     )
 }
 
-# 3.3 Prepare Data for VIMS Group -----------------------------------------
+# 3.2 Prepare Data for VIMS Group -----------------------------------------
 
 # Create function to remove values that are <RL with estimated RL values and
   # modify value in related _Sign variable to "< (unknown)"
@@ -875,7 +861,7 @@ rm_est_rl <- function(df, data_var) {
     )
 }
 
-vims_nutr_chla <- df_nutr_chla_mvi_all_c1 %>%
+vims_nutr_chla <- df_nutr_chla_mvi_all %>%
   # Remove Microcystis data
   select(-Microcystis) %>%
   # Remove nutrient values that are <RL with estimated RL values
@@ -884,9 +870,26 @@ vims_nutr_chla <- df_nutr_chla_mvi_all_c1 %>%
   rm_est_rl(DissOrthophos) %>%
   # Remove records where all nutrient parameters and chlorophyll-a are NA
   filter(!if_all(c(DissAmmonia, DissNitrateNitrite, DissOrthophos, Chlorophyll), is.na)) %>%
+  # Remove records without latitude-longitude coordinates
+  drop_na(Latitude, Longitude) %>%
+  # Convert to sf object
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
+  # Change to crs of sf_delta_vims
+  st_transform(crs = st_crs(sf_delta_vims)) %>%
+  # Add Subregions from sf_delta_vims and remove all stations outside area of interest
+  st_join(sf_delta_vims, join = st_intersects) %>%
+  filter(!is.na(SubRegion)) %>%
+  # Prepare data frame to be spatially joined with sf_hab_reg
+  st_transform(crs = st_crs(sf_hab_reg)) %>%
+  # Add Regions from sf_hab_reg for QA purposes
+  st_join(sf_hab_reg, join = st_intersects) %>%
+  # Assign "Outside" to stations without region assignments
+  replace_na(list(Region = "Outside")) %>%
+  # Drop sf geometry column since it's no longer needed
+  st_drop_geometry() %>%
   # Flag data points that have modified z-scores greater than 15 grouped by
-    # Delta Region - not including chlorophyll because most of the higher values
-    # are probably real
+    # region from sf_hab_reg - not including chlorophyll because most of the
+    # higher values are probably real
   group_by(Region) %>%
   flag_modzscore(DissAmmonia, 15) %>%
   flag_modzscore(DissNitrateNitrite, 15) %>%
@@ -906,19 +909,33 @@ vims_nutr_chla <- df_nutr_chla_mvi_all_c1 %>%
   rm_flagged(DissNitrateNitrite) %>%
   rm_flagged(DissOrthophos) %>%
   rm_flagged(Chlorophyll) %>%
-  # Remove mod z-score and flag variables
-  select(!ends_with(c("_mod_zscore", "_flag"))) %>%
   # Clean up and reorder variables
-  select(-Region) %>%
+  select(!ends_with(c("_mod_zscore", "_flag", "Region"))) %>%
   relocate(Chlorophyll_Sign, .before = Chlorophyll)
 
-# 3.4 Prepare Data for HABs Report ----------------------------------------
+# 3.3 Prepare Data for HABs Report ----------------------------------------
 
 # Look for and remove outliers from the data set
-df_nutr_chla_mvi_all_c2 <- df_nutr_chla_mvi_all_c1 %>%
-  # Flag data points that have modified z-scores greater than 15 grouped by Delta
-    # Region - not including chlorophyll and ammonia because most of the higher
-    # values are probably real
+df_nutr_chla_mvi_all_c1 <- df_nutr_chla_mvi_all %>%
+  # Remove records where all nutrient parameters, chlorophyll-a, and Microcystis are NA
+  filter(
+    !if_all(
+      c(DissAmmonia, DissNitrateNitrite, DissOrthophos, Chlorophyll, Microcystis),
+      is.na
+    )
+  ) %>%
+  # Remove records without latitude-longitude coordinates
+  drop_na(Latitude, Longitude) %>%
+  # Convert to sf object
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
+  # Add Regions from sf_hab_reg and remove all stations outside area of interest
+  st_join(sf_hab_reg, join = st_intersects) %>%
+  filter(!is.na(Region)) %>%
+  # Drop sf geometry column since it's no longer needed
+  st_drop_geometry() %>%
+  # Flag data points that have modified z-scores greater than 15 grouped by
+    # region from sf_hab_reg - not including chlorophyll and ammonia because most
+    # of the higher values are probably real
   group_by(Region) %>%
   flag_modzscore(DissNitrateNitrite, 15) %>%
   flag_modzscore(DissOrthophos, 15) %>%
@@ -930,13 +947,13 @@ df_nutr_chla_mvi_all_c2 <- df_nutr_chla_mvi_all_c1 %>%
     # We waited to remove these stations until after running the modified z-score
     # test to have the most data possible for each region
   filter(!str_detect(Station, "^EZ")) %>%
-  # Remove mod z-score and Region variables
-  select(-c(ends_with("_mod_zscore"), Region))
+  # Remove mod z-score variables
+  select(!ends_with("_mod_zscore"))
 
 # We will only keep stations where all three nutrients and chlorophyll-a have been collected
 # This doesn't require that all parameters were collected on the same day though
-df_sta_keep <- df_nutr_chla_mvi_all_c2 %>%
-  select(!ends_with("_Sign")) %>%
+df_sta_keep <- df_nutr_chla_mvi_all_c1 %>%
+  select(-c(ends_with(c("_Sign", "_flag")), Microcystis)) %>%
   pivot_longer(
     cols = c(starts_with("Diss"), Chlorophyll),
     names_to = "Parameter",
@@ -949,7 +966,7 @@ df_sta_keep <- df_nutr_chla_mvi_all_c2 %>%
   select(Source, Station)
 
 # Finish preparing data for the HABs report
-hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c2 %>%
+hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c1 %>%
   # Run inner join to only include Source-Station combinations in df_sta_keep
   inner_join(df_sta_keep, by = c("Source", "Station")) %>%
   # Flag the <RL values with high RL's (> 75th percentile) in the DWR_EMP data set
@@ -962,17 +979,6 @@ hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c2 %>%
   rm_flagged(DissNitrateNitrite) %>%
   rm_flagged(DissOrthophos) %>%
   rm_flagged(Chlorophyll) %>%
-  # Add Regions from the sf_hab_reg shapefile which were used in the analysis of
-    # this data
-  # Convert to sf object
-  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
-  # Add Regions from sf_hab_reg
-  st_join(sf_hab_reg, join = st_intersects) %>%
-  # Drop sf geometry column since it's no longer needed
-  st_drop_geometry() %>%
-  # Remove three stations not within the regions in sf_hab_reg - these are
-    # located west of Chipps Island
-  filter(!is.na(Region)) %>%
   # Remove and reorder variables
   select(!ends_with("_flag")) %>%
   relocate(Region, .before = Date) %>%
