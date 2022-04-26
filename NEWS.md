@@ -5,6 +5,7 @@
   * Removed regions and stations west of Chipps Island (this removes the "Suisun Bay" region and the three stations within it)
   * Merged the "SDWSC" region with "Cache/Liberty"
   * Divided the "South Delta" region into Franks Tract (Franks), Old/Middle River (OMR), and South Delta
+  * Using the new regions also added two USGS stations located in the Toe Drain to the data set: 11455139 and 11455140
 
 # EDBdata 0.4.0
 
