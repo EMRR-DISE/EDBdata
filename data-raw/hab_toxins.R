@@ -1,12 +1,14 @@
-# Code to prepare combined data set of HAB toxin data for the Emergency Drought
-# Barrier (HABs/Weeds) analysis:
-# 1) `hab_toxins` - . Used in the Spring-Summer version of the 2022 HABs/Weeds
-# report.
+# Code to prepare combined HAB toxin data set for the Emergency Drought Barrier
+  # (HABs/Weeds) analysis:
+# 1) `hab_toxins` - Cyanotoxin concentrations in whole-water grab samples
+  # collected at various locations in the upper San Francisco Estuary (Delta) in
+  # 2021. Used in the Spring-Summer version of the 2022 HABs/Weeds report.
 
 # Load packages
 library(dplyr)
 library(stringr)
 library(readr)
+library(tidyr)
 library(lubridate)
 library(readxl)
 library(here)
@@ -27,30 +29,24 @@ df_swp <- read_excel(path = str_subset(fp_hab_toxins, "DWR_DFD_Cyanotoxin"))
 df_usgs_spatt <- read_csv(file = str_subset(fp_hab_toxins, "USGS_DWR_fixed"))
 
 # Water board samples from Franks Tract
-# Frk <- data.frame(
-#   Station = c("FRK", "FRK", "FRK", "MI"),
-#   Analyte = c("Microcystins", "Microcystins", "Anatoxins", "Microcystins"),
-#   Date = c(as.Date("2021-07-02"), as.Date("2021-08-06"), as.Date("2021-08-06"), as.Date("2021-07-02")),
-#   result = c(0, 0.63, 0, 0.6)
-# )
 df_wb_franks <- tibble(
   Station = c("FRK", "FRK", "FRK", "MI"),
   Analyte = c("Microcystins", "Microcystins", "Anatoxins", "Microcystins"),
   Date = ymd("2021-07-02", "2021-08-06", "2021-08-06", "2021-07-02"),
-  result = c(0, 0.63, 0, 0.6)
+  Result = c(0, 0.63, 0, 0.6)
 )
 
 # Nautilus data - from the State Board's database, provided by Karen Atkinson
-# Nautilus = read_excel("data/datapackage/RawData/HAB_Monitoring.xlsx", sheet = "Nautalis")
 df_nautilus <- read_excel(path = str_subset(fp_hab_toxins, "HAB_Monitoring"), sheet = "Nautalis")
 
 # East Bay Parks data - from the State Board's database, provided by Karen Atkinson
-# EastBay = read_excel("data/datapackage/RawData/HAB_Monitoring.xlsx", sheet = "East Bay")
 df_ebp <- read_excel(path = str_subset(fp_hab_toxins, "HAB_Monitoring"), sheet = "East Bay")
 
 # Preece/Otten data
-# preece = read_excel("data/datapackage/RawData/Prop 1 data_4.1.22.xlsx", sheet = "preecedata")
-df_pre_ott <- read_excel(str_subset(fp_hab_toxins, "Prop 1 data"), sheet = "preecedata")
+df_pre_ott <- read_excel(path = str_subset(fp_hab_toxins, "Prop 1 data"), sheet = "preecedata")
+
+# Station information
+df_stations <- read_excel(path = str_subset(fp_hab_toxins, "Prop 1 data"), sheet = "stations")
 
 
 # 2. Clean and Combine Data -----------------------------------------------
@@ -91,7 +87,7 @@ df_usgs_spatt_c <- df_usgs_spatt %>%
   ) %>%
   # Sum toxin values by class
   group_by(BGC_ID, Site, NWIS_site_no, Date, date_time, lab, Year, Month, DOY, class) %>%
-  summarize(result = sum(resultNum)) %>%
+  summarize(Result = sum(resultNum)) %>%
   ungroup() %>%
   # Convert Date and rename some variables
   mutate(Date = mdy(Date)) %>%
@@ -101,57 +97,120 @@ df_usgs_spatt_c <- df_usgs_spatt %>%
   )
 
 # Nautilus data
-Naut = Nautilus %>%
-  dplyr::select(Station_Code, Site_Name, Actual_Latitude, Actual_Longitude, Sample_ID, `Anatonxin-a_ELISA_Method (ug/L)`,
-                `Cylindrospermopsin_ELISA_Method (ug/L)`, `Microcystin_ELISA_Method (ug/L)`, `Saxitoxin_ELISA_Method (ug/L)`,
-                Sample_Date) %>%
-  rename(Station = Station_Code, Microcystins = `Microcystin_ELISA_Method (ug/L)`,
-         Anatoxins = `Anatonxin-a_ELISA_Method (ug/L)`,
-         Cylindrospermopsins = `Cylindrospermopsin_ELISA_Method (ug/L)`,
-         Saxitoxins = `Saxitoxin_ELISA_Method (ug/L)`,
-         Date = Sample_Date) %>%
-  pivot_longer(cols = c(Microcystins, Anatoxins, Cylindrospermopsins, Saxitoxins), names_to= "Analyte", values_to = "resultF")%>%
-  mutate(result = case_when(resultF == "ND" ~ 0,
-                            resultF == ">50" ~ 50,
-                            TRUE ~ as.numeric(resultF))) %>%
-  dplyr::filter(!is.na(result))
+df_nautilus_c <- df_nautilus %>%
+  # Rename and select columns to keep
+  select(
+    Station = Station_Code,
+    Site_Name,
+    Actual_Latitude,
+    Actual_Longitude,
+    Sample_ID,
+    Anatoxins = `Anatonxin-a_ELISA_Method (ug/L)`,
+    Cylindrospermopsins = `Cylindrospermopsin_ELISA_Method (ug/L)`,
+    Microcystins = `Microcystin_ELISA_Method (ug/L)`,
+    Saxitoxins = `Saxitoxin_ELISA_Method (ug/L)`,
+    Date = Sample_Date
+  ) %>%
+  # Restructure data to long format
+  pivot_longer(
+    cols = c(Microcystins, Anatoxins, Cylindrospermopsins, Saxitoxins),
+    names_to = "Analyte",
+    values_to = "Result"
+  ) %>%
+  # Convert Result to numeric substituting non-detect values with zero
+  mutate(Result = as.numeric(if_else(Result == "ND", "0", Result))) %>%
+  filter(!is.na(Result))
 
 # East Bay Parks data
-EastBayX = dplyr::filter(EastBay, Water_Body == "Big Break Regional Shoreline") %>%
-  dplyr::select(Station_Code, Site_Name, Actual_Latitude, Actual_Longitude, Sample_ID, `Microcystin (µg/L)\r\nELISA_Method`, Sample_Date) %>%
-  rename(resultF = `Microcystin (µg/L)\r\nELISA_Method`, Date = Sample_Date) %>%
-  mutate(result = case_when(resultF == "ND" ~ 0,
-                            resultF == ">50" ~ 50,
-                            TRUE ~ as.numeric(resultF)),
-         Analyte = "Microcystins", Station = "BigBreak") %>%
-  dplyr::filter(!is.na(result))
+df_ebp_c <- df_ebp %>%
+  # Only include sites within Big Break Regional Shoreline
+  filter(Water_Body == "Big Break Regional Shoreline") %>%
+  # Rename and select columns to keep
+  select(
+    Station_Code,
+    Site_Name,
+    Actual_Latitude,
+    Actual_Longitude,
+    Sample_ID,
+    Result = `Microcystin (µg/L)\r\nELISA_Method`,
+    Date = Sample_Date
+  ) %>%
+  mutate(
+    # Convert Result to numeric substituting non-detect values with zero and
+      # >50 values with 50
+    Result = as.numeric(
+      case_when(
+        Result == "ND" ~ "0",
+        Result == ">50" ~ "50",
+        TRUE ~ Result
+      )
+    ),
+    # Add variables for Analyte and Station
+    Analyte = "Microcystins",
+    Station = "BigBreak"
+  ) %>%
+  filter(!is.na(Result))
 
-#Preece/Otten data
-preece = read_excel("data/datapackage/RawData/Prop 1 data_4.1.22.xlsx", sheet = "preecedata") %>%
-  mutate(Analyte = "Microcystins", result = case_when(`Final_conc (ug/L)`=="ND"~ 0,
-                                                      TRUE ~ as.numeric(`Final_conc (ug/L)`)),
-         Year = year(Collection_Date), Month = as.character(month(Collection_Date))) %>%
+# Preece/Otten data
+df_pre_ott_c <- df_pre_ott %>%
+  mutate(
+    # Add variables for Analyte
+    Analyte = "Microcystins",
+    # Convert Result to numeric substituting non-detect values with zero
+    Result = as.numeric(if_else(`Final_conc (ug/L)` == "ND", "0", `Final_conc (ug/L)`))
+  ) %>%
+  # Rename a few variables
+  rename(
+    Station = Sample_ID,
+    Date = Collection_Date
+  )
+
+# Combine and finish preparing toxin data
+hab_toxins <-
+  bind_rows(
+    df_usgs_spatt_c,
+    df_swp_c,
+    df_wb_franks,
+    df_pre_ott_c,
+    df_nautilus_c,
+    df_ebp_c
+  ) %>%
+  # Standardize Analyte names
+  mutate(
+    Analyte = case_when(
+      Analyte == "MC" ~ "Microcystins",
+      Analyte == "ANTX-A" ~ "Anatoxins",
+      TRUE ~ Analyte
+    ),
+    # Convert Date variable to Date class and add Year and Month variables
+    Date = as_date(Date),
+    Year = year(Date),
+    Month = month(Date)
+  ) %>%
+  # Only include 2021 data
   filter(Year == 2021) %>%
-  rename(Station = Sample_ID, Date = Collection_Date)
-
-#Put them all together
-allTox = bind_rows(df_usgs_spatt_c, df_swp_c2, Frk, preece, Naut, EastBayX)  %>%
-  mutate(Analyte = case_when(
-    Analyte == "MC"~ "Microcystins",
-    Analyte == "ANTX-A"~"Anatoxins",
-    TRUE ~ Analyte
-  ))
-
-
-#Attatch stations
-Stas =  read_excel("data/datapackage/RawData/Prop 1 data_4.1.22.xlsx", sheet = "stations")
-allTox3a = left_join(allTox, Stas) %>%
-  mutate(Longitude = as.numeric(Longitude))  %>%
-  ungroup()
-
-
-Alltox3 = dplyr::select(allTox3a, Station, Date, Year, Month, Analyte, result, Study, Region, Latitude, Longitude)
+  # Join station information
+  left_join(df_stations, by = "Station") %>%
+  # Select variables to keep
+  select(
+    Source = Study,
+    Station,
+    Latitude,
+    Longitude,
+    Region,
+    Year,
+    Month,
+    Date,
+    Analyte,
+    Result
+  )
 
 
+# 3. Save and Export Data -------------------------------------------------
 
-# usethis::use_data(hab_toxins, overwrite = TRUE)
+# Save final HAB toxin data set as csv file for easier diffing
+hab_toxins %>% write_csv(here("data-raw/Final/hab_toxins.csv"))
+
+# Save final HAB toxin data set as object in the data package
+usethis::use_data(hab_toxins, overwrite = TRUE)
+
