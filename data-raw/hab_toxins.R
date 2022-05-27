@@ -197,6 +197,8 @@ hab_toxins <-
   filter(Year == 2021) %>%
   # Join station information
   left_join(df_stations, by = "Station") %>%
+  # Correct spelling mistake for Nautilus
+  mutate(Study = if_else(Study == "Nautalis", "Nautilus", Study)) %>%
   # Select variables to keep
   select(
     Source = Study,
