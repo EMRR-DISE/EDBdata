@@ -171,6 +171,16 @@ df_pre_ott_c <- df_pre_ott %>%
     Date = Collection_Date
   )
 
+# Station Information
+df_stations_c <- df_stations %>%
+  # Correct spelling mistake for Nautilus
+  mutate(Study = if_else(Study == "Nautalis", "Nautilus", Study)) %>%
+  # Correct switched column names for station coordinates
+  rename(
+    Longitude = Latitude,
+    Latitude = Longitude
+  )
+
 # Combine and finish preparing toxin data
 hab_toxins <-
   bind_rows(
@@ -196,9 +206,7 @@ hab_toxins <-
   # Only include 2021 data
   filter(Year == 2021) %>%
   # Join station information
-  left_join(df_stations, by = "Station") %>%
-  # Correct spelling mistake for Nautilus
-  mutate(Study = if_else(Study == "Nautalis", "Nautilus", Study)) %>%
+  left_join(df_stations_c, by = "Station") %>%
   # Select variables to keep
   select(
     Source = Study,
