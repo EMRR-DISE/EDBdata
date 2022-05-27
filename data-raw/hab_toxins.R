@@ -33,7 +33,8 @@ df_wb_franks <- tibble(
   Station = c("FRK", "FRK", "FRK", "MI"),
   Analyte = c("Microcystins", "Microcystins", "Anatoxins", "Microcystins"),
   Date = ymd("2021-07-02", "2021-08-06", "2021-08-06", "2021-07-02"),
-  Result = c(0, 0.63, 0, 0.6)
+  Result = c(0, 0.63, 0, 0.6),
+  Result_Sign = c("ND", "=", "ND", "=")
 )
 
 # Nautilus data - from the State Board's database, provided by Karen Atkinson
@@ -71,13 +72,15 @@ df_swp_c <- df_swp %>%
   # Average replicated samples for each station, analyte, and date
   group_by(Station, Analyte, Date) %>%
   summarize(Result = mean(Result)) %>%
-  ungroup()
+  ungroup() %>%
+  # Add Result_Sign variable to indicate non-detect values
+  mutate(Result_Sign = if_else(Result == 0, "ND", "="))
 
 # USGS's SPATT study
 df_usgs_spatt_c <- df_usgs_spatt %>%
   # Only include toxins that were detected in the samples
   group_by(toxin) %>%
-  mutate(resultSum = sum(resultNum, na.rm = T)) %>%
+  mutate(resultSum = sum(resultNum, na.rm = TRUE)) %>%
   ungroup() %>%
   filter(
     resultSum != 0,
@@ -92,7 +95,9 @@ df_usgs_spatt_c <- df_usgs_spatt %>%
   rename(
     Analyte = class,
     Station = Site
-  )
+  ) %>%
+  # Add Result_Sign variable to indicate non-detect values
+  mutate(Result_Sign = if_else(Result == 0, "ND", "="))
 
 # Nautilus data
 df_nautilus_c <- df_nautilus %>%
@@ -111,8 +116,12 @@ df_nautilus_c <- df_nautilus %>%
     names_to = "Analyte",
     values_to = "Result"
   ) %>%
-  # Convert Result to numeric substituting non-detect values with zero
-  mutate(Result = as.numeric(if_else(Result == "ND", "0", Result))) %>%
+  mutate(
+    # Add Result_Sign variable to indicate non-detect values
+    Result_Sign = if_else(Result == "ND", "ND", "="),
+    # Convert Result to numeric substituting non-detect values with zero
+    Result = as.numeric(if_else(Result == "ND", "0", Result))
+  ) %>%
   filter(!is.na(Result))
 
 # East Bay Parks data
@@ -125,6 +134,12 @@ df_ebp_c <- df_ebp %>%
     Date = Sample_Date
   ) %>%
   mutate(
+    # Add Result_Sign variable to indicate non-detect and above detection values
+    Result_Sign = case_when(
+      Result == "ND" ~ "ND",
+      Result == ">50" ~ ">",
+      TRUE ~ "="
+    ),
     # Convert Result to numeric substituting non-detect values with zero and
       # >50 values with 50
     Result = as.numeric(
@@ -145,6 +160,8 @@ df_pre_ott_c <- df_pre_ott %>%
   mutate(
     # Add variables for Analyte
     Analyte = "Microcystins",
+    # Add Result_Sign variable to indicate non-detect values
+    Result_Sign = if_else(`Final_conc (ug/L)` == "ND", "ND", "="),
     # Convert Result to numeric substituting non-detect values with zero
     Result = as.numeric(if_else(`Final_conc (ug/L)` == "ND", "0", `Final_conc (ug/L)`))
   ) %>%
@@ -191,7 +208,8 @@ hab_toxins <-
     Month,
     Date,
     Analyte,
-    Result
+    Result,
+    Result_Sign
   )
 
 
