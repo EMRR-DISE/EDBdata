@@ -71,9 +71,7 @@ df_swp_c <- df_swp %>%
   # Average replicated samples for each station, analyte, and date
   group_by(Station, Analyte, Date) %>%
   summarize(Result = mean(Result)) %>%
-  ungroup() %>%
-  # Add year column
-  mutate(Year = year(Date))
+  ungroup()
 
 # USGS's SPATT study
 df_usgs_spatt_c <- df_usgs_spatt %>%
@@ -86,7 +84,7 @@ df_usgs_spatt_c <- df_usgs_spatt %>%
     !is.na(resultNum)
   ) %>%
   # Sum toxin values by class
-  group_by(BGC_ID, Site, NWIS_site_no, Date, date_time, lab, Year, Month, DOY, class) %>%
+  group_by(BGC_ID, Site, NWIS_site_no, Date, date_time, lab, class) %>%
   summarize(Result = sum(resultNum)) %>%
   ungroup() %>%
   # Convert Date and rename some variables
@@ -101,10 +99,6 @@ df_nautilus_c <- df_nautilus %>%
   # Rename and select columns to keep
   select(
     Station = Station_Code,
-    Site_Name,
-    Actual_Latitude,
-    Actual_Longitude,
-    Sample_ID,
     Anatoxins = `Anatonxin-a_ELISA_Method (ug/L)`,
     Cylindrospermopsins = `Cylindrospermopsin_ELISA_Method (ug/L)`,
     Microcystins = `Microcystin_ELISA_Method (ug/L)`,
@@ -127,11 +121,6 @@ df_ebp_c <- df_ebp %>%
   filter(Water_Body == "Big Break Regional Shoreline") %>%
   # Rename and select columns to keep
   select(
-    Station_Code,
-    Site_Name,
-    Actual_Latitude,
-    Actual_Longitude,
-    Sample_ID,
     Result = `Microcystin (µg/L)\r\nELISA_Method`,
     Date = Sample_Date
   ) %>%
