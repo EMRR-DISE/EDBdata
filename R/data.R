@@ -227,3 +227,45 @@
 #'   Council: <https://www.waterqualitydata.us/>
 "hab_nutr_chla_mvi"
 
+#' @title Cyanotoxin water concentrations in the upper San Francisco Estuary
+#' @description A data set containing Cyanotoxin concentrations in whole-water
+#'   grab samples collected at various locations in the upper San Francisco
+#'   Estuary (Delta) in 2021.
+#'
+#' @format data frame with 643 rows and 11 columns
+#' \describe{
+#'   \item{Source}{Name of the source dataset. Is one of the following: CVRWQCB
+#'     (Central Valley Regional Water Quality Control Board), DWR (DWR's State
+#'     Water Project), EastBay (East Bay Regional Park District), Nautilus
+#'     (Nautilus Data Technologies), Preece (Preliminary results from Preece et
+#'     al.), or USGS (Special study by USGS and DWR).}
+#'   \item{Station}{Location where measurement was collected}
+#'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Region}{Region designation of `Station` for the Emergency Drought
+#'     Barrier analysis. Is one of the following: Cache Slough/Liberty Island,
+#'     Clifton Court, Lower Sacramento, Lower San Joaquin, San Joaquin, SDWSC,
+#'     South Delta, Upper Sacramento, or Vernalis.}
+#'   \item{Year}{Calendar year of the measurement}
+#'   \item{Month}{Numeric calendar month of the measurement where 1 represents
+#'     January and 12 represents December}
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{Analyte}{Name of Cyanotoxin measured in the water sample. Is one of
+#'     the following: Anabaenopeptins, Anatoxins, Microcystins, or Saxitoxins.}
+#'   \item{Result}{Concentration of `Analyte` measured in the water sample in
+#'     micrograms per liter}
+#'   \item{Result_Sign}{A symbol representing whether the Cyanotoxin measurement
+#'     in `Result` is below a lower detection limit, equal to the reported value,
+#'     or above an upper detection limit. Contains one of three symbols: "ND",
+#'     "=", or ">". "ND" indicates that the value was below a lower detection
+#'     limit. All values below a lower detection limit in this data set were
+#'     replaced with zeros. "=" indicates that the value was detected by the
+#'     laboratory with the value in the corresponding `Result` column equal to the
+#'     actual value measured by the laboratory. ">" indicates that the value was
+#'     above an upper detection limit with the with the value in the corresponding
+#'     `Result` column equal to the upper detection limit.}
+#' }
+#'
+#' @source
+#' Not sure about this. Need to check.
+"hab_toxins"
