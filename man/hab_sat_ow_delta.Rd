@@ -8,7 +8,7 @@ four open water regions in the Delta}
 \format{
 data frame with 708 rows and 9 columns
 \describe{
-\item{Date}{Date of satellite imagery}
+\item{Date}{Date of satellite imagery in yyyy-mm-dd}
 \item{Region}{Name of the polygon region. Is one of the following: Franks
 Tract, Mildred Island, Clifton Court Forebay, or Liberty Island.}
 \item{AvgCI}{Average Cyano Index value of all valid pixels within the

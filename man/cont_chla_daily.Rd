@@ -3,8 +3,8 @@
 \docType{data}
 \name{cont_chla_daily}
 \alias{cont_chla_daily}
-\title{Daily values of continuous chlorophyll fluorescence data from
-2020-2021}
+\title{Daily values of continuous chlorophyll fluorescence data for stations
+within the EDB regions}
 \format{
 data frame with 7,612 rows and 7 columns
 \describe{
@@ -15,8 +15,8 @@ Central Region Office), or USGS}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
 Barrier analysis. Is one of the following: Central Delta, Sacramento, or
 San Joaquin.}
-\item{Year}{Calendar year of the value}
-\item{Date}{Calendar date of the value}
+\item{Year}{Calendar year of the measurement}
+\item{Date}{Calendar date of the measurement in yyyy-mm-dd}
 \item{AvgChla}{Daily average chlorophyll fluorescence value in micrograms
 per liter}
 \item{MedianChla}{Daily median chlorophyll fluorescence value in micrograms
@@ -36,9 +36,10 @@ cont_chla_daily
 }
 \description{
 A data set containing daily average and median values of
-continuous chlorophyll fluorescence data collected by DWR and USGS from
-2020-2021 for the stations within the designated Emergency Drought Barrier
-(EDB) regions. Used in the analyses for the EDB.
+continuous chlorophyll fluorescence measured in the water in-situ at the
+stations within the designated Emergency Drought Barrier (EDB) regions.
+Data was collected by DWR and USGS from 2020-2021. Used in the analyses for
+the EDB.
 
 All chlorophyll data collected by DWR_NCRO (DWR's North Central Region
 Office) was downloaded from the Water Data Library (WDL). Data collected by

@@ -3,8 +3,8 @@
 \docType{data}
 \name{hab_nutr_chla_mvi}
 \alias{hab_nutr_chla_mvi}
-\title{Discrete nutrient and chlorophyll-a concentrations and \emph{Microcystis}
-visual index values for 2014-2021}
+\title{Discrete nutrient and chlorophyll-a water concentrations and
+\emph{Microcystis} visual index values in the upper San Francisco Estuary}
 \format{
 data frame with 3,133 rows and 16 columns
 \describe{
@@ -18,26 +18,27 @@ or USGS_CAWSC (USGS's California Water Science Center)}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
 Barrier analysis. Is one of the following: Cache/Liberty, East Delta,
 Franks, Lower Sac, Lower SJ, OMR, South Delta, or Upper Sac.}
-\item{Date}{Calendar date of the measurement}
-\item{Datetime}{Date and time of the measurement in PST}
+\item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+\item{Datetime}{Date and time (yyyy-mm-dd hh:mm:ss) of the measurement in
+PST}
 \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia
 value is below the reporting limit or above it. Contains one of four
 symbols: "<", "< (estimated)", "=", or "= (unreliable)". See the section
 below for more information about what these symbols represent.}
-\item{DissAmmonia}{Dissolved Ammonia concentration in milligrams per liter
-as N}
+\item{DissAmmonia}{Dissolved Ammonia concentration measured in the water
+sample in milligrams per liter as N}
 \item{DissNitrateNitrite_Sign}{A symbol representing whether the Dissolved
 Nitrate + Nitrite value is below the reporting limit or above it. Contains
 one of four symbols: "<", "< (estimated)", "=", or "= (unreliable)". See
 the section below for more information about what these symbols represent.}
-\item{DissNitrateNitrite}{Dissolved Nitrate + Nitrite concentration in
-milligrams per liter as N}
+\item{DissNitrateNitrite}{Dissolved Nitrate + Nitrite concentration
+measured in the water sample in milligrams per liter as N}
 \item{DissOrthophos_Sign}{A symbol representing whether the Dissolved
 Ortho-phosphate value is below the reporting limit or above it. Contains
 one of four symbols: "<", "< (estimated)", "=", or "= (unreliable)". See
 the section below for more information about what these symbols represent.}
-\item{DissOrthophos}{Dissolved Ortho-phosphate concentration in milligrams
-per liter as P}
+\item{DissOrthophos}{Dissolved Ortho-phosphate concentration measured in
+the water sample in milligrams per liter as P}
 \item{Chlorophyll_Sign}{A symbol representing whether the chlorophyll-a
 value is below the reporting limit or above it. Contains one of three
 symbols: "<", "= (estimated)", or "=". See the section below for more
@@ -62,13 +63,14 @@ Council: \url{https://www.waterqualitydata.us/}
 hab_nutr_chla_mvi
 }
 \description{
-A data set containing concentrations of chlorophyll-a and three
-nutrient parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and
-Dissolved Ortho-phosphate) in the San Francisco Estuary (Delta) east of
-Chipps Island for 2014-2021. This data set also contains Microcystis visual
-index values for the surveys (DWR_EMP and DWR_NCRO) that have collected
-this data. Used in the analyses for the Spring-Summer version of the 2022
-HABs/Weeds report for the Emergency Drought Barrier.
+A data set containing concentrations in water of chlorophyll-a
+and three nutrient parameters (Dissolved Ammonia, Dissolved Nitrate +
+Nitrite, and Dissolved Ortho-phosphate) at various locations in the San
+Francisco Estuary (Delta) east of Chipps Island for 2014-2021. This data
+set also contains Microcystis visual index values for the surveys (DWR_EMP
+and DWR_NCRO) that have collected this data. Used in the analyses for the
+Spring-Summer version of the 2022 HABs/Weeds report for the Emergency
+Drought Barrier.
 
 Most of the nutrient, chlorophyll-a, and Microcystis visual index data from
 DWR_EMP (DWR's Environmental Monitoring Program) and all the data from

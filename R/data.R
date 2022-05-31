@@ -24,7 +24,7 @@
 #'
 #' @format data frame with 708 rows and 9 columns
 #' \describe{
-#'   \item{Date}{Date of satellite imagery}
+#'   \item{Date}{Date of satellite imagery in yyyy-mm-dd}
 #'   \item{Region}{Name of the polygon region. Is one of the following: Franks
 #'     Tract, Mildred Island, Clifton Court Forebay, or Liberty Island.}
 #'   \item{AvgCI}{Average Cyano Index value of all valid pixels within the
@@ -52,8 +52,7 @@
 #'   Tool. <https://fhab.sfei.org/>
 "hab_sat_ow_delta"
 
-#' @title Phytoplankton community data from 2014-2021 for stations within the
-#'   EDB regions
+#' @title Phytoplankton community data for stations within the EDB regions
 #' @description A data set containing phytoplankton community data collected by
 #'   DWR's Environmental Monitoring Program from 2014-2021 for the stations
 #'   within the designated Emergency Drought Barrier (EDB) regions. Used in the
@@ -66,8 +65,8 @@
 #'     Barrier analysis. Is one of the following: Central Delta, Sacramento, or
 #'     San Joaquin.}
 #'   \item{Year}{Calendar year of the sample}
-#'   \item{Date}{Calendar date of the sample}
-#'   \item{Datetime}{Date and time of the sample in PST}
+#'   \item{Date}{Calendar date of the sample in yyyy-mm-dd}
+#'   \item{Datetime}{Date and time (yyyy-mm-dd hh:mm:ss) of the sample in PST}
 #'   \item{Taxon}{Taxonomic designation of the organism as "Genus species"}
 #'   \item{Genus}{Genus designation of the organism}
 #'   \item{Species}{Species designation of the organism}
@@ -81,12 +80,13 @@
 #'   data requests
 "phyto_edb"
 
-#' @title Daily values of continuous chlorophyll fluorescence data from
-#'   2020-2021
+#' @title Daily values of continuous chlorophyll fluorescence data for stations
+#'   within the EDB regions
 #' @description A data set containing daily average and median values of
-#'   continuous chlorophyll fluorescence data collected by DWR and USGS from
-#'   2020-2021 for the stations within the designated Emergency Drought Barrier
-#'   (EDB) regions. Used in the analyses for the EDB.
+#'   continuous chlorophyll fluorescence measured in the water in-situ at the
+#'   stations within the designated Emergency Drought Barrier (EDB) regions.
+#'   Data was collected by DWR and USGS from 2020-2021. Used in the analyses for
+#'   the EDB.
 #'
 #'   All chlorophyll data collected by DWR_NCRO (DWR's North Central Region
 #'   Office) was downloaded from the Water Data Library (WDL). Data collected by
@@ -104,8 +104,8 @@
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
 #'     Barrier analysis. Is one of the following: Central Delta, Sacramento, or
 #'     San Joaquin.}
-#'   \item{Year}{Calendar year of the value}
-#'   \item{Date}{Calendar date of the value}
+#'   \item{Year}{Calendar year of the measurement}
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
 #'   \item{AvgChla}{Daily average chlorophyll fluorescence value in micrograms
 #'     per liter}
 #'   \item{MedianChla}{Daily median chlorophyll fluorescence value in micrograms
@@ -119,15 +119,16 @@
 #'   <https://nwis.waterdata.usgs.gov/nwis>
 "cont_chla_daily"
 
-#' @title Discrete nutrient and chlorophyll-a concentrations and *Microcystis*
-#'   visual index values for 2014-2021
-#' @description A data set containing concentrations of chlorophyll-a and three
-#'   nutrient parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and
-#'   Dissolved Ortho-phosphate) in the San Francisco Estuary (Delta) east of
-#'   Chipps Island for 2014-2021. This data set also contains Microcystis visual
-#'   index values for the surveys (DWR_EMP and DWR_NCRO) that have collected
-#'   this data. Used in the analyses for the Spring-Summer version of the 2022
-#'   HABs/Weeds report for the Emergency Drought Barrier.
+#' @title Discrete nutrient and chlorophyll-a water concentrations and
+#'   *Microcystis* visual index values in the upper San Francisco Estuary
+#' @description A data set containing concentrations in water of chlorophyll-a
+#'   and three nutrient parameters (Dissolved Ammonia, Dissolved Nitrate +
+#'   Nitrite, and Dissolved Ortho-phosphate) at various locations in the San
+#'   Francisco Estuary (Delta) east of Chipps Island for 2014-2021. This data
+#'   set also contains Microcystis visual index values for the surveys (DWR_EMP
+#'   and DWR_NCRO) that have collected this data. Used in the analyses for the
+#'   Spring-Summer version of the 2022 HABs/Weeds report for the Emergency
+#'   Drought Barrier.
 #'
 #'   Most of the nutrient, chlorophyll-a, and Microcystis visual index data from
 #'   DWR_EMP (DWR's Environmental Monitoring Program) and all the data from
@@ -171,26 +172,27 @@
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
 #'     Barrier analysis. Is one of the following: Cache/Liberty, East Delta,
 #'     Franks, Lower Sac, Lower SJ, OMR, South Delta, or Upper Sac.}
-#'   \item{Date}{Calendar date of the measurement}
-#'   \item{Datetime}{Date and time of the measurement in PST}
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{Datetime}{Date and time (yyyy-mm-dd hh:mm:ss) of the measurement in
+#'     PST}
 #'   \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia
 #'     value is below the reporting limit or above it. Contains one of four
 #'     symbols: "<", "< (estimated)", "=", or "= (unreliable)". See the section
 #'     below for more information about what these symbols represent.}
-#'   \item{DissAmmonia}{Dissolved Ammonia concentration in milligrams per liter
-#'     as N}
+#'   \item{DissAmmonia}{Dissolved Ammonia concentration measured in the water
+#'     sample in milligrams per liter as N}
 #'   \item{DissNitrateNitrite_Sign}{A symbol representing whether the Dissolved
 #'     Nitrate + Nitrite value is below the reporting limit or above it. Contains
 #'     one of four symbols: "<", "< (estimated)", "=", or "= (unreliable)". See
 #'     the section below for more information about what these symbols represent.}
-#'   \item{DissNitrateNitrite}{Dissolved Nitrate + Nitrite concentration in
-#'     milligrams per liter as N}
+#'   \item{DissNitrateNitrite}{Dissolved Nitrate + Nitrite concentration
+#'     measured in the water sample in milligrams per liter as N}
 #'   \item{DissOrthophos_Sign}{A symbol representing whether the Dissolved
 #'     Ortho-phosphate value is below the reporting limit or above it. Contains
 #'     one of four symbols: "<", "< (estimated)", "=", or "= (unreliable)". See
 #'     the section below for more information about what these symbols represent.}
-#'   \item{DissOrthophos}{Dissolved Ortho-phosphate concentration in milligrams
-#'     per liter as P}
+#'   \item{DissOrthophos}{Dissolved Ortho-phosphate concentration measured in
+#'     the water sample in milligrams per liter as P}
 #'   \item{Chlorophyll_Sign}{A symbol representing whether the chlorophyll-a
 #'     value is below the reporting limit or above it. Contains one of three
 #'     symbols: "<", "= (estimated)", or "=". See the section below for more
