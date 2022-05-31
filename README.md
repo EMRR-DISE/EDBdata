@@ -34,6 +34,9 @@ This package provides the following data tables:
     Ortho-phosphate), chlorophyll-a concentrations, and *Microcystis*
     visual index values in the San Francisco Estuary east of Suisun
     Marsh for 2014-2021
+-   `hab_toxins`: Cyanotoxin concentrations in whole-water grab samples
+    collected at various locations in the upper San Francisco Estuary
+    (Delta) in 2021
 
 ## Installation
 
