@@ -66,7 +66,7 @@
 #'     San Joaquin.}
 #'   \item{Year}{Calendar year of the sample}
 #'   \item{Date}{Calendar date of the sample in yyyy-mm-dd}
-#'   \item{Datetime}{Date and time (yyyy-mm-dd hh:mm:ss) of the sample in PST}
+#'   \item{Datetime}{Date and time (yyyy-mm-dd HH:MM:SS) of the sample in PST}
 #'   \item{Taxon}{Taxonomic designation of the organism as "Genus species"}
 #'   \item{Genus}{Genus designation of the organism}
 #'   \item{Species}{Species designation of the organism}
@@ -173,7 +173,7 @@
 #'     Barrier analysis. Is one of the following: Cache/Liberty, East Delta,
 #'     Franks, Lower Sac, Lower SJ, OMR, South Delta, or Upper Sac.}
 #'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
-#'   \item{Datetime}{Date and time (yyyy-mm-dd hh:mm:ss) of the measurement in
+#'   \item{Datetime}{Date and time (yyyy-mm-dd HH:MM:SS) of the measurement in
 #'     PST}
 #'   \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia
 #'     value is below the reporting limit or above it. Contains one of four

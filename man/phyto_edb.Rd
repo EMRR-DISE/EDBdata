@@ -13,7 +13,7 @@ Barrier analysis. Is one of the following: Central Delta, Sacramento, or
 San Joaquin.}
 \item{Year}{Calendar year of the sample}
 \item{Date}{Calendar date of the sample in yyyy-mm-dd}
-\item{Datetime}{Date and time (yyyy-mm-dd hh:mm:ss) of the sample in PST}
+\item{Datetime}{Date and time (yyyy-mm-dd HH:MM:SS) of the sample in PST}
 \item{Taxon}{Taxonomic designation of the organism as "Genus species"}
 \item{Genus}{Genus designation of the organism}
 \item{Species}{Species designation of the organism}
