@@ -268,6 +268,5 @@
 #'     `Result` column equal to the upper detection limit.}
 #' }
 #'
-#' @source
-#' Not sure about this. Need to check.
+#' @source Acquired through direct data requests
 "hab_toxins"
