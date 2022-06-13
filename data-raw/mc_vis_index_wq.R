@@ -2,7 +2,7 @@
   # Emergency Drought Barrier (HABs/Weeds) analysis:
 # 1) `mc_vis_index_wq` - Microcystis visual index and water quality measurement
   # data collected at various locations in the upper San Francisco Estuary (Delta)
-  # from xx to 2021. Water quality parameters include water temperature and secchi
+  # from 2007 to 2021. Water quality parameters include water temperature and secchi
   # depth. Used in the Spring-Summer version of the 2022 HABs/Weeds report.
 
 # Load packages
