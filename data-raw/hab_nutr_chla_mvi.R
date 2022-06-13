@@ -246,6 +246,8 @@ df_ncro_coord <-
 # Load Delta regions shapefile from Brian and prepare it to use for processing
   # the VIMS data set - we'll use this to define which stations to include in the
   # data set we'll provide to the VIMS group
+# NOTE: we will use the HABs regions shapefile (sf_hab_reg in sysdata.R) to
+  # assign regions for QA purposes for the VIMS data set
 sf_delta_vims <- R_EDSM_Subregions_Mahardja_FLOAT %>%
   # Remove SubRegions outside of our area of interest for the VIMS group
   filter(
@@ -268,13 +270,6 @@ sf_delta_vims <- R_EDSM_Subregions_Mahardja_FLOAT %>%
     )
   ) %>%
   select(SubRegion)
-
-# Import polygon shapefile for the HABs regions - we'll use this to define which
-  # stations to include in the data set for the HABs/Weeds report and to assign
-  # regions for QA purposes (for both the VIMS and HABs/Weeds data sets). These
-  # regions are also used in the analysis of the HABs/Weeds data set.
-sf_hab_reg <- read_sf(here("data-raw/Spatial_data/HABregions.shp")) %>%
-  select(Region = Stratum2)
 
 
 # 2. Clean and Combine Data -----------------------------------------------
@@ -880,9 +875,9 @@ vims_nutr_chla <- df_nutr_chla_mvi_all %>%
   st_join(sf_delta_vims, join = st_intersects) %>%
   filter(!is.na(SubRegion)) %>%
   # Prepare data frame to be spatially joined with sf_hab_reg
-  st_transform(crs = st_crs(sf_hab_reg)) %>%
+  st_transform(crs = st_crs(EDBdata:::sf_hab_reg)) %>%
   # Add Regions from sf_hab_reg for QA purposes
-  st_join(sf_hab_reg, join = st_intersects) %>%
+  st_join(EDBdata:::sf_hab_reg, join = st_intersects) %>%
   # Assign "Outside" to stations without region assignments
   replace_na(list(Region = "Outside")) %>%
   # Drop sf geometry column since it's no longer needed
@@ -929,7 +924,7 @@ df_nutr_chla_mvi_all_c1 <- df_nutr_chla_mvi_all %>%
   # Convert to sf object
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, remove = FALSE) %>%
   # Add Regions from sf_hab_reg and remove all stations outside area of interest
-  st_join(sf_hab_reg, join = st_intersects) %>%
+  st_join(EDBdata:::sf_hab_reg, join = st_intersects) %>%
   filter(!is.na(Region)) %>%
   # Drop sf geometry column since it's no longer needed
   st_drop_geometry() %>%
