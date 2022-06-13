@@ -12,31 +12,31 @@ data frame with 643 rows and 11 columns
 Water Project), EastBay (East Bay Regional Park District), Nautilus
 (Nautilus Data Technologies), Preece (Preliminary results from Preece et
 al.), or USGS (Special study by USGS and DWR).}
-\item{Station}{Location where measurement was collected}
+\item{Station}{Location where sample was collected}
 \item{Latitude}{Latitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
 \item{Longitude}{Longitude of \code{Station} in Decimal Degrees (WGS 84 Datum)}
 \item{Region}{Region designation of \code{Station} for the Emergency Drought
 Barrier analysis. Is one of the following: Cache Slough/Liberty Island,
 Clifton Court, Lower Sacramento, Lower San Joaquin, San Joaquin, SDWSC,
 South Delta, Upper Sacramento, or Vernalis.}
-\item{Year}{Calendar year of the measurement}
-\item{Month}{Numeric calendar month of the measurement where 1 represents
+\item{Year}{Calendar year of the sample}
+\item{Month}{Numeric calendar month of the sample where 1 represents
 January and 12 represents December}
-\item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+\item{Date}{Calendar date of the sample in yyyy-mm-dd}
 \item{Analyte}{Name of Cyanotoxin measured in the water sample. Is one of
 the following: Anabaenopeptins, Anatoxins, Microcystins, or Saxitoxins.}
 \item{Result}{Concentration of \code{Analyte} measured in the water sample in
 micrograms per liter}
-\item{Result_Sign}{A symbol representing whether the Cyanotoxin measurement
-in \code{Result} is below a lower detection limit, equal to the reported value,
-or above an upper detection limit. Contains one of three symbols: "ND",
-"=", or ">". "ND" indicates that the value was below a lower detection
-limit. All values below a lower detection limit in this data set were
-replaced with zeros. "=" indicates that the value was detected by the
-laboratory with the value in the corresponding \code{Result} column equal to the
-actual value measured by the laboratory. ">" indicates that the value was
-above an upper detection limit with the with the value in the corresponding
-\code{Result} column equal to the upper detection limit.}
+\item{Result_Sign}{A symbol representing whether the Cyanotoxin value in
+\code{Result} is below a lower detection limit, equal to the reported value, or
+above an upper detection limit. Contains one of three symbols: "ND", "=",
+or ">". "ND" indicates that the value was below a lower detection limit.
+All values below a lower detection limit in this data set were replaced
+with zeros. "=" indicates that the value was detected by the laboratory
+with the value in the corresponding \code{Result} column equal to the actual
+value measured by the laboratory. ">" indicates that the value was above an
+upper detection limit with the with the value in the corresponding \code{Result}
+column equal to the upper detection limit.}
 }
 }
 \source{
@@ -48,6 +48,7 @@ hab_toxins
 \description{
 A data set containing Cyanotoxin concentrations in whole-water
 grab samples collected at various locations in the upper San Francisco
-Estuary (Delta) in 2021.
+Estuary (Delta) in 2021. Used in the analyses for the Spring-Summer version
+of the 2022 HABs/Weeds report for the Emergency Drought Barrier.
 }
 \keyword{datasets}

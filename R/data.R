@@ -232,7 +232,8 @@
 #' @title Cyanotoxin water concentrations in the upper San Francisco Estuary
 #' @description A data set containing Cyanotoxin concentrations in whole-water
 #'   grab samples collected at various locations in the upper San Francisco
-#'   Estuary (Delta) in 2021.
+#'   Estuary (Delta) in 2021. Used in the analyses for the Spring-Summer version
+#'   of the 2022 HABs/Weeds report for the Emergency Drought Barrier.
 #'
 #' @format data frame with 643 rows and 11 columns
 #' \describe{
@@ -241,32 +242,76 @@
 #'     Water Project), EastBay (East Bay Regional Park District), Nautilus
 #'     (Nautilus Data Technologies), Preece (Preliminary results from Preece et
 #'     al.), or USGS (Special study by USGS and DWR).}
-#'   \item{Station}{Location where measurement was collected}
+#'   \item{Station}{Location where sample was collected}
 #'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
 #'     Barrier analysis. Is one of the following: Cache Slough/Liberty Island,
 #'     Clifton Court, Lower Sacramento, Lower San Joaquin, San Joaquin, SDWSC,
 #'     South Delta, Upper Sacramento, or Vernalis.}
-#'   \item{Year}{Calendar year of the measurement}
-#'   \item{Month}{Numeric calendar month of the measurement where 1 represents
+#'   \item{Year}{Calendar year of the sample}
+#'   \item{Month}{Numeric calendar month of the sample where 1 represents
 #'     January and 12 represents December}
-#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{Date}{Calendar date of the sample in yyyy-mm-dd}
 #'   \item{Analyte}{Name of Cyanotoxin measured in the water sample. Is one of
 #'     the following: Anabaenopeptins, Anatoxins, Microcystins, or Saxitoxins.}
 #'   \item{Result}{Concentration of `Analyte` measured in the water sample in
 #'     micrograms per liter}
-#'   \item{Result_Sign}{A symbol representing whether the Cyanotoxin measurement
-#'     in `Result` is below a lower detection limit, equal to the reported value,
-#'     or above an upper detection limit. Contains one of three symbols: "ND",
-#'     "=", or ">". "ND" indicates that the value was below a lower detection
-#'     limit. All values below a lower detection limit in this data set were
-#'     replaced with zeros. "=" indicates that the value was detected by the
-#'     laboratory with the value in the corresponding `Result` column equal to the
-#'     actual value measured by the laboratory. ">" indicates that the value was
-#'     above an upper detection limit with the with the value in the corresponding
-#'     `Result` column equal to the upper detection limit.}
+#'   \item{Result_Sign}{A symbol representing whether the Cyanotoxin value in
+#'     `Result` is below a lower detection limit, equal to the reported value, or
+#'     above an upper detection limit. Contains one of three symbols: "ND", "=",
+#'     or ">". "ND" indicates that the value was below a lower detection limit.
+#'     All values below a lower detection limit in this data set were replaced
+#'     with zeros. "=" indicates that the value was detected by the laboratory
+#'     with the value in the corresponding `Result` column equal to the actual
+#'     value measured by the laboratory. ">" indicates that the value was above an
+#'     upper detection limit with the with the value in the corresponding `Result`
+#'     column equal to the upper detection limit.}
 #' }
 #'
 #' @source Acquired through direct data requests
 "hab_toxins"
+
+#' @title *Microcystis* visual index values and water quality measurements in
+#'   the upper San Francisco Estuary
+#' @description A data set containing *Microcystis* visual index, secchi depth,
+#'   and water temperature data collected at various locations in the upper San
+#'   Francisco Estuary (Delta) from 2007-2021. Used in the analyses for the
+#'   Spring-Summer version of the 2022 HABs/Weeds report for the Emergency
+#'   Drought Barrier.
+#'
+#'   All *Microcystis* visual index and water quality measurement data from
+#'   DWR_EMP (DWR's Environmental Monitoring Program), FMWT (CDFW's Fall
+#'   Midwater Trawl survey), and STN (CDFW's Summer Townet survey)  are from the
+#'   `discretewq` data package. All data collected by DWR_NCRO (DWR's North
+#'   Central Region Office) was acquired through a direct data request; however,
+#'   most of this data is available for download from the Water Data Library
+#'   (WDL). And all data collected by DOP (USBR's Directed Outflow Project) was
+#'   also acquired through a direct data request.
+#'
+#' @format data frame with 8,503 rows and 11 columns
+#' \describe{
+#'   \item{Source}{Name of the source dataset. Is one of the following: DOP
+#'     (USBR's Directed Outflow Project), DWR_EMP (DWR's Environmental Monitoring
+#'     Program), DWR_NCRO (DWR's North Central Region Office), FMWT (CDFW's Fall
+#'     Midwater Trawl survey), or STN (CDFW's Summer Townet survey)}
+#'   \item{Station}{Location where measurement was collected}
+#'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
+#'   \item{Region}{Region designation of `Station` for the Emergency Drought
+#'     Barrier analysis. Is one of the following: Cache/Liberty, East Delta,
+#'     Franks, Lower Sac, Lower SJ, OMR, South Delta, or Upper Sac.}
+#'   \item{Year}{Calendar year of the measurement}
+#'   \item{Month}{Numeric calendar month of the measurement where 1 represents
+#'     January and 12 represents December}
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{Microcystis}{*Microcystis* visual index value on a qualitative scale
+#'     from 1 to 5, where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very
+#'     high}
+#'   \item{Secchi}{Secchi depth in centimeters}
+#'   \item{Temperature}{Water temperature in degrees Celsius}
+#' }
+#'
+#' @source `discretewq` data package (version 2.3.2):
+#'   <https://github.com/sbashevkin/discretewq/tree/v2.3.2>
+"mc_vis_index_wq"
