@@ -35,13 +35,14 @@ test_that("Data dimensions are correct", {
   expect_equal(names(hab_toxins), name_check)
 })
 
-# There are known duplicates in the data set. We decided to keep them in there
-  # for now.
-# test_that("There are no duplicate records", {
-#   hab_toxins_t <- hab_toxins %>%
-#     dplyr::mutate(ID = paste(Date, Source, Station, Analyte, sep = "_"))
-#   expect_equal(length(unique(hab_toxins_t$ID)), nrow(hab_toxins_t))
-# })
+# There are known duplicates in the Preece and USGS data sets. We decided to
+  # keep them in there for now.
+test_that("There are no duplicate records, excluding Preece and USGS", {
+  hab_toxins_t <- hab_toxins %>%
+    dplyr::filter(!Source %in% c("Preece", "USGS")) %>%
+    dplyr::mutate(ID = paste(Date, Source, Station, Analyte, sep = "_"))
+  expect_equal(length(unique(hab_toxins_t$ID)), nrow(hab_toxins_t))
+})
 
 test_that("All variables are correct class", {
   expect_equal(class(hab_toxins$Source), "character")
