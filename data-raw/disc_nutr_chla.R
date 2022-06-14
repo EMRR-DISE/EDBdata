@@ -35,7 +35,7 @@ library(glue)
 library(here)
 
 # Check if we are in the correct working directory
-i_am("data-raw/hab_nutr_chla_mvi.R")
+i_am("data-raw/disc_nutr_chla.R")
 
 
 # 1. Import Data ----------------------------------------------------------
@@ -226,12 +226,7 @@ df_ncro_2021b <-
   )
 
 # Station coordinates
-df_ncro_coord <-
-  read_excel(
-    str_subset(fp_nutr_chla, "NCROWQES_DiscreteData_historical"),
-    sheet = "METADATA",
-    range = "A38:E44"
-  )
+df_ncro_coord <- read_excel(here("data-raw/Global/NCRO_Station_Metadata_Coords.xlsx"))
 
 # Load Delta regions shapefile from Brian and prepare it to use for processing
   # the VIMS data set - we'll use this to define which stations to include in the
@@ -679,10 +674,11 @@ df_ncro_2021_all <- bind_rows(df_ncro_2021a, df_ncro_2021b) %>%
 # Prepare NCRO station coordinates to be joined to data
 df_ncro_coord_c <- df_ncro_coord %>%
   select(
-    Station = `Station Code`,
-    Latitude,
-    Longitude
-  )
+    Station = `WQES Code`,
+    Latitude = `Latitude (WGS84)`,
+    Longitude = `Longitude (WGS84)`
+  ) %>%
+  drop_na()
 
 # Combine historical and 2021 DWR-NCRO data and remove a few duplicates
 df_ncro_all <- bind_rows(df_ncro_hist, df_ncro_2021_all) %>%
