@@ -119,29 +119,27 @@
 #'   <https://nwis.waterdata.usgs.gov/nwis>
 "cont_chla_daily"
 
-#' @title Discrete nutrient and chlorophyll-a water concentrations and
-#'   *Microcystis* visual index values in the upper San Francisco Estuary
-#' @description A data set containing concentrations in water of chlorophyll-a
-#'   and three nutrient parameters (Dissolved Ammonia, Dissolved Nitrate +
-#'   Nitrite, and Dissolved Ortho-phosphate) at various locations in the San
-#'   Francisco Estuary (Delta) east of Chipps Island for 2014-2021. This data
-#'   set also contains Microcystis visual index values for the surveys (DWR_EMP
-#'   and DWR_NCRO) that have collected this data. Used in the analyses for the
-#'   Spring-Summer version of the 2022 HABs/Weeds report for the Emergency
-#'   Drought Barrier.
+#' @title Discrete nutrient and chlorophyll-a water concentrations in the upper
+#'   San Francisco Estuary
+#' @description A data set containing concentrations of chlorophyll-a and three
+#'   nutrient parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and
+#'   Dissolved Ortho-phosphate) in water samples collected at various locations
+#'   in the San Francisco Estuary (Delta) east of Chipps Island for 2014-2021.
+#'   Used in the analyses for the Spring-Summer version of the 2022 HABs/Weeds
+#'   report for the Emergency Drought Barrier.
 #'
-#'   Most of the nutrient, chlorophyll-a, and Microcystis visual index data from
-#'   DWR_EMP (DWR's Environmental Monitoring Program) and all the data from
-#'   USGS_SFBS (USGS's San Francisco Bay Water Quality Survey) are from the
-#'   `discretewq` data package. DWR_EMP data collected in 2021 was acquired
-#'   through a direct data request and should be considered provisional. All
-#'   data collected by DWR_NCRO (DWR's North Central Region Office) was also
-#'   acquired through a direct data request; however, most of this data is
-#'   available for download from the Water Data Library (WDL). Some of the most
-#'   recent DWR_NCRO data collected in 2021 should be considered provisional.
-#'   Data from USGS_CAWSC (USGS's California Water Science Center) were
-#'   downloaded directly from the Water Quality Portal using the `dataRetrieval`
-#'   R package. Some of the data from USGS_CAWSC is also considered provisional.
+#'   Most of the nutrient and chlorophyll-a data from DWR_EMP (DWR's
+#'   Environmental Monitoring Program) and all the data from USGS_SFBS (USGS's
+#'   San Francisco Bay Water Quality Survey) are from the `discretewq` data
+#'   package. DWR_EMP data collected in 2021 was acquired through a direct data
+#'   request and should be considered provisional. All data collected by
+#'   DWR_NCRO (DWR's North Central Region Office) was also acquired through a
+#'   direct data request; however, most of this data is available for download
+#'   from the Water Data Library (WDL). Some of the most recent DWR_NCRO data
+#'   collected in 2021 should be considered provisional. Data from USGS_CAWSC
+#'   (USGS's California Water Science Center) were downloaded directly from the
+#'   Water Quality Portal using the `dataRetrieval` R package. Some of the data
+#'   from USGS_CAWSC is also considered provisional.
 #'
 #'   This data set contains only one sample or measurement per `Station` and
 #'   `Date` and only includes stations where all three nutrient parameters and
@@ -158,23 +156,22 @@
 #'   some of the nutrient values that were below the RL in the USGS_CAWSC data
 #'   set did not have RL values provided from the data source. In these
 #'   instances, this data set uses the most common RL for each nutrient
-#'   parameter and laboratory method to fill in the missing RL values.
+#'   parameter and laboratory method.
 #'
-#' @format data frame with 3,133 rows and 16 columns
+#' @format data frame with 3,133 rows and 15 columns
 #' \describe{
 #'   \item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
 #'     (DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
 #'     Region Office), USGS_SFBS (USGS's San Francisco Bay Water Quality Survey),
 #'     or USGS_CAWSC (USGS's California Water Science Center)}
-#'   \item{Station}{Location where measurement was collected}
+#'   \item{Station}{Location where sample was collected}
 #'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Region}{Region designation of `Station` for the Emergency Drought
 #'     Barrier analysis. Is one of the following: Cache/Liberty, East Delta,
 #'     Franks, Lower Sac, Lower SJ, OMR, South Delta, or Upper Sac.}
-#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
-#'   \item{Datetime}{Date and time (yyyy-mm-dd HH:MM:SS) of the measurement in
-#'     PST}
+#'   \item{Date}{Calendar date of the sample in yyyy-mm-dd}
+#'   \item{Datetime}{Date and time (yyyy-mm-dd HH:MM:SS) of the sample in PST}
 #'   \item{DissAmmonia_Sign}{A symbol representing whether the Dissolved Ammonia
 #'     value is below the reporting limit or above it. Contains one of four
 #'     symbols: "<", "< (estimated)", "=", or "= (unreliable)". See the section
@@ -198,9 +195,6 @@
 #'     symbols: "<", "= (estimated)", or "=". See the section below for more
 #'     information about what these symbols represent.}
 #'   \item{Chlorophyll}{Chlorophyll-a concentration in micrograms per liter}
-#'   \item{Microcystis}{*Microcystis* visual index value on a qualitative scale
-#'     from 1 to 5, where 1 = absent, 2 = low, 3 = medium, 4 = high, and 5 = very
-#'     high}
 #' }
 #'
 #' @section More information about the `_Sign` columns:
@@ -227,7 +221,7 @@
 #'   <https://wdl.water.ca.gov/WaterDataLibrary/>
 #' * Water Quality Portal hosted by the National Water Quality Monitoring
 #'   Council: <https://www.waterqualitydata.us/>
-"hab_nutr_chla_mvi"
+"disc_nutr_chla"
 
 #' @title Cyanotoxin water concentrations in the upper San Francisco Estuary
 #' @description A data set containing Cyanotoxin concentrations in whole-water

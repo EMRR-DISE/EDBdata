@@ -1,7 +1,7 @@
 
 test_that("No expected variables contain `NA` values", {
   count_na <- function(test_var) {
-    hab_nutr_chla_mvi %>%
+    disc_nutr_chla %>%
       dplyr::summarize(n_na = sum(is.na(.data[[test_var]]))) %>%
       dplyr::pull(n_na)
   }
@@ -29,8 +29,8 @@ test_that("No expected variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(hab_nutr_chla_mvi), 3133)
-  expect_equal(ncol(hab_nutr_chla_mvi), 16)
+  expect_equal(nrow(disc_nutr_chla), 3133)
+  expect_equal(ncol(disc_nutr_chla), 15)
 
   name_check <- c(
     "Source",
@@ -47,19 +47,18 @@ test_that("Data dimensions are correct", {
     "DissOrthophos_Sign",
     "DissOrthophos",
     "Chlorophyll_Sign",
-    "Chlorophyll",
-    "Microcystis"
+    "Chlorophyll"
   )
 
-  expect_equal(names(hab_nutr_chla_mvi), name_check)
+  expect_equal(names(disc_nutr_chla), name_check)
 })
 
 test_that("There are no duplicate records", {
-  hab_nutr_chla_mvi_t <- hab_nutr_chla_mvi %>%
+  disc_nutr_chla_t <- disc_nutr_chla %>%
     dplyr::mutate(ID = paste(Date, Source, Station, sep = "_"))
 
   select_var <- function(test_var) {
-    hab_nutr_chla_mvi_t %>%
+    disc_nutr_chla_t %>%
       dplyr::filter(!is.na(.data[[test_var]])) %>%
       dplyr::pull(ID)
   }
@@ -76,35 +75,33 @@ test_that("There are no duplicate records", {
     "DissAmmonia",
     "DissNitrateNitrite",
     "DissOrthophos",
-    "Chlorophyll",
-    "Microcystis"
+    "Chlorophyll"
   )
 
   purrr::map(vars_results, expect_no_dups)
 })
 
 test_that("All variables are correct class", {
-  expect_equal(class(hab_nutr_chla_mvi$Source), "character")
-  expect_equal(class(hab_nutr_chla_mvi$Station), "character")
-  expect_equal(class(hab_nutr_chla_mvi$Latitude), "numeric")
-  expect_equal(class(hab_nutr_chla_mvi$Longitude), "numeric")
-  expect_equal(class(hab_nutr_chla_mvi$Region), "character")
-  expect_equal(class(hab_nutr_chla_mvi$Date), "Date")
-  expect_equal(class(hab_nutr_chla_mvi$Datetime), c("POSIXct", "POSIXt"))
-  expect_equal(class(hab_nutr_chla_mvi$DissAmmonia_Sign), "character")
-  expect_equal(class(hab_nutr_chla_mvi$DissAmmonia), "numeric")
-  expect_equal(class(hab_nutr_chla_mvi$DissNitrateNitrite_Sign), "character")
-  expect_equal(class(hab_nutr_chla_mvi$DissNitrateNitrite), "numeric")
-  expect_equal(class(hab_nutr_chla_mvi$DissOrthophos_Sign), "character")
-  expect_equal(class(hab_nutr_chla_mvi$DissOrthophos), "numeric")
-  expect_equal(class(hab_nutr_chla_mvi$Chlorophyll_Sign), "character")
-  expect_equal(class(hab_nutr_chla_mvi$Chlorophyll), "numeric")
-  expect_equal(class(hab_nutr_chla_mvi$Microcystis), "integer")
+  expect_equal(class(disc_nutr_chla$Source), "character")
+  expect_equal(class(disc_nutr_chla$Station), "character")
+  expect_equal(class(disc_nutr_chla$Latitude), "numeric")
+  expect_equal(class(disc_nutr_chla$Longitude), "numeric")
+  expect_equal(class(disc_nutr_chla$Region), "character")
+  expect_equal(class(disc_nutr_chla$Date), "Date")
+  expect_equal(class(disc_nutr_chla$Datetime), c("POSIXct", "POSIXt"))
+  expect_equal(class(disc_nutr_chla$DissAmmonia_Sign), "character")
+  expect_equal(class(disc_nutr_chla$DissAmmonia), "numeric")
+  expect_equal(class(disc_nutr_chla$DissNitrateNitrite_Sign), "character")
+  expect_equal(class(disc_nutr_chla$DissNitrateNitrite), "numeric")
+  expect_equal(class(disc_nutr_chla$DissOrthophos_Sign), "character")
+  expect_equal(class(disc_nutr_chla$DissOrthophos), "numeric")
+  expect_equal(class(disc_nutr_chla$Chlorophyll_Sign), "character")
+  expect_equal(class(disc_nutr_chla$Chlorophyll), "numeric")
 })
 
 test_that("All Sources are as expected", {
   sources_check <- c("DWR_EMP", "DWR_NCRO", "USGS_CAWSC", "USGS_SFBS")
-  expect_equal(sort(unique(hab_nutr_chla_mvi$Source)), sources_check)
+  expect_equal(sort(unique(disc_nutr_chla$Source)), sources_check)
 })
 
 test_that("All Stations are as expected", {
@@ -167,14 +164,14 @@ test_that("All Stations are as expected", {
     "USGS-382010121402301"
   )
 
-  expect_equal(sort(unique(hab_nutr_chla_mvi$Station)), stations_check)
+  expect_equal(sort(unique(disc_nutr_chla$Station)), stations_check)
 })
 
 test_that("All Latitude and Longitude values are within expected ranges", {
-  expect_gte(min(hab_nutr_chla_mvi$Latitude), 37)
-  expect_lte(max(hab_nutr_chla_mvi$Latitude), 39)
-  expect_gte(min(hab_nutr_chla_mvi$Longitude), -122)
-  expect_lte(max(hab_nutr_chla_mvi$Longitude), -121)
+  expect_gte(min(disc_nutr_chla$Latitude), 37)
+  expect_lte(max(disc_nutr_chla$Latitude), 39)
+  expect_gte(min(disc_nutr_chla$Longitude), -122)
+  expect_lte(max(disc_nutr_chla$Longitude), -121)
 })
 
 test_that("All Region names are as expected", {
@@ -189,49 +186,49 @@ test_that("All Region names are as expected", {
     "Upper Sac"
   )
 
-  expect_equal(sort(unique(hab_nutr_chla_mvi$Region)), regions_check)
+  expect_equal(sort(unique(disc_nutr_chla$Region)), regions_check)
 })
 
 test_that("Date is formatted correctly", {
   expect_true(all(stringr::str_detect(
-    as.character(hab_nutr_chla_mvi$Date),
+    as.character(disc_nutr_chla$Date),
     "[0-9]{4}-[0-9]{2}-[0-9]{2}"
   )))
 })
 
 test_that("Datetime is formatted correctly", {
   expect_true(all(stringr::str_detect(
-    as.character(hab_nutr_chla_mvi$Datetime),
+    as.character(disc_nutr_chla$Datetime),
     "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"
   )))
 })
 
 test_that("The Date and Datetime variables are in alignment", {
-  hab_nutr_chla_mvi_t <- hab_nutr_chla_mvi %>% dplyr::mutate(Date_t = lubridate::date(Datetime))
-  expect_equal(hab_nutr_chla_mvi_t$Date, hab_nutr_chla_mvi_t$Date_t)
+  disc_nutr_chla_t <- disc_nutr_chla %>% dplyr::mutate(Date_t = lubridate::date(Datetime))
+  expect_equal(disc_nutr_chla_t$Date, disc_nutr_chla_t$Date_t)
 })
 
 test_that("The time zone of Datetime is PST", {
-  expect_equal(lubridate::tz(hab_nutr_chla_mvi$Datetime), "Etc/GMT+8")
+  expect_equal(lubridate::tz(disc_nutr_chla$Datetime), "Etc/GMT+8")
 })
 
 test_that("Data is present for years 2014 through 2021", {
-  expect_equal(sort(unique(lubridate::year(hab_nutr_chla_mvi$Date))), c(2014:2021))
+  expect_equal(sort(unique(lubridate::year(disc_nutr_chla$Date))), c(2014:2021))
 })
 
 test_that("All values in _Sign variables are as expected", {
   signs_check <- c("<", "< (estimated)", "=", "= (unreliable)")
-  expect_equal(sort(unique(hab_nutr_chla_mvi$DissAmmonia_Sign)), signs_check)
-  expect_equal(sort(unique(hab_nutr_chla_mvi$DissNitrateNitrite_Sign)), signs_check)
-  expect_equal(sort(unique(hab_nutr_chla_mvi$DissOrthophos_Sign)), signs_check)
+  expect_equal(sort(unique(disc_nutr_chla$DissAmmonia_Sign)), signs_check)
+  expect_equal(sort(unique(disc_nutr_chla$DissNitrateNitrite_Sign)), signs_check)
+  expect_equal(sort(unique(disc_nutr_chla$DissOrthophos_Sign)), signs_check)
 
   sign_chla_check <- c("<", "=", "= (estimated)")
-  expect_equal(sort(unique(hab_nutr_chla_mvi$Chlorophyll_Sign)), sign_chla_check)
+  expect_equal(sort(unique(disc_nutr_chla$Chlorophyll_Sign)), sign_chla_check)
 })
 
 test_that("Nutrient and chlorophyll-a values are greater than zero", {
   calc_min <- function(test_var) {
-    hab_nutr_chla_mvi %>%
+    disc_nutr_chla %>%
       dplyr::summarize(min_val = min(.data[[test_var]], na.rm = TRUE)) %>%
       dplyr::pull(min_val)
   }
@@ -249,10 +246,5 @@ test_that("Nutrient and chlorophyll-a values are greater than zero", {
   )
 
   purrr::map(vars_results, expect_gt_zero)
-})
-
-test_that("Microcystis visual index values are between 1 and 5", {
-  expect_gte(min(hab_nutr_chla_mvi$Microcystis, na.rm = TRUE), 1)
-  expect_lte(max(hab_nutr_chla_mvi$Microcystis, na.rm = TRUE), 5)
 })
 

@@ -1,7 +1,8 @@
 # EDBdata (development version)
 
 * Renamed columns for the daily mean and median values in `cont_chla_daily` to `AvgChla` and `MedianChla`, respectively, to have consistent naming convention across all drought-related data sets
-* Updated regions in `hab_nutr_chla_mvi` to be consistent with the regions used in the analysis. Changes to the regions includes:
+* Removed the *Microcystis* visual index values from the `hab_nutr_chla_mvi` data set and renamed it to `disc_nutr_chla`
+* Updated regions in `disc_nutr_chla` to be consistent with the regions used in the analysis. Changes to the regions include:
   * Removed regions and stations west of Chipps Island (this removes the "Suisun Bay" region and the three stations within it)
   * Merged the "SDWSC" region with "Cache/Liberty"
   * Divided the "South Delta" region into Franks Tract (Franks), Old/Middle River (OMR), and South Delta

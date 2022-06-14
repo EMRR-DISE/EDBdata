@@ -1,11 +1,9 @@
 # Code to prepare combined data set of discrete nutrient and chlorophyll-a
-# concentrations and Microcystis visual index values for the Emergency Drought
-# Barrier (HABs/Weeds) analysis:
-# 1) `hab_nutr_chla_mvi` - discrete nutrient (DissAmmonia, DissNitrateNitrite,
-  # and DissOrthophos) and chlorophyll-a concentrations and Microcystis visual
-  # index values for 2014-2021 from the DWR-EMP, DWR-NCRO, USGS-SFBP, and
-  # USGS-CAWSC surveys. Used in the Spring-Summer version of the 2022 HABs/Weeds
-  # report.
+  # concentrations for the Emergency Drought Barrier (HABs/Weeds) analysis:
+# 1) `disc_nutr_chla` - discrete nutrient (DissAmmonia, DissNitrateNitrite,
+  # and DissOrthophos) and chlorophyll-a concentrations for 2014-2021 from the
+  # DWR-EMP, DWR-NCRO, USGS-SFBP, and USGS-CAWSC surveys. Used in the
+  # Spring-Summer version of the 2022 HABs/Weeds report.
 # 2) `vims_nutr_chla` - discrete nutrient (DissAmmonia, DissNitrateNitrite, and
   # DissOrthophos) and chlorophyll-a concentrations for 2014-2021 from the
   # DWR-EMP, DWR-NCRO, USGS-SFBP, and USGS-CAWSC surveys. Provided as a data
@@ -42,8 +40,7 @@ i_am("data-raw/hab_nutr_chla_mvi.R")
 
 # 1. Import Data ----------------------------------------------------------
 
-# Import discrete nutrient, chlorophyll-a, and Microcystis visual index data
-  # from the discretewq package (v2.3.1)
+# Import discrete nutrient and chlorophyll-a data from the discretewq package (v2.3.2)
 # Select EMP and USGS_SFBS since these are the only surveys besides
   # USGS_CAWSC that have collected discrete nutrient and chlorophyll-a data
 # The USGS_CAWSC survey also has collected discrete nutrient and chlorophyll-a
@@ -142,22 +139,22 @@ if (download == TRUE) {
   # Add coordinates to data frame
   df_cawsc_tmp <- left_join(df_cawsc_tmp, df_cawsc_coord, by = "MonitoringLocationIdentifier")
 
-  # Save data as a .csv file in the "data-raw/Discrete_nutr_chla_mvi_data" folder
+  # Save data as a .csv file in the "data-raw/Discrete_nutr_chla_data" folder
   df_cawsc_tmp %>%
-    write_csv(here("data-raw/Discrete_nutr_chla_mvi_data/USGS_CAWSC_nutr_chla_data_2014-2021.csv"))
+    write_csv(here("data-raw/Discrete_nutr_chla_data/USGS_CAWSC_nutr_chla_data_2014-2021.csv"))
 
   # Clean up
   rm(params, site_numb, df_cawsc_tmp, df_cawsc_coord)
 }
 
-# Create a vector of all file paths of the discrete nutrient, chlorophyll-a, and
-  # Microcystis visual index data found in the data-raw folder
-fp_nutr_chla_mvi <- dir(here("data-raw/Discrete_nutr_chla_mvi_data"), full.names = TRUE)
+# Create a vector of all file paths of the discrete nutrient and chlorophyll-a
+  # data found in the data-raw folder
+fp_nutr_chla <- dir(here("data-raw/Discrete_nutr_chla_data"), full.names = TRUE)
 
 # Import USGS discrete nutrient and chlorophyll-a data collected by the CAWSC group
 df_cawsc <-
   read_csv(
-    file = str_subset(fp_nutr_chla_mvi, "USGS_CAWSC"),
+    file = str_subset(fp_nutr_chla, "USGS_CAWSC"),
     col_types = cols_only(
       ActivityStartDate = "D",
       ActivityStartTime.Time = "t",
@@ -178,19 +175,18 @@ df_cawsc <-
 
 # Import additional DWR_EMP discrete nutrient and chlorophyll-a data for 2021
 # Provided from personal data request
-df_emp_nutr_chla_2021 <-
+df_emp_2021 <-
   read_excel(
-    path = str_subset(fp_nutr_chla_mvi, "EMP_water_quality"),
+    path = str_subset(fp_nutr_chla, "EMP_water_quality"),
     range = "A2:AA288",
     col_types = "text"
   )
 
 # Import additional DWR_EMP field data for 2021 - this includes EZ station
-  # coordinates and Microcystis visual index data
-# Provided from personal data request
+  # coordinates - provided from personal data request
 df_emp_field_2021 <-
   read_excel(
-    path = str_subset(fp_nutr_chla_mvi, "EMP_water_quality"),
+    path = str_subset(fp_nutr_chla, "EMP_water_quality"),
     range = "A290:R576",
     col_types = "text"
   )
@@ -198,39 +194,33 @@ df_emp_field_2021 <-
 # Import DWR_EMP station coordinates from EDI
 df_emp_coord <- read_csv("https://portal.edirepository.org/nis/dataviewer?packageid=edi.458.4&entityid=827aa171ecae79731cc50ae0e590e5af")
 
-# Import discrete nutrient, chlorophyll-a, and Microcystis visual index data
-  # collected by DWR_NCRO
+# Import discrete nutrient and chlorophyll-a data collected by DWR_NCRO
 ### Historical data:
 # Create a vector of sheet names from the data spreadsheet - these will double as station names
 ncro_sheets <- c("FAL", "BET", "HOL", "OSJ", "FCT", "TSL")
 
-# Import the discrete nutrient and chlorophyll-a data as a nested data frame
-  # with each element containing data for one station
-ndf_ncro_nutr_chla_hist <-
+# Import data as a nested data frame with each element containing data for one station
+ndf_ncro_hist <-
   tibble(
-    fp_data = rep(str_subset(fp_nutr_chla_mvi, "NCROWQES_DiscreteData_historical"), 6),
+    fp_data = rep(str_subset(fp_nutr_chla, "NCROWQES_DiscreteData_historical"), 6),
     Station = ncro_sheets
   ) %>%
   mutate(df_data = map2(fp_data, Station, ~ read_excel(.x, sheet = .y, col_types = "text"))) %>%
   select(-fp_data)
 
-# Import all Microcystis visual index data collected by DWR_NCRO
-df_ncro_mvi_hist <-
-  read_excel(str_subset(fp_nutr_chla_mvi, "NCROWQES_Microcystis_Obs_2017-2022"))
-
-### 2021 discrete nutrient and chlorophyll-a data:
+### 2021 data:
 # May - November
-df_ncro_nutr_chla_2021a <-
+df_ncro_2021a <-
   read_excel(
-    str_subset(fp_nutr_chla_mvi, "NCROWQES_DiscreteData_2021_May-Nov"),
+    str_subset(fp_nutr_chla, "NCROWQES_DiscreteData_2021_May-Nov"),
     sheet = "Cross Tab_AnalyteResults",
     col_types = "text"
   )
 
 # December
-df_ncro_nutr_chla_2021b <-
+df_ncro_2021b <-
   read_excel(
-    str_subset(fp_nutr_chla_mvi, "NCROWQES_DiscreteData_2021_Dec"),
+    str_subset(fp_nutr_chla, "NCROWQES_DiscreteData_2021_Dec"),
     range = "A2:U6",
     col_types = "text"
   )
@@ -238,7 +228,7 @@ df_ncro_nutr_chla_2021b <-
 # Station coordinates
 df_ncro_coord <-
   read_excel(
-    str_subset(fp_nutr_chla_mvi, "NCROWQES_DiscreteData_historical"),
+    str_subset(fp_nutr_chla, "NCROWQES_DiscreteData_historical"),
     sheet = "METADATA",
     range = "A38:E44"
   )
@@ -310,8 +300,7 @@ df_package_c1 <- df_package %>%
     starts_with("DissAmmonia"),
     starts_with("DissNitrateNitrite"),
     starts_with("DissOrthophos"),
-    starts_with("Chlorophyll"),
-    Microcystis
+    starts_with("Chlorophyll")
   )
 
 # For the USGS_SFBS, if at least one of the nutrient parameters has a value reported, then we
@@ -348,18 +337,9 @@ df_emp_coord_ez21 <- df_emp_field_2021 %>%
   filter(!if_any(c(Latitude_field, Longitude_field), ~ .x == "N/A")) %>%
   mutate(across(ends_with("_field"), as.numeric))
 
-# Prepare 2021 DWR_EMP Microcystis visual index data to by joined to 2021
-  # DWR_EMP discrete nutrient and chlorophyll-a data
-df_emp_mvi_2021 <- df_emp_field_2021 %>%
-  select(
-    SampleCode = `Sample Code`,
-    Microcystis = contains("Microcystis")
-  ) %>%
-  mutate(Microcystis = as.numeric(Microcystis))
-
-# Prepare 2021 EMP discrete nutrient, chlorophyll-a, and Microcystis visual
-  # index data to be combined with all other data
-df_emp_all_2021 <- df_emp_nutr_chla_2021 %>%
+# Prepare 2021 EMP discrete nutrient and chlorophyll-a data to be combined with
+  # all other data
+df_emp_2021_c <- df_emp_2021 %>%
   # Select and standardize variable names
   select(
     Station = `Station Name`,
@@ -417,8 +397,6 @@ df_emp_all_2021 <- df_emp_nutr_chla_2021 %>%
     Latitude = if_else(is.na(Latitude), Latitude_field, Latitude),
     Longitude = if_else(is.na(Longitude), Longitude_field, Longitude)
   ) %>%
-  # Add Microcystis visual index data
-  left_join(df_emp_mvi_2021, by = "SampleCode") %>%
   # Select variable order
   select(
     Source,
@@ -430,8 +408,7 @@ df_emp_all_2021 <- df_emp_nutr_chla_2021 %>%
     starts_with("DissAmmonia"),
     starts_with("DissNitrateNitrite"),
     starts_with("DissOrthophos"),
-    starts_with("Chlorophyll"),
-    Microcystis
+    starts_with("Chlorophyll")
   )
 
 # 2.3 USGS_CAWSC Data -----------------------------------------------------
@@ -550,7 +527,7 @@ vec_vars_keep <-
 
 # Prepare historical discrete nutrient and chlorophyll-a data from NCRO to be
   # combined with all other data
-df_ncro_nutr_chla_hist <- ndf_ncro_nutr_chla_hist %>%
+df_ncro_hist <- ndf_ncro_hist %>%
   # Standardize variable names
   mutate(
     df_data = map(
@@ -635,7 +612,7 @@ df_ncro_nutr_chla_hist <- ndf_ncro_nutr_chla_hist %>%
 
 # Prepare 2021 discrete nutrient and chlorophyll-a data from NCRO to be combined
   # with all other data
-df_ncro_nutr_chla_2021 <- bind_rows(df_ncro_nutr_chla_2021a, df_ncro_nutr_chla_2021b) %>%
+df_ncro_2021_all <- bind_rows(df_ncro_2021a, df_ncro_2021b) %>%
   # Select and standardize variable names
   select(
     Station = `Station Name`,
@@ -699,34 +676,6 @@ df_ncro_nutr_chla_2021 <- bind_rows(df_ncro_nutr_chla_2021a, df_ncro_nutr_chla_2
     starts_with("Chlorophyll")
   )
 
-# Prepare all Microcystis visual index data collected by DWR_NCRO to be joined
-  # to discrete nutrient and chlorophyll-a data
-df_ncro_mvi_hist_c <- df_ncro_mvi_hist %>%
-  rename(
-    Station = StationCode,
-    Datetime = DeploymentEnd,
-    Microcystis = FldObsWaterHabs
-  ) %>%
-  mutate(
-    # Define timezone of Datetime as PST and create Date variable
-    Datetime = force_tz(Datetime, tzone = "Etc/GMT+8"),
-    Date = date(Datetime),
-    # Standardize Microcystis score to a number 1-5
-    Microcystis = case_when(
-      Microcystis %in% c("Absent", "Not Visible") ~ 1,
-      Microcystis == "Low" ~ 2,
-      Microcystis == "Medium" ~ 3,
-      Microcystis == "High" ~ 4,
-      Microcystis == "Extreme" ~ 5,
-      TRUE ~ NA_real_
-    )
-  ) %>%
-  # Only include stations of interest
-  filter(Station %in% c("BET", "FAL", "FCT", "HOL", "OSJ", "TSL")) %>%
-  # Remove records with NA values
-  select(Station, Date, Microcystis) %>%
-  drop_na()
-
 # Prepare NCRO station coordinates to be joined to data
 df_ncro_coord_c <- df_ncro_coord %>%
   select(
@@ -736,14 +685,12 @@ df_ncro_coord_c <- df_ncro_coord %>%
   )
 
 # Combine historical and 2021 DWR-NCRO data and remove a few duplicates
-df_ncro_all <- bind_rows(df_ncro_nutr_chla_hist, df_ncro_nutr_chla_2021) %>%
+df_ncro_all <- bind_rows(df_ncro_hist, df_ncro_2021_all) %>%
   distinct() %>%
   # Add Source variable
   mutate(Source = "DWR_NCRO") %>%
   # Add station coordinates
   left_join(df_ncro_coord_c, by = "Station") %>%
-  # Add Microcystis visual index data
-  left_join(df_ncro_mvi_hist_c, by = c("Station", "Date")) %>%
   # Select variable order
   select(
     Source,
@@ -755,14 +702,13 @@ df_ncro_all <- bind_rows(df_ncro_nutr_chla_hist, df_ncro_nutr_chla_2021) %>%
     starts_with("DissAmmonia"),
     starts_with("DissNitrateNitrite"),
     starts_with("DissOrthophos"),
-    starts_with("Chlorophyll"),
-    Microcystis
+    starts_with("Chlorophyll")
   )
 
 # 2.5 Combine All Data ----------------------------------------------------
 
 # Combine EMP data from 2021 and USGS-CAWSC data to discretewq data
-df_nutr_chla_mvi_all <- bind_rows(df_package_c2, df_cawsc_c, df_emp_all_2021, df_ncro_all)
+df_all <- bind_rows(df_package_c2, df_cawsc_c, df_emp_2021_c, df_ncro_all)
 
 
 # 3. Clean All Raw Data ---------------------------------------------------
@@ -856,9 +802,7 @@ rm_est_rl <- function(df, data_var) {
     )
 }
 
-vims_nutr_chla <- df_nutr_chla_mvi_all %>%
-  # Remove Microcystis data
-  select(-Microcystis) %>%
+vims_nutr_chla <- df_all %>%
   # Remove nutrient values that are <RL with estimated RL values
   rm_est_rl(DissAmmonia) %>%
   rm_est_rl(DissNitrateNitrite) %>%
@@ -911,14 +855,9 @@ vims_nutr_chla <- df_nutr_chla_mvi_all %>%
 # 3.3 Prepare Data for HABs Report ----------------------------------------
 
 # Look for and remove outliers from the data set
-df_nutr_chla_mvi_all_c1 <- df_nutr_chla_mvi_all %>%
-  # Remove records where all nutrient parameters, chlorophyll-a, and Microcystis are NA
-  filter(
-    !if_all(
-      c(DissAmmonia, DissNitrateNitrite, DissOrthophos, Chlorophyll, Microcystis),
-      is.na
-    )
-  ) %>%
+df_all_c1 <- df_all %>%
+  # Remove records where all nutrient parameters and chlorophyll-a are NA
+  filter(!if_all(c(DissAmmonia, DissNitrateNitrite, DissOrthophos, Chlorophyll), is.na)) %>%
   # Remove records without latitude-longitude coordinates
   drop_na(Latitude, Longitude) %>%
   # Convert to sf object
@@ -947,8 +886,8 @@ df_nutr_chla_mvi_all_c1 <- df_nutr_chla_mvi_all %>%
 
 # We will only keep stations where all three nutrients and chlorophyll-a have been collected
 # This doesn't require that all parameters were collected on the same day though
-df_sta_keep <- df_nutr_chla_mvi_all_c1 %>%
-  select(-c(ends_with(c("_Sign", "_flag")), Microcystis)) %>%
+df_sta_keep <- df_all_c1 %>%
+  select(-c(ends_with(c("_Sign", "_flag")))) %>%
   pivot_longer(
     cols = c(starts_with("Diss"), Chlorophyll),
     names_to = "Parameter",
@@ -961,7 +900,7 @@ df_sta_keep <- df_nutr_chla_mvi_all_c1 %>%
   select(Source, Station)
 
 # Finish preparing data for the HABs report
-hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c1 %>%
+disc_nutr_chla <- df_all_c1 %>%
   # Run inner join to only include Source-Station combinations in df_sta_keep
   inner_join(df_sta_keep, by = c("Source", "Station")) %>%
   # Flag the <RL values with high RL's (> 75th percentile) in the DWR_EMP data set
@@ -977,29 +916,27 @@ hab_nutr_chla_mvi <- df_nutr_chla_mvi_all_c1 %>%
   # Remove and reorder variables
   select(!ends_with("_flag")) %>%
   relocate(Region, .before = Date) %>%
-  relocate(Chlorophyll_Sign, .before = Chlorophyll) %>%
-  # Convert Microcystis to integer
-  mutate(Microcystis = as.integer(Microcystis))
+  relocate(Chlorophyll_Sign, .before = Chlorophyll)
 
 
 # 4. Save and Export Data -------------------------------------------------
 
-# Save final data sets of discrete nutrient and chlorophyll-a concentrations and
-  # Microcystis visual index values as csv files for easier diffing
+# Save final data sets of discrete nutrient and chlorophyll-a concentrations as
+  # csv files for easier diffing
 vims_nutr_chla %>%
   # Convert Datetime to character so that it isn't converted to UTC upon export
   mutate(Datetime = as.character(Datetime)) %>%
   write_csv(here("data-raw/Final/vims_nutr_chla.csv"))
 
-hab_nutr_chla_mvi %>%
+disc_nutr_chla %>%
   # Convert Datetime to character so that it isn't converted to UTC upon export
   mutate(Datetime = as.character(Datetime)) %>%
-  write_csv(here("data-raw/Final/hab_nutr_chla_mvi.csv"))
+  write_csv(here("data-raw/Final/disc_nutr_chla.csv"))
 
-# Save final data sets of discrete nutrient and chlorophyll-a concentrations and
-  # Microcystis visual index values as objects in the data package
+# Save final data sets of discrete nutrient and chlorophyll-a concentrations as
+  # objects in the data package
 # `vims_nutr_chla` will be saved as a .csv file in the data package but not
   # exported as an .rda data object for now. It was provided as a special data
   # request to VIMS to assist with their modeling effort.
-usethis::use_data(hab_nutr_chla_mvi, overwrite = TRUE)
+usethis::use_data(disc_nutr_chla, overwrite = TRUE)
 

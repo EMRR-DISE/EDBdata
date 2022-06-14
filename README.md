@@ -29,12 +29,11 @@ This package provides the following data tables:
     chlorophyll fluorescence measured in the water in-situ at the
     stations within the Emergency Drought Barrier regions. Data was
     collected by DWR and USGS from 2020-2021.
--   `hab_nutr_chla_mvi`: Concentrations in water of chlorophyll-a and
-    three nutrient parameters (Dissolved Ammonia, Dissolved Nitrate +
-    Nitrite, and Dissolved Ortho-phosphate) at various locations in the
-    San Francisco Estuary (Delta) east of Chipps Island for 2014-2021.
-    This data set also contains *Microcystis* visual index values for
-    the surveys that collected this data.
+-   `disc_nutr_chla`: Concentrations of chlorophyll-a and three nutrient
+    parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and
+    Dissolved Ortho-phosphate) in water samples collected at various
+    locations in the San Francisco Estuary (Delta) east of Chipps Island
+    for 2014-2021
 -   `hab_toxins`: Cyanotoxin concentrations in whole-water grab samples
     collected at various locations in the upper San Francisco Estuary
     (Delta) in 2021
