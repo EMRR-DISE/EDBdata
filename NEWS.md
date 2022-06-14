@@ -8,6 +8,7 @@
   * Divided the "South Delta" region into Franks Tract (Franks), Old/Middle River (OMR), and South Delta
   * Using the new regions also added two USGS stations located in the Toe Drain to the data set: 11455139 and 11455140
 * Added `hab_toxins` - cyanotoxin concentrations in whole-water grab samples collected at various locations in the upper San Francisco Estuary (Delta) in 2021
+* Added `mc_vis_index_wq` - *Microcystis* visual index, secchi depth, and water temperature data collected at various locations in the Delta from 2007-2021
 
 # EDBdata 0.4.0
 
