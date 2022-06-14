@@ -51,8 +51,8 @@ high}
 }
 \source{
 \itemize{
-\item \code{discretewq} data package (version 2.3.1):
-\url{https://github.com/sbashevkin/discretewq/tree/258dd2591a695710067fb29b4e8cbd9ffab54aa9}
+\item \code{discretewq} data package (version 2.3.2):
+\url{https://github.com/sbashevkin/discretewq/tree/v2.3.2}
 \item California Department of Water Resources (DWR) Water Data Library (WDL):
 \url{https://wdl.water.ca.gov/WaterDataLibrary/}
 \item Water Quality Portal hosted by the National Water Quality Monitoring

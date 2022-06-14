@@ -221,8 +221,8 @@
 #' determined to be an outlier and is excluded from the data set.
 #'
 #' @source
-#' * `discretewq` data package (version 2.3.1):
-#'   <https://github.com/sbashevkin/discretewq/tree/258dd2591a695710067fb29b4e8cbd9ffab54aa9>
+#' * `discretewq` data package (version 2.3.2):
+#'   <https://github.com/sbashevkin/discretewq/tree/v2.3.2>
 #' * California Department of Water Resources (DWR) Water Data Library (WDL):
 #'   <https://wdl.water.ca.gov/WaterDataLibrary/>
 #' * Water Quality Portal hosted by the National Water Quality Monitoring

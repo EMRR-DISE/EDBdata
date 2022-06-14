@@ -15,9 +15,9 @@
 
 # Load packages
 library(dplyr)
-# Make sure we are using `discretewq` version 2.3.1
+# Make sure we are using `discretewq` version 2.3.2
 # install.packages("devtools")
-# devtools::install_github("sbashevkin/discretewq", ref = "v2.3.1")
+# devtools::install_github("sbashevkin/discretewq", ref = "v2.3.2")
 library(discretewq)
 library(dataRetrieval)
 # Make sure we are using `deltamapr` version 1.0.0, commit d0a6f9c22aa074f906176e99a0ed70f97f26fffd
