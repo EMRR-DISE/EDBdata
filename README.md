@@ -25,6 +25,9 @@ This package provides the following data tables:
 -   `phyto_edb`: Phytoplankton community data collected by DWR’s
     Environmental Monitoring Program from 2014-2021 for stations within
     the Emergency Drought Barrier regions
+-   `phyto_hab`: Phytoplankton community data of potentially toxic
+    Cyanobacteria collected by DWR’s Environmental Monitoring Program at
+    various locations in the Delta from 2014-2021
 -   `cont_chla_daily`: Daily average and median values of continuous
     chlorophyll fluorescence measured in the water in-situ at the
     stations within the Emergency Drought Barrier regions. Data was
