@@ -1,0 +1,229 @@
+Station,Region,Year,Date,Datetime,Taxon,Genus,Species,AlgalType,Count,OrganismsPerMl
+P8,South Delta,2014,2014-05-08,2014-05-08 12:45:00,cf. Planktothrix suspensa,Planktothrix,NA,Cyanobacterium,1,65.03
+P8,South Delta,2014,2014-06-05,2014-06-05 10:45:00,Aphanizomenon cf. yezoense,Aphanizomenon,NA,Cyanobacterium,2,130.06
+P8,South Delta,2014,2014-06-05,2014-06-05 10:45:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,16,1040.5
+D19,Franks,2014,2014-07-02,2014-07-02 08:20:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,12,2483
+D28A,OMR,2014,2014-07-02,2014-07-02 09:25:00,Anabaena sp.,Dolichospermum,NA,Cyanobacterium,4,303.48
+D28A,OMR,2014,2014-07-02,2014-07-02 09:25:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,53,4021.09
+D26,Lower SJ,2014,2014-07-03,2014-07-03 07:15:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,303.48
+D26,Lower SJ,2014,2014-07-03,2014-07-03 07:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,2,606.96
+P8,South Delta,2014,2014-07-03,2014-07-03 09:50:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,3,170.71
+P8,South Delta,2014,2014-08-15,2014-08-15 12:15:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,91.04
+D19,Franks,2014,2014-09-15,2014-09-15 10:55:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,455.22
+D28A,OMR,2014,2014-09-15,2014-09-15 12:00:00,Anabaena sp.,Dolichospermum,NA,Cyanobacterium,1,151.74
+D28A,OMR,2014,2014-09-15,2014-09-15 12:00:00,Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,3,455.22
+MD10A,East Delta,2014,2014-09-16,2014-09-16 11:20:00,Oscillatoria tenuis,Oscillatoria,NA,Cyanobacterium,2,182.09
+P8,South Delta,2014,2014-09-16,2014-09-16 12:40:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,91.04
+D26,Lower SJ,2014,2014-10-02,2014-10-02 10:30:00,Planktothrix suspensa,Planktothrix,NA,Cyanobacterium,1,252.9
+D19,Franks,2014,2014-11-12,2014-11-12 11:05:00,Anabaena sp.,Dolichospermum,NA,Cyanobacterium,1,189.67
+D19,Franks,2014,2014-11-12,2014-11-12 11:05:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,189.67
+D28A,OMR,2014,2014-11-12,2014-11-12 12:20:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,3,119.79
+D26,Lower SJ,2014,2014-11-13,2014-11-13 09:40:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,130.06
+MD10A,East Delta,2014,2014-11-13,2014-11-13 10:50:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,45.52
+D4,Lower Sac,2015,2015-01-16,2015-01-16 12:25:00,Anabaena sp.,Dolichospermum,NA,Cyanobacterium,1,189.67
+D19,Franks,2015,2015-06-08,2015-06-08 10:45:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,94.84
+D28A,OMR,2015,2015-06-08,2015-06-08 11:35:00,cf. Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,1,84.3
+D26,Lower SJ,2015,2015-06-09,2015-06-09 08:35:00,cf. Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,2,182.09
+P8,South Delta,2015,2015-06-09,2015-06-09 11:05:00,cf. Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,3,227.61
+D19,Franks,2015,2015-07-08,2015-07-08 10:15:00,Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,6,569.02
+D28A,OMR,2015,2015-07-08,2015-07-08 12:25:00,Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,6,569.02
+D26,Lower SJ,2015,2015-07-09,2015-07-09 08:55:00,Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,5,284.51
+MD10A,East Delta,2015,2015-07-09,2015-07-09 10:05:00,Anabaenopsis sp.,Anabaenopsis,NA,Cyanobacterium,3,113.8
+MD10A,East Delta,2015,2015-07-09,2015-07-09 10:05:00,Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,7,265.54
+MD10A,East Delta,2015,2015-07-09,2015-07-09 10:05:00,Oscillatoria tenuis,Oscillatoria,NA,Cyanobacterium,1,37.93
+P8,South Delta,2015,2015-07-09,2015-07-09 11:30:00,cf. Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,1,56.9
+D19,Franks,2015,2015-08-19,2015-08-19 09:57:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,8,650.31
+D28A,OMR,2015,2015-08-19,2015-08-19 11:15:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,2,84.3
+D26,Lower SJ,2015,2015-08-25,2015-08-25 13:10:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,2,126.45
+D26,Lower SJ,2015,2015-08-25,2015-08-25 13:10:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,16,1011.59
+MD10A,East Delta,2015,2015-08-25,2015-08-25 13:45:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,5,227.61
+MD10A,East Delta,2015,2015-08-25,2015-08-25 13:45:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,14,637.3
+MD10A,East Delta,2015,2015-08-25,2015-08-25 13:45:00,Dolichospermum planctonicum,Dolichospermum,NA,Cyanobacterium,2,91.04
+P8,South Delta,2015,2015-08-25,2015-08-25 14:15:00,Anabaena sp.,Dolichospermum,NA,Cyanobacterium,1,54.19
+P8,South Delta,2015,2015-08-25,2015-08-25 14:15:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,2,108.39
+P8,South Delta,2015,2015-08-25,2015-08-25 14:15:00,Dolichospermum planctonicum,Dolichospermum,NA,Cyanobacterium,2,108.39
+P8,South Delta,2015,2015-08-25,2015-08-25 14:15:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,5,270.96
+D28A,OMR,2015,2015-09-17,2015-09-17 10:55:00,Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,126.45
+MD10A,East Delta,2015,2015-09-21,2015-09-21 10:35:00,Aphanizomenon klebahnii,Aphanizomenon,NA,Cyanobacterium,5,284.51
+P8,South Delta,2015,2015-09-21,2015-09-21 11:40:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,94.84
+D28A,OMR,2015,2015-10-19,2015-10-19 13:15:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,68.97
+P8,South Delta,2015,2015-10-20,2015-10-20 12:00:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,68.97
+D19,Franks,2015,2015-11-02,2015-11-02 11:40:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,103.46
+D19,Franks,2015,2015-12-02,2015-12-02 11:50:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,175.08
+D28A,OMR,2015,2015-12-02,2015-12-02 13:00:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,47.42
+MD10A,East Delta,2015,2015-12-03,2015-12-03 11:22:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,37.93
+D28A,OMR,2016,2016-01-04,2016-01-04 15:52:00,Aphanizomenon cf. klebahnii,Aphanizomenon,NA,Cyanobacterium,1,151.74
+MD10A,East Delta,2016,2016-01-05,2016-01-05 14:40:00,Planktothrix suspensa,Planktothrix,NA,Cyanobacterium,1,30.35
+P8,South Delta,2016,2016-02-02,2016-02-02 13:35:00,Planktothrix agardhii,Planktothrix,NA,Cyanobacterium,1,91.04
+P8,South Delta,2016,2016-05-12,2016-05-12 10:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,151.74
+P8,South Delta,2016,2016-05-12,2016-05-12 10:15:00,Dolichospermum sp.,Dolichospermum,NA,Cyanobacterium,1,151.74
+D28A,OMR,2016,2016-06-09,2016-06-09 08:30:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,151.74
+D19,Franks,2016,2016-07-11,2016-07-11 10:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,11,3576.71
+D19,Franks,2016,2016-07-11,2016-07-11 10:15:00,Cylindrospermopsis acuminatocrispa,Cylindrospermopsis,NA,Cyanobacterium,1,325.16
+D28A,OMR,2016,2016-07-11,2016-07-11 11:15:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,2,303.48
+D28A,OMR,2016,2016-07-11,2016-07-11 11:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,29,4400.43
+D16,Lower SJ,2016,2016-07-12,2016-07-12 08:55:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,303.48
+D16,Lower SJ,2016,2016-07-12,2016-07-12 08:55:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,10,3034.78
+D26,Lower SJ,2016,2016-07-12,2016-07-12 09:45:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,10,3034.78
+MD10A,East Delta,2016,2016-07-12,2016-07-12 11:10:00,Anabaena sp.,Dolichospermum,NA,Cyanobacterium,6,910.43
+MD10A,East Delta,2016,2016-07-12,2016-07-12 11:10:00,cf. Anabaenopsis sp.,Anabaenopsis,NA,Cyanobacterium,7,1062.17
+MD10A,East Delta,2016,2016-07-12,2016-07-12 11:10:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,116,17601.74
+MD10A,East Delta,2016,2016-07-12,2016-07-12 11:10:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,1,151.74
+MD10A,East Delta,2016,2016-07-12,2016-07-12 11:10:00,Planktothrix suspensa,Planktothrix,NA,Cyanobacterium,1,151.74
+P8,South Delta,2016,2016-07-12,2016-07-12 12:10:00,cf. Anabaenopsis sp.,Anabaenopsis,NA,Cyanobacterium,2,303.48
+P8,South Delta,2016,2016-07-12,2016-07-12 12:10:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,52,7890.43
+D4,Lower Sac,2016,2016-07-13,2016-07-13 12:20:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,2,910.43
+D12,Lower SJ,2016,2016-08-08,2016-08-08 08:05:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,2,1138.04
+D19,Franks,2016,2016-08-08,2016-08-08 09:20:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,16,2427.83
+D28A,OMR,2016,2016-08-08,2016-08-08 10:25:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,151.74
+D28A,OMR,2016,2016-08-08,2016-08-08 10:25:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,4,606.96
+D16,Lower SJ,2016,2016-08-09,2016-08-09 07:35:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,9,5852.8
+D26,Lower SJ,2016,2016-08-09,2016-08-09 08:30:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,22,4005.91
+MD10A,East Delta,2016,2016-08-09,2016-08-09 09:50:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,24,3641.74
+P8,South Delta,2016,2016-08-09,2016-08-09 11:05:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,42,6373.04
+D28A,OMR,2016,2016-09-06,2016-09-06 10:10:00,Cylindrospermopsis sp.,Cylindrospermopsis,NA,Cyanobacterium,1,151.74
+P8,South Delta,2016,2016-09-09,2016-09-09 13:10:00,Cylindrospermopsis sp.,Cylindrospermopsis,NA,Cyanobacterium,1,151.74
+D12,Lower SJ,2016,2016-11-03,2016-11-03 06:40:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,650.31
+MD10A,East Delta,2017,2017-03-07,2017-03-07 10:35:00,cf. Cylindrospermopsis sp.,Cylindrospermopsis,NA,Cyanobacterium,7,12746.09
+MD10A,East Delta,2017,2017-03-07,2017-03-07 10:35:00,Cylindrospermopsis sp.,Cylindrospermopsis,NA,Cyanobacterium,1,1820.87
+C9,South Delta,2017,2017-07-12,2017-07-12 08:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,606.96
+MD10A,East Delta,2017,2017-07-17,2017-07-17 11:10:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,303.48
+P8,South Delta,2017,2017-07-17,2017-07-17 12:25:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,910.43
+C9,South Delta,2017,2017-08-11,2017-08-11 08:50:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,2,867.08
+C9,South Delta,2017,2017-09-11,2017-09-11 10:18:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,3,1138.04
+D19,Franks,2017,2017-09-12,2017-09-12 10:30:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,3,455.22
+D28A,OMR,2017,2017-09-12,2017-09-12 11:40:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,7,1062.17
+D19,Franks,2017,2017-10-10,2017-10-10 09:30:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,2,364.17
+D28A,OMR,2017,2017-10-10,2017-10-10 10:20:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,10,1138.04
+C9,South Delta,2017,2017-10-11,2017-10-11 11:00:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,41,7178.43
+C9,South Delta,2017,2017-11-08,2017-11-08 10:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,162.58
+D28A,OMR,2017,2017-11-13,2017-11-13 11:45:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,3,303.48
+P8,South Delta,2018,2018-05-09,2018-05-09 12:25:00,Planktothrix sp.,Planktothrix,NA,Cyanobacterium,1,577.39
+C9,South Delta,2018,2018-06-04,2018-06-04 09:10:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,252.9
+MD10A,East Delta,2018,2018-06-07,2018-06-07 10:45:00,Dolichospermum sp.,Dolichospermum,NA,Cyanobacterium,1,413.83
+D16,Lower SJ,2018,2018-07-09,2018-07-09 12:10:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,2,758.7
+D16,Lower SJ,2018,2018-07-09,2018-07-09 12:10:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,3,1138.04
+D26,Lower SJ,2018,2018-07-09,2018-07-09 13:00:00,Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,379.35
+D26,Lower SJ,2018,2018-07-09,2018-07-09 13:00:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,10,3793.48
+C3A,Upper Sac,2018,2018-07-17,2018-07-17 09:00:00,Dolichospermum sp.,Dolichospermum,NA,Cyanobacterium,2,419.92
+D4,Lower Sac,2018,2018-07-18,2018-07-18 07:40:00,Dolichospermum sp.,Dolichospermum,NA,Cyanobacterium,1,769.85
+D19,Franks,2018,2018-07-19,2018-07-19 10:40:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,325.16
+D19,Franks,2018,2018-07-19,2018-07-19 10:40:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,5,1625.78
+D28A,OMR,2018,2018-07-19,2018-07-19 11:15:00,cf. Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,284.51
+D28A,OMR,2018,2018-07-19,2018-07-19 11:15:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,10,2845.11
+C9,South Delta,2018,2018-08-01,2018-08-01 09:20:00,Aphanizomenon sp.,Aphanizomenon,NA,Cyanobacterium,1,455.22
+C9,South Delta,2018,2018-08-01,2018-08-01 09:20:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,6,2731.3
+D28A,OMR,2018,2018-08-03,2018-08-03 10:10:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,7,1770.29
+D26,Lower SJ,2018,2018-08-06,2018-08-06 11:35:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,2,827.67
+P8,South Delta,2018,2018-08-06,2018-08-06 14:00:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,569.02
+D19,Franks,2018,2018-09-14,2018-09-14 09:25:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,2,569.02
+D16,Lower SJ,2018,2018-09-17,2018-09-17 09:35:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,2,569.02
+C9,South Delta,2018,2018-09-20,2018-09-20 11:55:00,Microcystis sp.,Microcystis,NA,Cyanobacterium,27,6828.26
+C9,South Delta,2018,2018-10-11,2018-10-11 09:30:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,33,5007.39
+C3A,Upper Sac,2018,2018-10-12,2018-10-12 09:30:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,60.7
+D12,Lower SJ,2018,2018-10-15,2018-10-15 09:45:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,162.58
+D19,Franks,2018,2018-10-15,2018-10-15 11:40:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,3,401.66
+D28A,OMR,2018,2018-10-15,2018-10-15 12:20:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,8,606.96
+C9,South Delta,2018,2018-11-09,2018-11-09 09:45:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,75.87
+C9,South Delta,2018,2018-12-10,2018-12-10 09:55:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,89.26
+D12,Lower SJ,2018,2018-12-12,2018-12-12 08:50:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,252.9
+MD10A,East Delta,2018,2018-12-13,2018-12-13 11:10:00,cf. Microcystis sp.,Microcystis,NA,Cyanobacterium,1,126.45
+C9,South Delta,2019,2019-01-18,2019-01-18 11:10:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,300.49
+D22,Lower Sac,2019,2019-02-12,2019-02-12 10:10:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,901.46
+C9,South Delta,2019,2019-03-11,2019-03-11 09:45:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,3,751.23
+D28A,OMR,2019,2019-03-13,2019-03-13 10:25:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,187.8
+D16,Lower SJ,2019,2019-03-14,2019-03-14 08:05:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,901.46
+D16,Lower SJ,2019,2019-04-12,2019-04-12 07:40:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,2,563.42
+D28A,OMR,2019,2019-07-09,2019-07-09 11:25:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,2,281.7
+MD10A,East Delta,2019,2019-08-07,2019-08-07 09:45:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,7,1609.86
+C9,South Delta,2019,2019-09-03,2019-09-03 10:45:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,153.32
+C9,South Delta,2019,2019-10-01,2019-10-01 11:00:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,139.38
+D19,Franks,2020,2020-06-10,2020-06-10 08:55:00,cf. Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,43.81
+D19,Franks,2020,2020-06-10,2020-06-10 08:55:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,6,262.86
+D28A,OMR,2020,2020-06-10,2020-06-10 09:35:00,cf. Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,3,89.04
+D28A,OMR,2020,2020-06-10,2020-06-10 09:35:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,6,178.08
+D26,Lower SJ,2020,2020-06-11,2020-06-11 06:40:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,76.66
+D26,Lower SJ,2020,2020-06-11,2020-06-11 06:40:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,76.66
+C9,South Delta,2020,2020-06-11,2020-06-11 09:25:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,10.65
+NZ068,Lower Sac,2020,2020-06-15,2020-06-15 14:35:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,42.59
+C9,South Delta,2020,2020-07-08,2020-07-08 08:30:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,4,418.16
+C9,South Delta,2020,2020-07-08,2020-07-08 08:30:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,104.54
+D12,Lower SJ,2020,2020-07-09,2020-07-09 06:25:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,2,353.82
+D16,Lower SJ,2020,2020-07-09,2020-07-09 07:50:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,176.91
+D19,Franks,2020,2020-07-09,2020-07-09 08:55:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,7,564.9
+D28A,OMR,2020,2020-07-09,2020-07-09 09:35:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,7,503.09
+D26,Lower SJ,2020,2020-07-13,2020-07-13 09:25:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,4,278.76
+MD10A,East Delta,2020,2020-07-13,2020-07-13 10:40:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,3,265.38
+P8,South Delta,2020,2020-07-13,2020-07-13 12:10:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,170.36
+C9,South Delta,2020,2020-08-06,2020-08-06 08:15:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,117.94
+C9,South Delta,2020,2020-08-06,2020-08-06 08:15:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,117.94
+D12,Lower SJ,2020,2020-08-10,2020-08-10 08:25:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,2,408.86
+D19,Franks,2020,2020-08-10,2020-08-10 11:20:00,cf. Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,104.54
+MD10A,East Delta,2020,2020-08-11,2020-08-11 10:00:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,54.76
+MD10A,East Delta,2020,2020-08-11,2020-08-11 10:00:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,3,164.28
+D19,Franks,2020,2020-09-08,2020-09-08 10:05:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,99.99
+D28A,OMR,2020,2020-09-08,2020-09-08 10:40:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,73.01
+MD10A,East Delta,2020,2020-09-09,2020-09-09 09:00:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,2,127.76
+P8,South Delta,2020,2020-09-09,2020-09-09 10:15:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,82.14
+C9,South Delta,2020,2020-10-06,2020-10-06 10:45:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,145.4
+D19,Franks,2020,2020-11-05,2020-11-05 11:35:00,cf. Oscillatoria sp.,Oscillatoria,sp.,Cyanobacterium,2,176.92
+MD10A,East Delta,2020,2020-11-06,2020-11-06 10:15:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,41.82
+D16,Lower SJ,2021,2021-08-13,2021-08-13 10:10:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,127.76923702619163
+D16,Lower SJ,2021,2021-08-13,2021-08-13 10:10:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,8,1022.1538962095331
+D16,Lower SJ,2021,2021-08-13,2021-08-13 10:10:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,53,6771.769562388156
+D28A,OMR,2021,2021-08-13,2021-08-13 12:15:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,127.76923702619163
+D28A,OMR,2021,2021-08-13,2021-08-13 12:15:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,10,1277.6923702619163
+D28A,OMR,2021,2021-08-13,2021-08-13 12:15:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,50,6388.461851309582
+C9,South Delta,2021,2021-08-12,2021-08-12 09:30:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,2,204.43077924190663
+C9,South Delta,2021,2021-08-12,2021-08-12 09:30:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,21,2146.5231820400195
+NZ068,Lower Sac,2021,2021-08-17,2021-08-17 14:45:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,95.82692776964373
+NZ068,Lower Sac,2021,2021-08-17,2021-08-17 14:45:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,7,670.7884943875061
+D26,Lower SJ,2021,2021-08-16,2021-08-16 10:45:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,4,353.82250253406914
+D26,Lower SJ,2021,2021-08-16,2021-08-16 10:45:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,35,3095.946897173105
+D26,Lower SJ,2021,2021-08-16,2021-08-16 10:45:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,63,5572.704414911589
+D26,Lower SJ,2021,2021-08-16,2021-08-16 10:45:00,Oscillatoria sp.,Oscillatoria,sp.,Cyanobacterium,3,265.36687690055186
+D22,Lower Sac,2021,2021-08-17,2021-08-17 13:20:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,2,180.38009933109404
+D12,Lower SJ,2021,2021-08-13,2021-08-13 07:45:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,67.64253724916027
+D12,Lower SJ,2021,2021-08-13,2021-08-13 07:45:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,1,67.64253724916027
+D12,Lower SJ,2021,2021-08-13,2021-08-13 07:45:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,7,473.4977607441219
+D19,Franks,2021,2021-08-13,2021-08-13 11:30:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,7,731.7692666045522
+D19,Franks,2021,2021-08-13,2021-08-13 11:30:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,38,3972.46173299614
+D19,Franks,2021,2021-08-13,2021-08-13 11:30:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,48,5017.846399574072
+C3A,Upper Sac,2021,2021-08-12,2021-08-12 07:30:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,17.035898270158885
+MD10A,East Delta,2021,2021-08-16,2021-08-16 12:00:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,3,137.99077598828694
+P8,South Delta,2021,2021-08-16,2021-08-16 13:30:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,4,245.31693509028796
+P8,South Delta,2021,2021-08-16,2021-08-16 13:30:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,18,1103.9262079062958
+C9,South Delta,2021,2021-07-14,2021-07-14 09:15:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,9,689.9538799414349
+C9,South Delta,2021,2021-07-14,2021-07-14 09:15:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,62,4753.015617374329
+D26,Lower SJ,2021,2021-07-16,2021-07-16 07:55:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,17,1371.8381238601628
+D16,Lower SJ,2021,2021-07-15,2021-07-15 09:50:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,45,4312.211749633967
+D12,Lower SJ,2021,2021-07-15,2021-07-15 07:45:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,14,1651.1716784923228
+D22,Lower Sac,2021,2021-07-19,2021-07-19 13:10:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,2,204.43077924190663
+D19,Franks,2021,2021-07-15,2021-07-15 10:50:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,7,402.4730966325036
+D19,Franks,2021,2021-07-15,2021-07-15 10:50:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,13,747.450036603221
+D19,Franks,2021,2021-07-15,2021-07-15 10:50:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,7,402.4730966325036
+NZ068,Lower Sac,2021,2021-07-19,2021-07-19 14:30:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,76.66154221571499
+NZ068,Lower Sac,2021,2021-07-19,2021-07-19 14:30:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,5,383.3077110785749
+D28A,OMR,2021,2021-07-15,2021-07-15 11:40:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,13,879.3529842390835
+D28A,OMR,2021,2021-07-15,2021-07-15 11:40:00,Dolichospermum sp.,Dolichospermum,sp.,Cyanobacterium,8,541.1402979932822
+C3A,Upper Sac,2021,2021-07-14,2021-07-14 07:30:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,20.534341664923655
+P8,South Delta,2021,2021-07-16,2021-07-16 10:20:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,41.06868332984731
+P8,South Delta,2021,2021-07-16,2021-07-16 10:20:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,19,780.3049832670989
+MD10A,East Delta,2021,2021-07-16,2021-07-16 09:00:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,2,102.2153896209533
+MD10A,East Delta,2021,2021-07-16,2021-07-16 09:00:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,21,1073.2615910200097
+D28A,OMR,2021,2021-06-02,2021-06-02 13:25:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,38.33077110785749
+P8,South Delta,2021,2021-06-03,2021-06-03 13:05:00,Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,41.06868332984731
+P8,South Delta,2021,2021-06-03,2021-06-03 13:05:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,6,246.41209997908385
+D26,Lower SJ,2021,2021-05-05,2021-05-05 10:50:00,cf. Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,42.58974567539721
+C3A,Upper Sac,2021,2021-11-08,2021-11-08 08:15:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,16.910634312290068
+C9,South Delta,2021,2021-10-11,2021-10-11 11:10:00,cf. Aphanizomenon sp.,Aphanizomenon,sp.,Cyanobacterium,1,24.208908068120518
+C3A,Upper Sac,2021,2021-10-11,2021-10-11 09:15:00,cf. Planktothrix sp.,Planktothrix,sp.,Cyanobacterium,1,23.95673194241093
+NZ068,Lower Sac,2021,2021-10-22,2021-10-22 08:45:00,cf. Microcystis sp.,Microcystis,sp.,Cyanobacterium,2,127.76923702619163
+D12,Lower SJ,2021,2021-09-13,2021-09-13 08:50:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,3,131.41978665551142
+D16,Lower SJ,2021,2021-09-13,2021-09-13 10:25:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,7,207.7280498748406
+D22,Lower Sac,2021,2021-09-14,2021-09-14 11:50:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,3,202.9276117474808
+D19,Franks,2021,2021-09-13,2021-09-13 11:45:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,7,459.96925329428984
+NZ068,Lower Sac,2021,2021-09-14,2021-09-14 13:10:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,2,76.66154221571497
+C9,South Delta,2021,2021-09-09,2021-09-09 08:00:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,11,421.6384821864324
+MD10A,East Delta,2021,2021-09-10,2021-09-10 09:03:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,1,57.49615666178623
+P8,South Delta,2021,2021-09-10,2021-09-10 11:05:00,Microcystis sp.,Microcystis,sp.,Cyanobacterium,24,1379.9077598828694

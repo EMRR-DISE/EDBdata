@@ -103,30 +103,6 @@ df_phyto_all <- bind_rows(df_phyto_early_c, df_phyto_recent)
 
 # 3. Clean All Data -------------------------------------------------------
 
-# Assign EDB regions to EMP stations
-df_region_emp <- df_coord_emp %>%
-  select(Station, Latitude, Longitude) %>%
-  filter(!if_any(c(Latitude, Longitude), is.na)) %>%
-  # Convert to sf object
-  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
-  st_join(st_make_valid(EDBdata:::sf_edb_reg), join = st_intersects) %>%
-  # Drop sf geometry column since it's no longer needed
-  st_drop_geometry() %>%
-  # Assign "Outside" to stations without region assignments
-  replace_na(list(Region = "Outside"))
-
-# Assign regions used for the HABs/Weeds report to EMP stations
-df_hab_region_emp <- df_coord_emp %>%
-  select(Station, Latitude, Longitude) %>%
-  drop_na(Latitude, Longitude) %>%
-  # Convert to sf object
-  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
-  st_join(EDBdata:::sf_hab_reg, join = st_intersects) %>%
-  # Drop sf geometry column since it's no longer needed
-  st_drop_geometry() %>%
-  # Assign "Outside" to stations without region assignments
-  replace_na(list(Region = "Outside"))
-
 # Three genera need to be added to the taxonomy table: Mayamaea, Acanthoceras, and Lindavia
   # I looked up these three genera in AlgaeBase: https://www.algaebase.org/
   # Also adding a placeholder for unknown Genera
@@ -153,8 +129,8 @@ df_phyto_taxonomy_c1 <- df_phyto_taxonomy %>%
   # Add additional genera to the classification table
   bind_rows(df_add_genera)
 
-# Finish cleaning up the phytoplankton data
-phyto_hab <- df_phyto_all %>%
+# Start cleaning the phytoplankton data
+df_phyto_all_c <- df_phyto_all %>%
   mutate(
     # Fix an erroneous Date
     Date = if_else(Date == "2022-11-17", as_date("2021-11-17"), Date),
@@ -165,7 +141,8 @@ phyto_hab <- df_phyto_all %>%
     ),
     # Fix a few erroneous Station names:
       # Stations C3A-Hood and C3A-HOOD represent station C3A,
-      # Stations NZ328 and NZ542 are most likely typos and most likely represent NZ325 and NZS42
+      # Stations NZ328 and NZ542 are most likely typos and most likely represent
+        # NZ325 and NZS42
     Station = case_when(
       Station == "C3A-HOOD" ~ "C3A",
       Station == "C3A-Hood" ~ "C3A",
@@ -176,21 +153,11 @@ phyto_hab <- df_phyto_all %>%
     # Add variable for year
     Year = year(Date)
   ) %>%
-  # Add EDB regions to all phytoplankton data
-  left_join(df_hab_region_emp, by = "Station") %>%
-  # Remove data for stations outside of the EDB regions keeping NA values in
-    # Region to catch errors during testing
-    # Also remove the EZ stations since they are not fixed
-  filter(
-    Region != "Outside" | is.na(Region),
-    !str_detect(Station, "^EZ")
-  ) %>%
   # Add taxonomic information to all phytoplankton data
   left_join(df_phyto_taxonomy_c1, by = "Genus") %>%
   # Reorder columns
   select(
     Station,
-    Region,
     Year,
     Date,
     Datetime,
@@ -202,42 +169,93 @@ phyto_hab <- df_phyto_all %>%
     OrganismsPerMl
   )
 
-phyto_hab2 <- read_csv(here("AllEMPphyto.csv")) %>%
-  select(-c(...1, Stratum)) %>%
-  rename(Region = Stratum2, Datetime = DateTime) %>%
-  mutate(Datetime = force_tz(Datetime, tzone = "Etc/GMT+8")) %>%
-  drop_na(Region) %>%
-  arrange(Count) %>%
-  group_by(Station, Region, Year, Date, Datetime, Taxon) %>%
-  mutate(row_num = row_number()) %>%
-  ungroup() %>%
-  arrange(Datetime)
+# 3.1 Data for EDB report -------------------------------------------------
 
-phyto_hab %>% distinct(Region, Station) %>% arrange(Region, Station)
-phyto_hab2 %>% distinct(Region, Station) %>% arrange(Region, Station)
+# Assign EDB regions to EMP stations
+df_edb_region_emp <- df_coord_emp %>%
+  select(Station, Latitude, Longitude) %>%
+  drop_na(Latitude, Longitude) %>%
+  # Convert to sf object
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
+  st_join(st_make_valid(EDBdata:::sf_edb_reg), join = st_intersects) %>%
+  # Drop sf geometry column since it's no longer needed
+  st_drop_geometry() %>%
+  # Assign "Outside" to stations without region assignments
+  replace_na(list(Region = "Outside"))
 
-phyto_hab <- phyto_hab %>%
-  filter(Date <= max(phyto_hab2$Date), !Date %in% ymd("2020-12-03", "2020-12-04")) %>%
-  arrange(Count) %>%
-  group_by(Station, Region, Year, Date, Datetime, Taxon) %>%
-  mutate(row_num = row_number()) %>%
-  ungroup() %>%
-  arrange(Datetime)
+# Finish cleaning up the phytoplankton data for the EDB report
+phyto_edb <- df_phyto_all_c %>%
+  # Add EDB regions
+  left_join(df_edb_region_emp, by = "Station") %>%
+  # Remove data for stations outside of the EDB regions keeping NA values in
+    # Region to catch errors during testing
+  # Also remove the EZ stations since they are not fixed
+  filter(
+    Region != "Outside" | is.na(Region),
+    !str_detect(Station, "^EZ")
+  ) %>%
+  # Reorder Region column
+  relocate(Region, .after = Station)
 
+# 3.2 Data for HABs/Weeds report ------------------------------------------
 
-setequal(phyto_hab, phyto_hab2)
+# Assign regions used for the HABs/Weeds report to EMP stations
+df_hab_region_emp <- df_coord_emp %>%
+  select(Station, Latitude, Longitude) %>%
+  drop_na(Latitude, Longitude) %>%
+  # Convert to sf object
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
+  st_join(EDBdata:::sf_hab_reg, join = st_intersects) %>%
+  # Drop sf geometry column since it's no longer needed
+  st_drop_geometry() %>%
+  # Assign "Outside" to stations without region assignments
+  replace_na(list(Region = "Outside"))
+
+# Finish cleaning up the phytoplankton data for the HABs/Weeds report
+phyto_hab <- df_phyto_all_c %>%
+  # Add HAB regions
+  left_join(df_hab_region_emp, by = "Station") %>%
+  # Remove data for stations outside of the HAB regions keeping NA values in
+    # Region to catch errors during testing
+  # Also remove the EZ stations since they are not fixed
+  filter(
+    Region != "Outside" | is.na(Region),
+    !str_detect(Station, "^EZ")
+  ) %>%
+  # Only include potentially toxic cyanobacteria
+  filter(
+    Genus %in% c(
+      "Aphanizomenon",
+      "Anabaena",
+      "Dolichospermum",
+      "Microcystis",
+      "Oscillatoria",
+      "Cylindrospermopsis",
+      "Anabaenopsis",
+      "Planktothrix"
+    )
+  ) %>%
+  # Group genus Anabaena with Dolichospermum
+  mutate(Genus = if_else(Genus == "Anabaena", "Dolichospermum", Genus)) %>%
+  # Reorder Region column
+  relocate(Region, .after = Station)
 
 
 # 4. Save and Export Data -------------------------------------------------
 
-# Save final data set containing phytoplankton community data for the EDB analysis as csv file
-  # for easier diffing
+# Save final data sets containing phytoplankton community data as csv files for
+  # easier diffing
 phyto_edb %>%
   # Convert Datetime to character so that it isn't converted to UTC upon export
   mutate(Datetime = as.character(Datetime)) %>%
   write_csv(here("data-raw/Final/phyto_edb.csv"))
 
-# Save final data set containing phytoplankton community data for the EDB analysis as objects
-  # in the data package
-usethis::use_data(phyto_edb, overwrite = TRUE)
+phyto_hab %>%
+  # Convert Datetime to character so that it isn't converted to UTC upon export
+  mutate(Datetime = as.character(Datetime)) %>%
+  write_csv(here("data-raw/Final/phyto_hab.csv"))
+
+# Save final data sets containing phytoplankton community data as objects in the
+  # data package
+usethis::use_data(phyto_edb, phyto_hab, overwrite = TRUE)
 
