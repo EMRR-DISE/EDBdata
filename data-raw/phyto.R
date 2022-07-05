@@ -1,6 +1,9 @@
-# Code to prepare phytoplankton data set for the Emergency Drought Barrier analysis:
-# 1) `phyto_edb` - Phytoplankton community data collected by DWR-EMP from
-  # 2014-2021 for the stations within the designated EDB regions
+# Code to prepare phytoplankton data sets for the Emergency Drought Barrier analysis:
+  # 1) `phyto_edb` - Phytoplankton community data collected by DWR-EMP from
+    # 2014-2021 for the stations within the designated EDB regions
+  # 2) `phyto_hab` - Phytoplankton community data of potentially toxic
+    # cyanobacteria collected by DWR-EMP from 2014-2021. Used in the Spring-Summer
+    # version of the 2022 HABs/Weeds report.
 
 # Load packages
 library(dplyr)
@@ -15,7 +18,7 @@ library(sf)
 library(here)
 
 # Check if we are in the correct working directory
-i_am("data-raw/phyto_edb.R")
+i_am("data-raw/phyto.R")
 
 
 # 1. Import Data ----------------------------------------------------------
@@ -112,6 +115,18 @@ df_region_emp <- df_coord_emp %>%
   # Assign "Outside" to stations without region assignments
   replace_na(list(Region = "Outside"))
 
+# Assign regions used for the HABs/Weeds report to EMP stations
+df_hab_region_emp <- df_coord_emp %>%
+  select(Station, Latitude, Longitude) %>%
+  drop_na(Latitude, Longitude) %>%
+  # Convert to sf object
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
+  st_join(EDBdata:::sf_hab_reg, join = st_intersects) %>%
+  # Drop sf geometry column since it's no longer needed
+  st_drop_geometry() %>%
+  # Assign "Outside" to stations without region assignments
+  replace_na(list(Region = "Outside"))
+
 # Three genera need to be added to the taxonomy table: Mayamaea, Acanthoceras, and Lindavia
   # I looked up these three genera in AlgaeBase: https://www.algaebase.org/
   # Also adding a placeholder for unknown Genera
@@ -139,7 +154,7 @@ df_phyto_taxonomy_c1 <- df_phyto_taxonomy %>%
   bind_rows(df_add_genera)
 
 # Finish cleaning up the phytoplankton data
-phyto_edb <- df_phyto_all %>%
+phyto_hab <- df_phyto_all %>%
   mutate(
     # Fix an erroneous Date
     Date = if_else(Date == "2022-11-17", as_date("2021-11-17"), Date),
@@ -162,7 +177,7 @@ phyto_edb <- df_phyto_all %>%
     Year = year(Date)
   ) %>%
   # Add EDB regions to all phytoplankton data
-  left_join(df_region_emp, by = "Station") %>%
+  left_join(df_hab_region_emp, by = "Station") %>%
   # Remove data for stations outside of the EDB regions keeping NA values in
     # Region to catch errors during testing
     # Also remove the EZ stations since they are not fixed
@@ -186,6 +201,31 @@ phyto_edb <- df_phyto_all %>%
     Count,
     OrganismsPerMl
   )
+
+phyto_hab2 <- read_csv(here("AllEMPphyto.csv")) %>%
+  select(-c(...1, Stratum)) %>%
+  rename(Region = Stratum2, Datetime = DateTime) %>%
+  mutate(Datetime = force_tz(Datetime, tzone = "Etc/GMT+8")) %>%
+  drop_na(Region) %>%
+  arrange(Count) %>%
+  group_by(Station, Region, Year, Date, Datetime, Taxon) %>%
+  mutate(row_num = row_number()) %>%
+  ungroup() %>%
+  arrange(Datetime)
+
+phyto_hab %>% distinct(Region, Station) %>% arrange(Region, Station)
+phyto_hab2 %>% distinct(Region, Station) %>% arrange(Region, Station)
+
+phyto_hab <- phyto_hab %>%
+  filter(Date <= max(phyto_hab2$Date), !Date %in% ymd("2020-12-03", "2020-12-04")) %>%
+  arrange(Count) %>%
+  group_by(Station, Region, Year, Date, Datetime, Taxon) %>%
+  mutate(row_num = row_number()) %>%
+  ungroup() %>%
+  arrange(Datetime)
+
+
+setequal(phyto_hab, phyto_hab2)
 
 
 # 4. Save and Export Data -------------------------------------------------
