@@ -19,14 +19,14 @@ i_am("data-raw/hab_toxins.R")
 
 # 1. Import Data ----------------------------------------------------------
 
-# Create a vector of all file paths of the HAB toxin data found in the data-raw folder
-fp_hab_toxins <- dir(here("data-raw/HAB_toxin_data"), full.names = TRUE)
+# Define file path with all HAB toxin data found in the data-raw folder
+fp_hab_toxins <- here("data-raw/HAB_toxin_data")
 
 # DWR's State Water Project samples
-df_swp <- read_excel(path = str_subset(fp_hab_toxins, "DWR_DFD_Cyanotoxin"))
+df_swp <- read_excel(path = file.path(fp_hab_toxins, "DWR_DFD_Cyanotoxin_results_2021 - JG.xlsx"))
 
 # USGS's SPATT study, water samples only
-df_usgs_spatt <- read_csv(file = str_subset(fp_hab_toxins, "USGS_DWR_fixed"))
+df_usgs_spatt <- read_csv(file = file.path(fp_hab_toxins, "USGS_DWR_fixed_station_WW_cyanotoxins_Rexport.csv"))
 
 # Water board samples from Franks Tract
 df_wb_franks <- tibble(
@@ -38,16 +38,16 @@ df_wb_franks <- tibble(
 )
 
 # Nautilus data - from the State Board's database, provided by Karen Atkinson
-df_nautilus <- read_excel(path = str_subset(fp_hab_toxins, "HAB_Monitoring"), sheet = "Nautalis")
+df_nautilus <- read_excel(path = file.path(fp_hab_toxins, "HAB_Monitoring.xlsx"), sheet = "Nautalis")
 
 # East Bay Parks data - from the State Board's database, provided by Karen Atkinson
-df_ebp <- read_excel(path = str_subset(fp_hab_toxins, "HAB_Monitoring"), sheet = "East Bay")
+df_ebp <- read_excel(path = file.path(fp_hab_toxins, "HAB_Monitoring.xlsx"), sheet = "East Bay")
 
 # Preece/Otten data
-df_pre_ott <- read_excel(path = str_subset(fp_hab_toxins, "Prop 1 data"), sheet = "preecedata")
+df_pre_ott <- read_excel(path = file.path(fp_hab_toxins, "Prop 1 data_4.1.22.xlsx"), sheet = "preecedata")
 
 # Station information
-df_stations <- read_excel(path = str_subset(fp_hab_toxins, "Prop 1 data"), sheet = "stations")
+df_stations <- read_excel(path = file.path(fp_hab_toxins, "Prop 1 data_4.1.22.xlsx"), sheet = "stations")
 
 
 # 2. Clean and Combine Data -----------------------------------------------
