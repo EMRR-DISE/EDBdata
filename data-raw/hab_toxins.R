@@ -1,14 +1,19 @@
 # Code to prepare combined HAB toxin data set for the Emergency Drought Barrier
   # (HABs/Weeds) analysis:
-# 1) `hab_toxins` - Cyanotoxin concentrations in whole-water grab samples
-  # collected at various locations in the upper San Francisco Estuary (Delta) in
-  # 2021. Used in the Spring-Summer version of the 2022 HABs/Weeds report.
+# `hab_toxins` - Cyanotoxin concentrations in whole-water grab samples collected
+  # at various locations in the upper San Francisco Estuary (Delta). The majority
+  # of the available cyanotoxin data was collected in 2021, so this data set only
+  # includes data from 2021 for all stations except for Big Break Regional
+  # Shoreline. Big Break has a longer monitoring history, so all data collected at
+  # this location from 2015–2021 are included in this data set. Used in the
+  # Spring-Summer version of the 2022 HABs/Weeds report.
 
 # Load packages
 library(dplyr)
 library(stringr)
 library(readr)
 library(tidyr)
+library(purrr)
 library(lubridate)
 library(readxl)
 library(here)
@@ -40,8 +45,15 @@ df_wb_franks <- tibble(
 # Nautilus data - from the State Board's database, provided by Karen Atkinson
 df_nautilus <- read_excel(path = file.path(fp_hab_toxins, "HAB_Monitoring.xlsx"), sheet = "Nautalis")
 
-# East Bay Parks data - from the State Board's database, provided by Karen Atkinson
-df_ebp <- read_excel(path = file.path(fp_hab_toxins, "HAB_Monitoring.xlsx"), sheet = "East Bay")
+# Big Break data - from East Bay Regional Parks
+lst_ebp <- pmap(
+  list(
+    rep(file.path(fp_hab_toxins, "2015-22 BB HAB Monitoring.xlsx"), 7),
+    as.character(2015:2021),
+    c(2, 2, 2, 1, 1, 3, 1)
+  ),
+  ~ read_excel(path = ..1, sheet = ..2, skip = ..3)
+)
 
 # Preece/Otten data
 df_pre_ott <- read_excel(path = file.path(fp_hab_toxins, "Prop 1 data_4.1.22.xlsx"), sheet = "preecedata")
@@ -124,36 +136,47 @@ df_nautilus_c <- df_nautilus %>%
   ) %>%
   filter(!is.na(Result))
 
-# East Bay Parks data
-df_ebp_c <- df_ebp %>%
-  # Only include sites within Big Break Regional Shoreline
-  filter(Water_Body == "Big Break Regional Shoreline") %>%
-  # Rename and select columns to keep
-  select(
-    Result = `Microcystin (µg/L)\r\nELISA_Method`,
-    Date = Sample_Date
+# Big Break data
+df_ebp_c <- lst_ebp %>%
+  map(
+    ~ select(.x, Date, contains(c("Analyte", "Result")), starts_with("Test")) %>%
+      rename(Analyte = contains(c("Analyte", "Test")), Result = contains("Result")) %>%
+      drop_na(Result)
   ) %>%
+  map_at(1, ~ mutate(.x, Result = as.character(Result))) %>%
+  bind_rows() %>%
+  mutate(
+    Date = as_date(as.numeric(Date), origin = "1899-12-30"),
+    Result = case_when(
+      Analyte == "Ana/Cyl/Mic" ~ str_extract(Result, "(?<=/ND/).+"),
+      Analyte == "Mic, Ana" ~ str_extract(Result, ".+(?=,)"),
+      TRUE ~ Result
+    ),
+    Result = str_remove(Result, "[:space:]ppb|ppb"),
+    Analyte = if_else(str_detect(Analyte, "^Mic|Mic$"), "Microcystins", Analyte)
+  ) %>%
+  filter(Analyte == "Microcystins") %>%
   mutate(
     # Add Result_Sign variable to indicate non-detect and above detection values
     Result_Sign = case_when(
-      Result == "ND" ~ "ND",
-      Result == ">50" ~ ">",
+      Result %in% c("0", "ND") ~ "ND",
+      str_detect(Result, "^>") ~ ">",
       TRUE ~ "="
     ),
     # Convert Result to numeric substituting non-detect values with zero and
-      # >50 values with 50
+      # > values with their upper detection limit
     Result = as.numeric(
       case_when(
         Result == "ND" ~ "0",
-        Result == ">50" ~ "50",
+        Result == "2.5-5" ~ "5",
+        Result == "between 5 and 10" ~ "7.5",
+        str_detect(Result, "^>") ~ str_trim(str_remove(Result, "^>")),
         TRUE ~ Result
       )
     ),
-    # Add variables for Analyte and Station
-    Analyte = "Microcystins",
+    # Add variable for Station
     Station = "BigBreak"
-  ) %>%
-  filter(!is.na(Result))
+  )
 
 # Preece/Otten data
 df_pre_ott_c <- df_pre_ott %>%
@@ -203,8 +226,10 @@ hab_toxins <-
     Year = year(Date),
     Month = month(Date)
   ) %>%
-  # Only include 2021 data
-  filter(Year == 2021) %>%
+  # Only include 2021 data, except for Big Break which we'll include 2015-2021
+  filter(
+    (Station != "BigBreak" & Year == 2021) | (Station == "BigBreak" & Year %in% 2015:2021)
+  ) %>%
   # Join station information
   left_join(df_stations_c, by = "Station") %>%
   # Select variables to keep

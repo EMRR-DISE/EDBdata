@@ -37,7 +37,7 @@ This package provides the following data tables:
     Dissolved Ortho-phosphate) in water samples collected at various
     locations in the Delta east of Chipps Island for 2014-2021
 -   `hab_toxins`: Cyanotoxin concentrations in whole-water grab samples
-    collected at various locations in the Delta in 2021
+    collected at various locations in the Delta
 -   `mc_vis_index_wq`: *Microcystis* visual index, secchi depth, and
     water temperature data collected at various locations in the Delta
     from 2007-2021

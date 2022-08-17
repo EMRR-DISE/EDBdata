@@ -257,10 +257,14 @@
 #' @title Cyanotoxin water concentrations in the upper San Francisco Estuary
 #' @description A data set containing Cyanotoxin concentrations in whole-water
 #'   grab samples collected at various locations in the upper San Francisco
-#'   Estuary (Delta) in 2021. Used in the analyses for the Spring-Summer version
-#'   of the 2022 HABs/Weeds report for the Emergency Drought Barrier.
+#'   Estuary (Delta). The majority of the available cyanotoxin data was
+#'   collected in 2021, so this data set only includes data from 2021 for all
+#'   stations except for Big Break Regional Shoreline. Big Break has a longer
+#'   monitoring history, so all data collected at this location from 2015–2021
+#'   are included in this data set. Used in the analyses for the Spring-Summer
+#'   version of the 2022 HABs/Weeds report for the Emergency Drought Barrier.
 #'
-#' @format data frame with 643 rows and 11 columns
+#' @format data frame with 719 rows and 11 columns
 #' \describe{
 #'   \item{Source}{Name of the source dataset. Is one of the following: CVRWQCB
 #'     (Central Valley Regional Water Quality Control Board), DWR (DWR's State

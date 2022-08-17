@@ -15,7 +15,7 @@ test_that("No expected variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(hab_toxins), 643)
+  expect_equal(nrow(hab_toxins), 719)
   expect_equal(ncol(hab_toxins), 11)
 
   name_check <- c(
@@ -35,11 +35,11 @@ test_that("Data dimensions are correct", {
   expect_equal(names(hab_toxins), name_check)
 })
 
-# There are known duplicates in the Preece and USGS data sets. We decided to
-  # keep them in there for now.
-test_that("There are no duplicate records, excluding Preece and USGS", {
+# There are known duplicates in the EastBay, Preece, and USGS data sets. We
+  # decided to keep them in there for now.
+test_that("There are no duplicate records, excluding EastBay, Preece, and USGS", {
   hab_toxins_t <- hab_toxins %>%
-    dplyr::filter(!Source %in% c("Preece", "USGS")) %>%
+    dplyr::filter(!Source %in% c("EastBay", "Preece", "USGS")) %>%
     dplyr::mutate(ID = paste(Date, Source, Station, Analyte, sep = "_"))
   expect_equal(length(unique(hab_toxins_t$ID)), nrow(hab_toxins_t))
 })
@@ -120,8 +120,14 @@ test_that("All Region names are as expected", {
   expect_equal(sort(unique(hab_toxins$Region)), regions_check)
 })
 
-test_that("Data is present for year 2021", {
-  expect_equal(sort(unique(hab_toxins$Year)), 2021)
+test_that("Data is present for year 2021 for all stations except for Big Break", {
+  hab_toxins_t <- hab_toxins %>% dplyr::filter(Station != "BigBreak")
+  expect_equal(sort(unique(hab_toxins_t$Year)), 2021)
+})
+
+test_that("Data is present for years 2015-2021 for Big Break", {
+  hab_toxins_t <- hab_toxins %>% dplyr::filter(Station == "BigBreak")
+  expect_equal(sort(unique(hab_toxins_t$Year)), 2015:2021)
 })
 
 test_that("Values in Month are between 1 and 12", {
