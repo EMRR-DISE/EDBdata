@@ -17,7 +17,7 @@ Is one of the following: Caution, Warning, or Danger.}
 }
 }
 \source{
-The HAB Incident Reports Map maintained by the State Water Resources
+HAB Incident Reports Map maintained by the State Water Resources
 Control Board:
 \url{https://mywaterquality.ca.gov/habs/where/freshwater_events.html}
 }

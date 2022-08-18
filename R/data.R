@@ -368,7 +368,7 @@
 #'     Is one of the following: Caution, Warning, or Danger.}
 #' }
 #'
-#' @source The HAB Incident Reports Map maintained by the State Water Resources
+#' @source HAB Incident Reports Map maintained by the State Water Resources
 #'   Control Board:
 #'   <https://mywaterquality.ca.gov/habs/where/freshwater_events.html>
 "hab_incidents"
