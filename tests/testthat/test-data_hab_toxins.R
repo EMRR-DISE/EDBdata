@@ -26,9 +26,9 @@ test_that("Data dimensions are correct", {
     "Region",
     "Year",
     "Month",
-    "Date"    ,
-    "Analyte" ,
-    "Result"   ,
+    "Date",
+    "Analyte",
+    "Result",
     "Result_Sign"
   )
 
@@ -120,7 +120,7 @@ test_that("All Region names are as expected", {
   expect_equal(sort(unique(hab_toxins$Region)), regions_check)
 })
 
-test_that("Data is present for year 2021 for all stations except for Big Break", {
+test_that("Data is present only for year 2021 for all stations except for Big Break", {
   hab_toxins_t <- hab_toxins %>% dplyr::filter(Station != "BigBreak")
   expect_equal(sort(unique(hab_toxins_t$Year)), 2021)
 })
