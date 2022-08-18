@@ -50,7 +50,7 @@ with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("mountaindboz/EDBdata")
+devtools::install_github("EMRR-DISE/EDBdata")
 ```
 
 ## Data Sources
