@@ -344,3 +344,32 @@
 #' @source `discretewq` data package (version 2.3.2):
 #'   <https://github.com/sbashevkin/discretewq/tree/v2.3.2>
 "mc_vis_index_wq"
+
+#' @title CyanoHAB incident reports in the upper San Francisco Estuary
+#' @description A data set containing CyanoHAB incident reports in the upper San
+#'   Francisco Estuary (Delta) in 2021. Most of this data is from the State
+#'   Water Board's HAB Incident Report Map. This is combined with the maximum
+#'   advisory levels for Microcystins that occurred at each station in 2021 from
+#'   the cyanotoxin concentration data in [`hab_toxins`]. The [advisory
+#'   levels](https://mywaterquality.ca.gov/monitoring_council/cyanohab_network/docs/2016/appendix_a_2016_1.pdf)
+#'    were developed by the California Cyanobacteria and Harmful Algal Bloom
+#'   Network (CCHAB). Used in the analyses for the Spring-Summer version of the
+#'   2022 HABs/Weeds report for the Emergency Drought Barrier.
+#'
+#' @format data frame with 50 rows and 4 columns
+#' \describe{
+#'   \item{Date}{Calendar date of the incident in yyyy-mm-dd}
+#'   \item{Latitude}{Latitude of incident location in Decimal Degrees (WGS 84
+#'     Datum)}
+#'   \item{Longitude}{Longitude of incident location in Decimal Degrees (WGS 84
+#'     Datum)}
+#'   \item{Advisory}{CyanoHAB advisory level for the incident as [defined by
+#'     CCHAB](https://mywaterquality.ca.gov/monitoring_council/cyanohab_network/docs/2016/appendix_a_2016_1.pdf).
+#'     Is one of the following: Caution, Warning, or Danger.}
+#' }
+#'
+#' @source The HAB Incident Reports Map maintained by the State Water Resources
+#'   Control Board:
+#'   <https://mywaterquality.ca.gov/habs/where/freshwater_events.html>
+"hab_incidents"
+

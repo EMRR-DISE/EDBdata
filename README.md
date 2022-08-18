@@ -41,6 +41,7 @@ This package provides the following data tables:
 -   `mc_vis_index_wq`: *Microcystis* visual index, secchi depth, and
     water temperature data collected at various locations in the Delta
     from 2007-2021
+-   `hab_incidents`: CyanoHAB incident reports in the Delta in 2021
 
 ## Installation
 
