@@ -36,6 +36,11 @@ test_that("Data dimensions are correct", {
   expect_equal(names(phyto_hab), name_check)
 })
 
+test_that("There are no duplicate records", {
+  phyto_hab_t <- phyto_hab %>% dplyr::mutate(ID = paste(Date, Station, Taxon, sep = "_"))
+  expect_equal(length(unique(phyto_hab_t$ID)), nrow(phyto_hab_t))
+})
+
 test_that("All variables are correct class", {
   expect_equal(class(phyto_hab$Station), "character")
   expect_equal(class(phyto_hab$Region), "character")
@@ -99,6 +104,11 @@ test_that("Datetime is formatted correctly", {
     as.character(phyto_hab$Datetime),
     "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"
   )))
+})
+
+test_that("The Date and Year variables are in alignment", {
+  phyto_hab_t <- phyto_hab %>% dplyr::mutate(Year_t = lubridate::year(Date))
+  expect_equal(phyto_hab_t$Year, phyto_hab_t$Year_t)
 })
 
 test_that("The Date and Datetime variables are in alignment", {
