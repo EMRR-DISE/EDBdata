@@ -72,3 +72,6 @@ USGS National Water Information System (NWIS):
 
 Water Quality Portal hosted by the National Water Quality Monitoring
 Council: <https://www.waterqualitydata.us/>
+
+HAB Incident Reports Map maintained by the State Water Resources Control
+Board: <https://mywaterquality.ca.gov/habs/where/freshwater_events.html>
