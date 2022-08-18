@@ -1,6 +1,6 @@
 # Code to prepare Microcystis visual index and water quality data set for the
   # Emergency Drought Barrier (HABs/Weeds) analysis:
-# 1) `mc_vis_index_wq` - Microcystis visual index and water quality measurement
+# `mc_vis_index_wq` - Microcystis visual index and water quality measurement
   # data collected at various locations in the upper San Francisco Estuary (Delta)
   # from 2007 to 2021. Water quality parameters include water temperature and secchi
   # depth. Used in the Spring-Summer version of the 2022 HABs/Weeds report.
@@ -45,14 +45,6 @@ df_ncro <-
 
 # Import coordinates for NCRO stations
 df_ncro_coord <- read_excel(here("data-raw/Global/NCRO_Station_Metadata_Coords.xlsx"))
-
-# Import Microcystis visual index and water quality measurement data collected
-  # by USBR_DOP
-df_dop <-
-  read_excel(
-    here("data-raw/MC_visual_index_and_WQ_data/DOP water quality 2019-2021_11-2-2021.xlsx"),
-    na = "NA"
-  )
 
 
 # 2. Clean and Combine Data -----------------------------------------------
@@ -119,30 +111,9 @@ df_ncro_c <- df_ncro %>%
   ) %>%
   rename(Station = StationCode)
 
-# USBR_DOP data
-df_dop_c <- df_dop %>%
-  mutate(
-    # Add Source variable,
-    Source = "DOP",
-    # Convert Date variable to date object
-    Date = date(date)
-  ) %>%
-  # Only keep records with Microcystis visual index data
-  filter(!is.na(hab_score)) %>%
-  select(
-    Source,
-    Station = site_id,
-    Latitude = start_latitude,
-    Longitude = start_longitude,
-    Date,
-    Microcystis = hab_score,
-    Secchi = secchi_depth,
-    Temperature = temperature
-  )
-
 # Combine and finish preparing Microcystis visual index and water quality
   # measurement data
-mc_vis_index_wq <- bind_rows(df_package_c, df_ncro_c, df_dop_c) %>%
+mc_vis_index_wq <- bind_rows(df_package_c, df_ncro_c) %>%
   mutate(
     # Add Year and Month variables
     Year = year(Date),

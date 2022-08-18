@@ -315,15 +315,14 @@
 #'   `discretewq` data package. All data collected by DWR_NCRO (DWR's North
 #'   Central Region Office) was acquired through a direct data request; however,
 #'   most of this data is available for download from the Water Data Library
-#'   (WDL). And all data collected by DOP (USBR's Directed Outflow Project) was
-#'   also acquired through a direct data request.
+#'   (WDL).
 #'
-#' @format data frame with 8,503 rows and 11 columns
+#' @format data frame with 7,339 rows and 11 columns
 #' \describe{
-#'   \item{Source}{Name of the source dataset. Is one of the following: DOP
-#'     (USBR's Directed Outflow Project), DWR_EMP (DWR's Environmental Monitoring
-#'     Program), DWR_NCRO (DWR's North Central Region Office), FMWT (CDFW's Fall
-#'     Midwater Trawl survey), or STN (CDFW's Summer Townet survey)}
+#'   \item{Source}{Name of the source dataset. Is one of the following: DWR_EMP
+#'     (DWR's Environmental Monitoring Program), DWR_NCRO (DWR's North Central
+#'     Region Office), FMWT (CDFW's Fall Midwater Trawl survey), or STN (CDFW's
+#'     Summer Townet survey)}
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Latitude}{Latitude of `Station` in Decimal Degrees (WGS 84 Datum)}
 #'   \item{Longitude}{Longitude of `Station` in Decimal Degrees (WGS 84 Datum)}

@@ -27,7 +27,7 @@ test_that("No expected variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(mc_vis_index_wq), 8503)
+  expect_equal(nrow(mc_vis_index_wq), 7339)
   expect_equal(ncol(mc_vis_index_wq), 11)
 
   name_check <- c(
@@ -47,13 +47,8 @@ test_that("Data dimensions are correct", {
   expect_equal(names(mc_vis_index_wq), name_check)
 })
 
-# There are known duplicates in the DOP data set. We decided to keep them in
-  # there for now.
-test_that("There are no duplicate records, excluding DOP", {
-  mc_vis_index_wq_t <- mc_vis_index_wq %>%
-    dplyr::filter(Source != "DOP") %>%
-    dplyr::mutate(ID = paste(Date, Source, Station, sep = "_"))
-
+test_that("There are no duplicate records", {
+  mc_vis_index_wq_t <- mc_vis_index_wq %>% dplyr::mutate(ID = paste(Date, Source, Station, sep = "_"))
   expect_equal(length(unique(mc_vis_index_wq_t$ID)), nrow(mc_vis_index_wq_t))
 })
 
@@ -72,11 +67,11 @@ test_that("All variables are correct class", {
 })
 
 test_that("All Sources are as expected", {
-  sources_check <- c("DOP", "DWR_EMP", "DWR_NCRO", "FMWT", "STN")
+  sources_check <- c("DWR_EMP", "DWR_NCRO", "FMWT", "STN")
   expect_equal(sort(unique(mc_vis_index_wq$Source)), sources_check)
 })
 
-test_that("All Stations are as expected, excluding DOP", {
+test_that("All Stations are as expected", {
   stations_check <- c(
     "072",
     "073",
@@ -194,8 +189,7 @@ test_that("All Stations are as expected, excluding DOP", {
     "WDC"
   )
 
-  mc_vis_index_wq_t <- mc_vis_index_wq %>% dplyr::filter(Source != "DOP")
-  expect_equal(sort(unique(mc_vis_index_wq_t$Station)), stations_check)
+  expect_equal(sort(unique(mc_vis_index_wq$Station)), stations_check)
 })
 
 test_that("All Latitude and Longitude values are within expected ranges", {
