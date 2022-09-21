@@ -11,6 +11,8 @@
 * Added `mc_vis_index_wq` - *Microcystis* visual index, secchi depth, and water temperature data collected at various locations in the Delta from 2007-2021
 * Added `phyto_hab` - phytoplankton community data of potentially toxic Cyanobacteria collected by DWR-EMP at various locations in the Delta from 2014-2021
 * Added `hab_incidents` - CyanoHAB incident reports in the Delta in 2021
+* Added `cont_wq_daily_avg` - daily averages of various continuous water quality parameters (Dissolved Oxygen, pH, and Chlorophyll Fluorescence) measured in the water in-situ from 2015-2021 at the stations near Franks Tract
+* Added `cont_wq_daily_max_frk` - daily maximums of various continuous water quality parameters (Dissolved Oxygen (as percent saturation), pH, and Chlorophyll Fluorescence) measured in the water in-situ at the Franks Tract station from 2015-2021
 
 # EDBdata 0.4.0
 
