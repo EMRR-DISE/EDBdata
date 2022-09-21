@@ -372,15 +372,15 @@
 #'   <https://mywaterquality.ca.gov/habs/where/freshwater_events.html>
 "hab_incidents"
 
-#' @title Daily values of continuous water quality data for stations near Franks
-#'   Tract
-#' @description A data set containing daily mean and maximum values of various
-#'   continuous water quality parameters measured in the water in-situ at the
-#'   stations near Franks Tract located in the upper San Francisco Estuary
-#'   (Delta). Water quality parameters include Water Temperature, Dissolved
-#'   Oxygen, pH, and Chlorophyll Fluorescence. Data was collected by DWR and
-#'   USGS from 2015-2021. Used in the analyses for the Spring-Summer version of
-#'   the 2022 HABs/Weeds report for the Emergency Drought Barrier.
+#' @title Daily averages of continuous water quality data for stations near
+#'   Franks Tract
+#' @description A data set containing daily averages of various continuous water
+#'   quality parameters measured in the water in-situ at the stations near
+#'   Franks Tract located in the upper San Francisco Estuary (Delta). Water
+#'   quality parameters include Dissolved Oxygen, pH, and Chlorophyll
+#'   Fluorescence. Data was collected by DWR and USGS from 2015-2021. Used in
+#'   the analyses for the Spring-Summer version of the 2022 HABs/Weeds report
+#'   for the Emergency Drought Barrier.
 #'
 #'   All water quality data collected by DWR_NCRO (DWR's North Central Region
 #'   Office) was downloaded from the Water Data Library (WDL). Data collected by
@@ -388,23 +388,16 @@
 #'   through direct data requests. And data from USGS were downloaded from the
 #'   National Water Information System (NWIS).
 #'
-#' @format data frame with 17,552 rows and 11 columns
+#' @format data frame with 13,273 rows and 6 columns
 #' \describe{
 #'   \item{Source}{Name of the source dataset. Is one of the following: DWR_CEMP
 #'     (DWR's Continuous Environmental Monitoring Program), DWR_NCRO (DWR's North
 #'     Central Region Office), or USGS}
 #'   \item{Station}{Location where measurement was collected}
 #'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
-#'   \item{WaterTemp_Mean}{Daily average water temperature in degrees Celcius}
-#'   \item{WaterTemp_Max}{Daily maximum water temperature in degrees Celcius}
-#'   \item{DO_Mean}{Daily average dissolved oxygen in milligrams per liter}
-#'   \item{DO_Max}{Daily maximum dissolved oxygen in milligrams per liter}
-#'   \item{pH_Mean}{Daily average pH in pH units}
-#'   \item{pH_Max}{Daily maximum pH in pH units}
-#'   \item{Chla_Mean}{Daily average chlorophyll fluorescence in micrograms per
-#'     liter}
-#'   \item{Chla_Max}{Daily maximum chlorophyll fluorescence in micrograms per
-#'     liter}
+#'   \item{DO}{Daily average dissolved oxygen in milligrams per liter}
+#'   \item{pH}{Daily average pH in pH units}
+#'   \item{Chla}{Daily average chlorophyll fluorescence in micrograms per liter}
 #' }
 #'
 #' @source
@@ -412,4 +405,32 @@
 #'   <https://wdl.water.ca.gov/WaterDataLibrary/>
 #' * USGS National Water Information System (NWIS):
 #'   <https://nwis.waterdata.usgs.gov/nwis>
-"cont_wq_daily"
+"cont_wq_daily_avg"
+
+#' @title Daily maximums of continuous water quality data for the Franks Tract
+#'   station (FRK)
+#' @description A data set containing daily maximum values of various continuous
+#'   water quality parameters measured in the water in-situ at the the Franks
+#'   Tract station (FRK) located in the upper San Francisco Estuary (Delta).
+#'   Water quality parameters include Dissolved Oxygen (as percent saturation),
+#'   pH, and Chlorophyll Fluorescence. Data was collected from 2015-2021. Used
+#'   in the analyses for the Spring-Summer version of the 2022 HABs/Weeds report
+#'   for the Emergency Drought Barrier.
+#'
+#'   Water quality data was collected by DWR_CEMP (DWR's Continuous
+#'   Environmental Monitoring Program) and was acquired through direct data
+#'   requests.
+#'
+#' @format data frame with 2,376 rows and 4 columns
+#' \describe{
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{DO_PerSat}{Daily maximum dissolved oxygen in percent saturation.
+#'     Values were converted from the recorded dissolved oxygen concentration in
+#'     mg/L to percent saturation using the USGS method implemented from the
+#'     [`rMR`](https://cran.r-project.org/web/packages/rMR/index.html) package.}
+#'   \item{pH}{Daily maximum pH in pH units}
+#'   \item{Chla}{Daily maximum chlorophyll fluorescence in micrograms per liter}
+#' }
+#'
+#' @source Acquired through direct data requests
+"cont_wq_daily_max_frk"

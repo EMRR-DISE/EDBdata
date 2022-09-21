@@ -28,6 +28,7 @@ Suggests:
     readr,
     readxl,
     rlang,
+    rMR,
     sf,
     spelling,
     stars,

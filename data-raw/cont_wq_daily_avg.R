@@ -1,8 +1,8 @@
 # Code to prepare the continuous water quality data for the Emergency Drought
   # Barrier (HABs/Weeds) analysis:
-# `cont_wq_daily` - daily means and maximums of the continuous water quality
-  # data (Water Temperature, Dissolved Oxygen, pH, and Chlorophyll Fluorescence)
-  # from 2015-2021 for the stations near Franks Tract
+# `cont_wq_daily_avg` - daily means of the continuous water quality data
+  # (Dissolved Oxygen, pH, and Chlorophyll Fluorescence) from 2015-2021 for the
+  # stations near Franks Tract
 
 # Load packages
 library(dplyr)
@@ -14,7 +14,7 @@ library(lubridate)
 library(here)
 
 # Check if we are in the correct working directory
-i_am("data-raw/cont_wq_daily.R")
+i_am("data-raw/cont_wq_daily_avg.R")
 
 # Set System Timezone as "Etc/GMT+8" (PST) to make it consistent with all data frames
 Sys.setenv(TZ = "Etc/GMT+8")
@@ -39,8 +39,7 @@ Sys.setenv(TZ = "Etc/GMT+8")
 # All of this 15-minute continuous water quality data collected by DWR and USGS
   # is stored on the EDB Report SharePoint site because the file sizes are too
   # large to include in this data package. As a result, we need to define the file
-  # path for where this continuous chlorophyll data is stored on the SharePoint
-  # site.
+  # path for where this continuous data is stored on the SharePoint site.
 
 # Function to define file path to the EDB Report SharePoint site. Uses the
   # Windows user profile for the current DWR login.
@@ -61,7 +60,7 @@ edb_abs_sp_path <- function(fp_rel = NULL) {
   # on the EDB Report SharePoint site
 fp_wq_emp <- dir(
   edb_abs_sp_path("Water Quality/Continuous WQ - March 2022/EMP"),
-  pattern = "\\.csv$",
+  pattern = "(DissolvedOxygen|Fluorescence|pH).csv$",
   full.names = TRUE,
   recursive = TRUE
 )
@@ -101,11 +100,8 @@ df_wq_usgs <- read_csv(fp_wq_usgs)
 
 # DWR-EMP data (just FRK):
 df_wq_emp_c <- df_wq_emp %>%
-  # Remove X-flagged data and NA values in values column
+  # Remove X-flagged data
   filter(qaqc_flag_id != "X") %>%
-  drop_na(value) %>%
-  # Keep only DO, pH, WaterTemp, and Chla parameters
-  filter(parameter %in% c("DissolvedOxygen", "Fluorescence", "pH", "WaterTemperature")) %>%
   transmute(
     Source = "DWR_CEMP",
     Station = station,
@@ -113,7 +109,6 @@ df_wq_emp_c <- df_wq_emp %>%
     parameter = case_when(
       parameter == "DissolvedOxygen" ~ "DO",
       parameter == "Fluorescence" ~ "Chla",
-      parameter == "WaterTemperature" ~ "WaterTemp",
       TRUE ~ parameter
     ),
     # Define timezone as PST
@@ -137,12 +132,11 @@ df_wq_ncro_c <- ndf_wq_ncro %>%
     Source = "DWR_NCRO",
     Station,
     Datetime = mdy_hm(and, tz = "Etc/GMT+8"),
-    WaterTemp = `450`,
     DO = `2351`,
     Chla = `7004`
   ) %>%
   # Convert all columns for WQ parameters to numeric
-  mutate(across(c(WaterTemp, DO, Chla), as.numeric))
+  mutate(across(c(DO, Chla), as.numeric))
 
 # USGS data (just MDM):
 df_wq_usgs_c <- df_wq_usgs %>%
@@ -150,11 +144,11 @@ df_wq_usgs_c <- df_wq_usgs %>%
     Source = "USGS",
     Station = "MDM",
     Datetime = force_tz(DateTime, tzone = "Etc/GMT+8"),
-    WaterTemp = MDM.Temp,
     Chla = MDM.Chlor
   )
 
-# Combine continuous WQ together
+# Combine continuous WQ together and prepare data for calculating daily averages
+  # and maximums
 df_wq_all <-
   bind_rows(df_wq_emp_c, df_wq_ncro_c, df_wq_usgs_c) %>%
   # Only include years 2015 and 2021
@@ -168,41 +162,33 @@ df_wq_all <-
   mutate(RowNum = row_number()) %>%
   ungroup() %>%
   filter(RowNum == 1) %>%
-  select(-RowNum)
+  select(-RowNum) %>%
+  # Remove negative Chla values (n = 26)
+  mutate(Chla = if_else(Chla < 0, NA_real_, Chla))
 
 
 # 3. Aggregate Values -----------------------------------------------------
 
-cont_wq_daily <- df_wq_all %>%
+# Calculate daily averages
+cont_wq_daily_avg <- df_wq_all %>%
   pivot_longer(
     cols = where(is.numeric),
     names_to = "Parameter",
     values_to = "Value"
   ) %>%
-  # Remove negative Chla values (n = 26)
-  filter(!(Parameter == "Chla" & Value < 0)) %>%
-  # Calculate daily averages and maximums
   mutate(Date = date(Datetime)) %>%
   drop_na(Value) %>%
   group_by(Source, Station, Date, Parameter) %>%
-  summarize(
-    Mean = mean(Value),
-    Max = max(Value)
-  ) %>%
+  summarize(Avg = mean(Value)) %>%
   ungroup() %>%
-  pivot_wider(
-    names_from = Parameter,
-    values_from = c(Mean, Max),
-    names_glue = "{Parameter}_{.value}"
-  ) %>%
+  pivot_wider(names_from = Parameter, values_from = Avg) %>%
   select(
     Source,
     Station,
     Date,
-    starts_with("WaterTemp"),
-    starts_with("DO"),
-    starts_with("pH"),
-    starts_with("Chla")
+    DO,
+    pH,
+    Chla
   ) %>%
   arrange(Station, Date)
 
@@ -211,9 +197,9 @@ cont_wq_daily <- df_wq_all %>%
 
 # Save final data set containing continuous water quality data as csv file for
   # easier diffing
-cont_wq_daily %>% write_csv(here("data-raw/Final/cont_wq_daily.csv"))
+cont_wq_daily_avg %>% write_csv(here("data-raw/Final/cont_wq_daily_avg.csv"))
 
 # Save final data set containing continuous water quality data as object in the
   # data package
-usethis::use_data(cont_wq_daily, overwrite = TRUE)
+usethis::use_data(cont_wq_daily_avg, overwrite = TRUE)
 
