@@ -27,8 +27,8 @@ This package provides the following data tables:
 * `phyto_edb`: Phytoplankton community data collected by DWR's Environmental Monitoring Program from 2014-2021 for stations within the Emergency Drought Barrier regions
 * `phyto_hab`: Phytoplankton community data of potentially toxic Cyanobacteria collected by DWR's Environmental Monitoring Program at various locations in the Delta from 2014-2021
 * `cont_chla_daily`: Daily average and median values of continuous chlorophyll fluorescence measured in the water in-situ at the stations within the Emergency Drought Barrier regions. Data was collected by DWR and USGS from 2020-2021.
-* `cont_wq_daily_avg`: daily averages of various continuous water quality parameters (Dissolved Oxygen, pH, and Chlorophyll Fluorescence) measured in the water in-situ from 2015-2021 at the stations near Franks Tract located in the Delta 
-* `cont_wq_daily_max_frk`: daily maximums of various continuous water quality parameters (Dissolved Oxygen (as percent saturation), pH, and Chlorophyll Fluorescence) measured in the water in-situ at the Franks Tract station from 2015-2021
+* `cont_wq_daily_avg`: Daily averages of various continuous water quality parameters (Dissolved Oxygen, pH, and Chlorophyll Fluorescence) measured in the water in-situ from 2015-2021 at the stations near Franks Tract located in the Delta 
+* `cont_wq_daily_max_frk`: Daily maximums of various continuous water quality parameters (Dissolved Oxygen (as percent saturation), pH, and Chlorophyll Fluorescence) measured in the water in-situ at the Franks Tract station from 2015-2021
 * `disc_nutr_chla`: Concentrations of chlorophyll-a and three nutrient parameters (Dissolved Ammonia, Dissolved Nitrate + Nitrite, and Dissolved Ortho-phosphate) in water samples collected at various locations in the Delta east of Chipps Island for 2014-2021
 * `hab_toxins`: Cyanotoxin concentrations in whole-water grab samples collected at various locations in the Delta
 * `mc_vis_index_wq`: *Microcystis* visual index, secchi depth, and water temperature data collected at various locations in the Delta from 2007-2021

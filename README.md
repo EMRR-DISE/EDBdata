@@ -32,11 +32,11 @@ This package provides the following data tables:
     chlorophyll fluorescence measured in the water in-situ at the
     stations within the Emergency Drought Barrier regions. Data was
     collected by DWR and USGS from 2020-2021.
--   `cont_wq_daily_avg`: daily averages of various continuous water
+-   `cont_wq_daily_avg`: Daily averages of various continuous water
     quality parameters (Dissolved Oxygen, pH, and Chlorophyll
     Fluorescence) measured in the water in-situ from 2015-2021 at the
     stations near Franks Tract located in the Delta
--   `cont_wq_daily_max_frk`: daily maximums of various continuous water
+-   `cont_wq_daily_max_frk`: Daily maximums of various continuous water
     quality parameters (Dissolved Oxygen (as percent saturation), pH,
     and Chlorophyll Fluorescence) measured in the water in-situ at the
     Franks Tract station from 2015-2021
