@@ -1,9 +1,8 @@
 # Code to prepare HAB satellite data sets:
-# `hab_sat_ow_delta` - Pixel counts within each Cyano Index (CI) category for
-  # 4 open water regions in the upper San Francisco Estuary: Franks Tract, Mildred
-  # Island, Clifton Court Forebay, and Liberty Island. Also includes a calculated
-  # average Cyano Index value for each region and date in the data set. Summary
-  # statistics cover the summer through fall (June-Oct) from 2019-2021.
+# `hab_sat_ow_delta` - Pixel counts within each Cyano Index (CI) category for 4
+  # open water regions in the upper San Francisco Estuary: Franks Tract, Mildred
+  # Island, Clifton Court Forebay, and Liberty Island. Summary statistics cover
+  # the summer through fall (June-Oct) from 2019-2021.
 
 # Load packages
 library(dplyr)
@@ -131,16 +130,6 @@ count_ci_cat <- function(df) {
     pivot_wider(names_from = CICategory, values_from = pixel_count)
 }
 
-# Function to calculate the average Cyano Index of valid pixels completely
-  # within the polygon (100% coverage fraction)
-calc_avg_ci <- function(df) {
-  df %>%
-    filter(coverage_fraction == 1) %>%
-    left_join(EDBdata:::df_hab_sat_pixel_key, by = c("value" = "PixelValue")) %>%
-    summarize(AvgCI = mean(CyanoIndex, na.rm = TRUE)) %>%
-    pull(AvgCI)
-}
-
 # Finish preparing the HAB satellite data for the four open water regions in the Delta
 hab_sat_ow_delta <- df_hab_sat_c %>%
   mutate(sf_fr_mil_ccf_lib = list(sf_ow_delta_32611)) %>%
@@ -157,7 +146,11 @@ hab_sat_ow_delta <- df_hab_sat_c %>%
   select(Date, df_fr_mil_ccf_lib) %>%
   unnest(cols = df_fr_mil_ccf_lib) %>%
   # Count number of pixels in each CI category for each region and date
-  mutate(df_ci_count = map(df_rast_extract, count_ci_cat)) %>%
+  transmute(
+    Date,
+    Region,
+    df_ci_count = map(df_rast_extract, count_ci_cat)
+  ) %>%
   # Unnest CI category counts into data frame
   unnest(cols = df_ci_count) %>%
   # Replace NA values in the CI category counts with zeros
@@ -179,13 +172,10 @@ hab_sat_ow_delta <- df_hab_sat_c %>%
   ) %>%
   # Only include days where there were greater than 25% valid pixels
   filter(PercValid > 25) %>%
-  # Calculate the average Cyano Index value for each region and date
-  mutate(AvgCI = map_dbl(df_rast_extract, calc_avg_ci)) %>%
   # Reorder and select variables
   select(
     Date,
     Region,
-    AvgCI,
     NonDetect,
     Low,
     Moderate,
@@ -194,11 +184,11 @@ hab_sat_ow_delta <- df_hab_sat_c %>%
     InvalidOrMissing
   )
 
-# Save final data set containing counts and averages of Cyano Index values as csv file
+# Save final data set containing counts of Cyano Index categories as csv file
   # for easier diffing
 write_csv(hab_sat_ow_delta, here("data-raw/Final/hab_sat_ow_delta.csv"))
 
-# Save final data set containing counts and averages of Cyano Index values as object
-  # in the data package
+# Save final data set containing counts of Cyano Index categories as object in
+  # the data package
 usethis::use_data(hab_sat_ow_delta, overwrite = TRUE)
 
