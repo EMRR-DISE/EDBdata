@@ -15,13 +15,12 @@ test_that("No variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(hab_sat_ow_delta), 708)
-  expect_equal(ncol(hab_sat_ow_delta), 9)
+  expect_equal(nrow(hab_sat_ow_delta), 800)
+  expect_equal(ncol(hab_sat_ow_delta), 8)
 
   name_check <- c(
     "Date",
     "Region",
-    "AvgCI",
     "NonDetect",
     "Low",
     "Moderate",
@@ -41,7 +40,6 @@ test_that("There are no duplicate records", {
 test_that("All variables are correct class", {
   expect_equal(class(hab_sat_ow_delta$Date), "Date")
   expect_equal(class(hab_sat_ow_delta$Region), "character")
-  expect_equal(class(hab_sat_ow_delta$AvgCI), "numeric")
   expect_equal(class(hab_sat_ow_delta$NonDetect), "integer")
   expect_equal(class(hab_sat_ow_delta$Low), "integer")
   expect_equal(class(hab_sat_ow_delta$Moderate), "integer")
@@ -87,20 +85,17 @@ test_that("Periods of record for each region are as expected", {
     eval(bquote(expect_equal(month_por(.(region_name2), .(yr_val2)), .(months_expect))))
   }
 
-  # Test both polygons for year 2020
-  # Define expected months for data in 2020
-  months2020_check <- c(5:12)
-  purrr::map(region_names_check, expect_all_months, yr_val2 = 2020, months_expect = months2020_check)
+  # Define expected months for data for all years
+  months_check <- c(6:10)
 
-  # Test both polygons for year 2021
-  # Define expected months for data in 2021
-  months2021_check <- c(5:10)
-  purrr::map(region_names_check, expect_all_months, yr_val2 = 2021, months_expect = months2021_check)
-})
+  # Create a tibble of all Region-Year combinations to run the tests on
+  reg_yr_combo <- tidyr::expand_grid(
+    Region = region_names_check,
+    Year = c(2019:2021)
+  )
 
-test_that("All average Cyano Index values are in their expected range", {
-  expect_gte(min(hab_sat_ow_delta$AvgCI), 0)
-  expect_lte(max(hab_sat_ow_delta$AvgCI), 0.06327)
+  # Test all polygons for data within expected months
+  purrr::map2(reg_yr_combo$Region, reg_yr_combo$Year, expect_all_months, months_expect = months_check)
 })
 
 test_that("All pixel count values are in their expected range", {
