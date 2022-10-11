@@ -38,20 +38,21 @@ Tool. \url{https://fhab.sfei.org/}
 hab_sat_ow_delta
 }
 \description{
-A data set containing counts of pixel values within 4 Cyano
-Index categories from HAB satellite data downloaded from the Harmful Algal
-Blooms Analysis Tool (see Source section below). Summary statistics cover
-the summer through fall (June-Oct) in 2019-2021 for four open water regions
+A data set containing counts of pixel values derived from HAB
+satellite data within 4 Cyano Index categories for four open water regions
 in the upper San Francisco Estuary (Delta): Franks Tract, Mildred Island,
-Clifton Court Forebay, and Liberty Island. The Cyano Index categories (Low,
-Moderate, High, and Very High) were based on WHO recreational guidance
-level thresholds. The data set also includes counts of pixels that were
-below the detection limit for the imagery processing method and counts of
-pixels that were either invalid or missing.
+Clifton Court Forebay, and Liberty Island. Summary statistics cover the
+summer through fall (June-Oct) in 2019-2021. The Cyano Index categories
+(Low, Moderate, High, and Very High) were based on WHO recreational
+guidance level thresholds. The data set also includes counts of pixels that
+were below the detection limit for the imagery processing method and counts
+of pixels that were either invalid or missing.
 
 Counts only include pixels that were completely within the polygons for the
 four regions. In addition, the data set only includes date-region
 combinations for when there were greater than 25\% valid pixels within the
-region. Used in the analyses for the Emergency Drought Barrier (EDB).
+region. Zonal statistics were calculated from satellite data downloaded
+from the Harmful Algal Blooms Analysis Tool (see Source section below).
+Used in the analyses for the Emergency Drought Barrier (EDB).
 }
 \keyword{datasets}
