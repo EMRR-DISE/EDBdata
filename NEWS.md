@@ -13,6 +13,10 @@
 * Added `hab_incidents` - CyanoHAB incident reports in the Delta in 2021
 * Added `cont_wq_daily_avg` - daily averages of various continuous water quality parameters (Dissolved Oxygen, pH, and Chlorophyll Fluorescence) measured in the water in-situ from 2015-2021 at the stations near Franks Tract
 * Added `cont_wq_daily_max_frk` - daily maximums of various continuous water quality parameters (Dissolved Oxygen (as percent saturation), pH, and Chlorophyll Fluorescence) measured in the water in-situ at the Franks Tract station from 2015-2021
+* Updates to the `hab_sat_ow_delta` data set:
+  * Added 2019 data
+  * Restricted months to June-October since this is what we used in the report
+  * Removed average Cyano Index values since we decided not to use this metric in the report
 
 # EDBdata 0.4.0
 
