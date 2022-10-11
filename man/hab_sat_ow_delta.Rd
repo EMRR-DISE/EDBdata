@@ -3,16 +3,14 @@
 \docType{data}
 \name{hab_sat_ow_delta}
 \alias{hab_sat_ow_delta}
-\title{Summary of Cyano Index values derived from HAB satellite data for
-four open water regions in the Delta}
+\title{Counts of pixel values within Cyano Index categories for four open
+water regions in the Delta}
 \format{
-data frame with 708 rows and 9 columns
+data frame with 800 rows and 8 columns
 \describe{
 \item{Date}{Date of satellite imagery in yyyy-mm-dd}
 \item{Region}{Name of the polygon region. Is one of the following: Franks
 Tract, Mildred Island, Clifton Court Forebay, or Liberty Island.}
-\item{AvgCI}{Average Cyano Index value of all valid pixels within the
-region. The Cyano Index is a exponential and unitless metric.}
 \item{NonDetect}{Count of the number of pixels below the detection limit
 for the method which is less than or equal to a Cyano Index of 0.0000631}
 \item{Low}{Count of the number of pixels in the Low Cyano Index category
@@ -40,26 +38,20 @@ Tool. \url{https://fhab.sfei.org/}
 hab_sat_ow_delta
 }
 \description{
-A data set containing counts and averages of Cyano Index values
-from HAB satellite data downloaded from the Harmful Algal Blooms Analysis
-Tool (see Source section below). Summary statistics cover the spring
-through late fall (May-Dec) in 2020 and 2021 for four open water regions in
-the upper San Francisco Estuary (Delta): Franks Tract, Mildred Island,
-Clifton Court Forebay, and Liberty Island. Used in the analyses for the
-Emergency Drought Barrier (EDB).
+A data set containing counts of pixel values within 4 Cyano
+Index categories from HAB satellite data downloaded from the Harmful Algal
+Blooms Analysis Tool (see Source section below). Summary statistics cover
+the summer through fall (June-Oct) in 2019-2021 for four open water regions
+in the upper San Francisco Estuary (Delta): Franks Tract, Mildred Island,
+Clifton Court Forebay, and Liberty Island. The Cyano Index categories (Low,
+Moderate, High, and Very High) were based on WHO recreational guidance
+level thresholds. The data set also includes counts of pixels that were
+below the detection limit for the imagery processing method and counts of
+pixels that were either invalid or missing.
 
-The data set contains averages of Cyano Index for each region and date in
-addition to pixel counts within four Cyano Index categories. The Cyano
-Index categories (Low, Moderate, High, and Very High) were based on WHO
-recreational guidance level thresholds. The data set also includes counts
-of pixels that were below the detection limit for the imagery processing
-method and counts of pixels that were either invalid or missing. Zeros were
-substituted for the values below the detection limit and invalid or missing
-pixels were excluded when calculating the average.
-
-Counts and averages only include pixels that were completely within the
-polygons for the four regions. In addition, the data set only includes
-date-region combinations for when there were greater than 25\% valid pixels
-within the region.
+Counts only include pixels that were completely within the polygons for the
+four regions. In addition, the data set only includes date-region
+combinations for when there were greater than 25\% valid pixels within the
+region. Used in the analyses for the Emergency Drought Barrier (EDB).
 }
 \keyword{datasets}
