@@ -1,53 +1,300 @@
 Date,Region,AvgCI,NonDetect,Low,Moderate,High,VeryHigh,InvalidOrMissing
-2020-05-01,Franks Tract,0,81,0,0,0,0,85
-2020-05-01,Clifton Court Forebay,1.9525e-5,78,0,2,0,0,29
-2020-05-01,Liberty Island,0,60,0,0,0,0,84
-2020-05-03,Liberty Island,0,110,0,0,0,0,34
-2020-05-04,Franks Tract,0,105,0,0,0,0,61
-2020-05-04,Mildred Island,0,17,0,0,0,0,25
-2020-05-04,Clifton Court Forebay,0,86,0,0,0,0,23
-2020-05-04,Liberty Island,0,118,0,0,0,0,26
-2020-05-05,Franks Tract,0,56,0,0,0,0,110
-2020-05-05,Clifton Court Forebay,0,64,0,0,0,0,45
-2020-05-05,Liberty Island,0,92,0,0,0,0,52
-2020-05-07,Clifton Court Forebay,0,38,0,0,0,0,71
-2020-05-07,Liberty Island,2.865979381443299e-5,95,0,0,2,0,47
-2020-05-08,Liberty Island,0,125,0,0,0,0,19
-2020-05-09,Franks Tract,0,65,0,0,0,0,101
-2020-05-09,Mildred Island,0,11,0,0,0,0,31
-2020-05-09,Clifton Court Forebay,0,55,0,0,0,0,54
-2020-05-09,Liberty Island,0,60,0,0,0,0,84
-2020-05-11,Franks Tract,0,82,0,0,0,0,84
-2020-05-11,Mildred Island,0,20,0,0,0,0,22
-2020-05-11,Clifton Court Forebay,0,58,0,0,0,0,51
-2020-05-12,Liberty Island,0,51,0,0,0,0,93
-2020-05-15,Franks Tract,0,126,0,0,0,0,40
-2020-05-15,Mildred Island,0,29,0,0,0,0,13
-2020-05-15,Clifton Court Forebay,4.285714285714286e-6,83,0,1,0,0,25
-2020-05-15,Liberty Island,0,100,0,0,0,0,44
-2020-05-19,Franks Tract,0,108,0,0,0,0,58
-2020-05-19,Mildred Island,0,21,0,0,0,0,21
-2020-05-19,Liberty Island,0,38,0,0,0,0,106
-2020-05-20,Franks Tract,0,91,0,0,0,0,75
-2020-05-20,Mildred Island,0,16,0,0,0,0,26
-2020-05-20,Clifton Court Forebay,1.351578947368421e-4,66,0,5,5,0,33
-2020-05-20,Liberty Island,0,111,0,0,0,0,33
-2020-05-23,Franks Tract,0,101,0,0,0,0,65
-2020-05-23,Mildred Island,0,24,0,0,0,0,18
-2020-05-23,Clifton Court Forebay,0,81,0,0,0,0,28
-2020-05-23,Liberty Island,0,118,0,0,0,0,26
-2020-05-24,Franks Tract,0,102,0,0,0,0,64
-2020-05-24,Mildred Island,0,13,0,0,0,0,29
-2020-05-24,Clifton Court Forebay,0,74,0,0,0,0,35
-2020-05-24,Liberty Island,0,110,0,0,0,0,34
-2020-05-27,Franks Tract,0,122,0,0,0,0,44
-2020-05-27,Mildred Island,0,18,0,0,0,0,24
-2020-05-27,Clifton Court Forebay,0,78,0,0,0,0,31
-2020-05-27,Liberty Island,0,111,0,0,0,0,33
-2020-05-28,Franks Tract,0,93,0,0,0,0,73
-2020-05-28,Clifton Court Forebay,0,68,0,0,0,0,41
-2020-05-28,Liberty Island,0,88,0,0,0,0,56
-2020-05-31,Liberty Island,0,104,0,0,0,0,40
+2019-06-03,Franks Tract,0,130,0,0,0,0,36
+2019-06-03,Mildred Island,0,30,0,0,0,0,12
+2019-06-03,Clifton Court Forebay,0,91,0,0,0,0,18
+2019-06-03,Liberty Island,0,114,0,0,0,0,30
+2019-06-04,Franks Tract,0,113,0,0,0,0,53
+2019-06-04,Mildred Island,0,17,0,0,0,0,25
+2019-06-04,Clifton Court Forebay,0,74,0,0,0,0,35
+2019-06-04,Liberty Island,0,100,0,0,0,0,44
+2019-06-07,Franks Tract,0,129,0,0,0,0,37
+2019-06-07,Mildred Island,0,28,0,0,0,0,14
+2019-06-07,Clifton Court Forebay,0,89,0,0,0,0,20
+2019-06-07,Liberty Island,0,114,0,0,0,0,30
+2019-06-08,Franks Tract,0,64,0,0,0,0,102
+2019-06-08,Clifton Court Forebay,1.6190476190476193e-5,82,0,2,0,0,25
+2019-06-08,Liberty Island,0,125,0,0,0,0,19
+2019-06-11,Franks Tract,0,121,0,0,0,0,45
+2019-06-11,Mildred Island,0,24,0,0,0,0,18
+2019-06-11,Clifton Court Forebay,0,82,0,0,0,0,27
+2019-06-11,Liberty Island,0,103,0,0,0,0,41
+2019-06-12,Franks Tract,0,98,0,0,0,0,68
+2019-06-12,Mildred Island,0,17,0,0,0,0,25
+2019-06-12,Clifton Court Forebay,0,75,0,0,0,0,34
+2019-06-12,Liberty Island,0,57,0,0,0,0,87
+2019-06-15,Franks Tract,0,134,0,0,0,0,32
+2019-06-15,Mildred Island,0,20,0,0,0,0,22
+2019-06-15,Clifton Court Forebay,3.879518072289157e-6,82,0,1,0,0,26
+2019-06-15,Liberty Island,0,115,0,0,0,0,29
+2019-06-16,Franks Tract,0,102,0,0,0,0,64
+2019-06-16,Mildred Island,0,16,0,0,0,0,26
+2019-06-16,Clifton Court Forebay,0,80,0,0,0,0,29
+2019-06-16,Liberty Island,0,100,0,0,0,0,44
+2019-06-18,Franks Tract,0,51,0,0,0,0,115
+2019-06-18,Liberty Island,0,51,0,0,0,0,93
+2019-06-19,Franks Tract,0,131,0,0,0,0,35
+2019-06-19,Mildred Island,0,26,0,0,0,0,16
+2019-06-19,Clifton Court Forebay,0,87,0,0,0,0,22
+2019-06-19,Liberty Island,0,117,0,0,0,0,27
+2019-06-20,Franks Tract,0,97,0,0,0,0,69
+2019-06-20,Mildred Island,0,11,0,0,0,0,31
+2019-06-20,Clifton Court Forebay,0,69,0,0,0,0,40
+2019-06-20,Liberty Island,0,103,0,0,0,0,41
+2019-06-22,Franks Tract,2.134848484848485e-5,129,0,1,2,0,34
+2019-06-22,Mildred Island,0,31,0,0,0,0,11
+2019-06-22,Clifton Court Forebay,0,76,0,0,0,0,33
+2019-06-22,Liberty Island,2.1983471074380165e-6,120,0,1,0,0,23
+2019-06-23,Franks Tract,0,125,0,0,0,0,41
+2019-06-23,Mildred Island,0,26,0,0,0,0,16
+2019-06-23,Clifton Court Forebay,0,82,0,0,0,0,27
+2019-06-23,Liberty Island,0,115,0,0,0,0,29
+2019-06-26,Franks Tract,0,130,0,0,0,0,36
+2019-06-26,Mildred Island,0,31,0,0,0,0,11
+2019-06-26,Clifton Court Forebay,1.6067415730337078e-5,88,0,0,1,0,20
+2019-06-26,Liberty Island,0,121,0,0,0,0,23
+2019-06-27,Clifton Court Forebay,1.75e-5,63,0,0,1,0,45
+2019-06-27,Liberty Island,0,92,0,0,0,0,52
+2019-06-30,Franks Tract,0,147,0,0,0,0,19
+2019-06-30,Mildred Island,0,27,0,0,0,0,15
+2019-06-30,Clifton Court Forebay,0,83,0,0,0,0,26
+2019-06-30,Liberty Island,7.266666666666667e-6,119,0,1,0,0,24
+2019-07-01,Franks Tract,0,135,0,0,0,0,31
+2019-07-01,Mildred Island,0,20,0,0,0,0,22
+2019-07-01,Clifton Court Forebay,0,73,0,0,0,0,36
+2019-07-01,Liberty Island,0,121,0,0,0,0,23
+2019-07-04,Franks Tract,0,125,0,0,0,0,41
+2019-07-04,Mildred Island,0,27,0,0,0,0,15
+2019-07-04,Clifton Court Forebay,0,87,0,0,0,0,22
+2019-07-04,Liberty Island,0,115,0,0,0,0,29
+2019-07-05,Franks Tract,0,89,0,0,0,0,77
+2019-07-05,Mildred Island,0,20,0,0,0,0,22
+2019-07-05,Clifton Court Forebay,0,77,0,0,0,0,32
+2019-07-05,Liberty Island,0,109,0,0,0,0,35
+2019-07-09,Franks Tract,0,88,0,0,0,0,78
+2019-07-09,Mildred Island,0,13,0,0,0,0,29
+2019-07-09,Clifton Court Forebay,0,67,0,0,0,0,42
+2019-07-09,Liberty Island,0,109,0,0,0,0,35
+2019-07-11,Liberty Island,0,51,0,0,0,0,93
+2019-07-12,Franks Tract,0,133,0,0,0,0,33
+2019-07-12,Mildred Island,0,21,0,0,0,0,21
+2019-07-12,Clifton Court Forebay,0,80,0,0,0,0,29
+2019-07-12,Liberty Island,0,113,0,0,0,0,31
+2019-07-13,Franks Tract,0,119,0,0,0,0,47
+2019-07-13,Clifton Court Forebay,0,73,0,0,0,0,36
+2019-07-13,Liberty Island,0,105,0,0,0,0,39
+2019-07-15,Franks Tract,0,93,0,0,0,0,73
+2019-07-15,Mildred Island,0,19,0,0,0,0,23
+2019-07-15,Clifton Court Forebay,0,51,0,0,0,0,58
+2019-07-15,Liberty Island,0,101,0,0,0,0,43
+2019-07-16,Franks Tract,0,129,0,0,0,0,37
+2019-07-16,Mildred Island,0,22,0,0,0,0,20
+2019-07-16,Clifton Court Forebay,0,83,0,0,0,0,26
+2019-07-16,Liberty Island,0,115,0,0,0,0,29
+2019-07-17,Franks Tract,0,75,0,0,0,0,91
+2019-07-17,Clifton Court Forebay,0,65,0,0,0,0,44
+2019-07-17,Liberty Island,0,75,0,0,0,0,69
+2019-07-19,Franks Tract,0,120,0,0,0,0,46
+2019-07-19,Mildred Island,0,27,0,0,0,0,15
+2019-07-19,Clifton Court Forebay,0,71,0,0,0,0,38
+2019-07-19,Liberty Island,0,113,0,0,0,0,31
+2019-07-20,Franks Tract,0,120,0,0,0,0,46
+2019-07-20,Mildred Island,0,27,0,0,0,0,15
+2019-07-20,Clifton Court Forebay,0,82,0,0,0,0,27
+2019-07-20,Liberty Island,0,107,0,0,0,0,37
+2019-07-23,Franks Tract,0,129,0,0,0,0,37
+2019-07-23,Mildred Island,0,27,0,0,0,0,15
+2019-07-23,Clifton Court Forebay,0,84,0,0,0,0,25
+2019-07-23,Liberty Island,0,113,0,0,0,0,31
+2019-07-24,Franks Tract,0,119,0,0,0,0,47
+2019-07-24,Mildred Island,0,17,0,0,0,0,25
+2019-07-24,Clifton Court Forebay,0,75,0,0,0,0,34
+2019-07-24,Liberty Island,0,102,0,0,0,0,42
+2019-07-27,Franks Tract,0,133,0,0,0,0,33
+2019-07-27,Mildred Island,0,26,0,0,0,0,16
+2019-07-27,Clifton Court Forebay,0,81,0,0,0,0,28
+2019-07-27,Liberty Island,0,111,0,0,0,0,33
+2019-07-28,Franks Tract,0,111,0,0,0,0,55
+2019-07-28,Mildred Island,0,12,0,0,0,0,30
+2019-07-28,Clifton Court Forebay,0,65,0,0,0,0,44
+2019-07-28,Liberty Island,0,112,0,0,0,0,32
+2019-07-31,Franks Tract,0,130,0,0,0,0,36
+2019-07-31,Mildred Island,0,25,0,0,0,0,17
+2019-07-31,Clifton Court Forebay,0,78,0,0,0,0,31
+2019-07-31,Liberty Island,0,114,0,0,0,0,30
+2019-08-01,Franks Tract,0,109,0,0,0,0,57
+2019-08-01,Mildred Island,0,20,0,0,0,0,22
+2019-08-01,Clifton Court Forebay,0,74,0,0,0,0,35
+2019-08-01,Liberty Island,0,107,0,0,0,0,37
+2019-08-04,Franks Tract,0,117,0,0,0,0,49
+2019-08-04,Mildred Island,0,21,0,0,0,0,21
+2019-08-04,Clifton Court Forebay,0,80,0,0,0,0,29
+2019-08-04,Liberty Island,0,104,0,0,0,0,40
+2019-08-05,Mildred Island,0,11,0,0,0,0,31
+2019-08-05,Liberty Island,0,93,0,0,0,0,51
+2019-08-07,Liberty Island,0,107,0,0,0,0,37
+2019-08-08,Franks Tract,0,106,0,0,0,0,60
+2019-08-08,Mildred Island,0,16,0,0,0,0,26
+2019-08-08,Clifton Court Forebay,9.456790123456791e-7,80,1,0,0,0,28
+2019-08-08,Liberty Island,0,109,0,0,0,0,35
+2019-08-11,Franks Tract,0,99,0,0,0,0,67
+2019-08-11,Mildred Island,0,23,0,0,0,0,19
+2019-08-11,Clifton Court Forebay,0,69,0,0,0,0,40
+2019-08-11,Liberty Island,1.7163636363636365e-5,107,0,3,0,0,34
+2019-08-12,Franks Tract,0,135,0,0,0,0,31
+2019-08-12,Mildred Island,0,22,0,0,0,0,20
+2019-08-12,Clifton Court Forebay,5.654761904761905e-6,83,0,1,0,0,25
+2019-08-12,Liberty Island,0,111,0,0,0,0,33
+2019-08-13,Franks Tract,0,97,0,0,0,0,69
+2019-08-13,Clifton Court Forebay,0,58,0,0,0,0,51
+2019-08-13,Liberty Island,0,99,0,0,0,0,45
+2019-08-15,Franks Tract,0,134,0,0,0,0,32
+2019-08-15,Mildred Island,0,23,0,0,0,0,19
+2019-08-15,Clifton Court Forebay,0,78,0,0,0,0,31
+2019-08-15,Liberty Island,0,109,0,0,0,0,35
+2019-08-16,Franks Tract,0,131,0,0,0,0,35
+2019-08-16,Mildred Island,0,18,0,0,0,0,24
+2019-08-16,Clifton Court Forebay,3.06e-5,83,1,0,1,0,24
+2019-08-16,Liberty Island,0,109,0,0,0,0,35
+2019-08-19,Franks Tract,0,123,0,0,0,0,43
+2019-08-19,Mildred Island,0,24,0,0,0,0,18
+2019-08-19,Clifton Court Forebay,0,84,0,0,0,0,25
+2019-08-19,Liberty Island,0,109,0,0,0,0,35
+2019-08-20,Franks Tract,0,76,0,0,0,0,90
+2019-08-20,Clifton Court Forebay,0,80,0,0,0,0,29
+2019-08-20,Liberty Island,1.4742268041237115e-5,96,0,0,1,0,47
+2019-08-23,Franks Tract,0,123,0,0,0,0,43
+2019-08-23,Mildred Island,0,25,0,0,0,0,17
+2019-08-23,Clifton Court Forebay,0,78,0,0,0,0,31
+2019-08-23,Liberty Island,0,104,0,0,0,0,40
+2019-08-24,Franks Tract,0,66,0,0,0,0,100
+2019-08-24,Mildred Island,0,16,0,0,0,0,26
+2019-08-24,Clifton Court Forebay,0,48,0,0,0,0,61
+2019-08-24,Liberty Island,0,89,0,0,0,0,55
+2019-08-27,Franks Tract,0,129,0,0,0,0,37
+2019-08-27,Mildred Island,0,13,0,0,0,0,29
+2019-08-27,Clifton Court Forebay,3.791666666666667e-6,71,0,1,0,0,37
+2019-08-27,Liberty Island,6.317757009345795e-5,103,0,0,4,0,37
+2019-08-28,Franks Tract,0,56,0,0,0,0,110
+2019-08-28,Mildred Island,0,15,0,0,0,0,27
+2019-08-28,Liberty Island,2.462686567164179e-5,66,0,0,1,0,77
+2019-08-31,Franks Tract,0,129,0,0,0,0,37
+2019-08-31,Mildred Island,0,19,0,0,0,0,23
+2019-08-31,Clifton Court Forebay,2.341772151898734e-6,78,1,0,0,0,30
+2019-08-31,Liberty Island,2.808653846153846e-5,101,0,2,1,0,40
+2019-09-03,Liberty Island,3.2212389380530973e-6,111,1,1,0,0,31
+2019-09-04,Mildred Island,0,19,0,0,0,0,23
+2019-09-04,Liberty Island,0,72,0,0,0,0,72
+2019-09-05,Clifton Court Forebay,0,52,0,0,0,0,57
+2019-09-08,Franks Tract,0,126,0,0,0,0,40
+2019-09-08,Mildred Island,0,20,0,0,0,0,22
+2019-09-08,Clifton Court Forebay,0,79,0,0,0,0,30
+2019-09-08,Liberty Island,8.03e-6,99,0,1,0,0,44
+2019-09-09,Franks Tract,0,91,0,0,0,0,75
+2019-09-09,Clifton Court Forebay,0,37,0,0,0,0,72
+2019-09-09,Liberty Island,1.4631460674157304e-4,82,0,3,4,0,55
+2019-09-11,Franks Tract,0,138,0,0,0,0,28
+2019-09-11,Mildred Island,0,20,0,0,0,0,22
+2019-09-11,Clifton Court Forebay,2.024390243902439e-6,81,1,0,0,0,27
+2019-09-11,Liberty Island,5.3423423423423426e-5,109,0,0,2,0,33
+2019-09-12,Franks Tract,0,129,0,0,0,0,37
+2019-09-12,Mildred Island,0,20,0,0,0,0,22
+2019-09-12,Clifton Court Forebay,0,64,0,0,0,0,45
+2019-09-12,Liberty Island,2.581132075471698e-5,104,0,1,1,0,38
+2019-09-15,Franks Tract,0,140,0,0,0,0,26
+2019-09-15,Mildred Island,0,24,0,0,0,0,18
+2019-09-15,Clifton Court Forebay,1.9963529411764707e-5,81,1,2,1,0,24
+2019-09-15,Liberty Island,1.0790909090909091e-4,97,0,9,4,0,34
+2019-09-16,Franks Tract,0,98,0,0,0,0,68
+2019-09-16,Clifton Court Forebay,0,71,0,0,0,0,38
+2019-09-16,Liberty Island,7.011428571428571e-5,95,2,3,5,0,39
+2019-09-19,Franks Tract,7.43859649122807e-6,113,0,1,0,0,52
+2019-09-19,Mildred Island,0,19,0,0,0,0,23
+2019-09-19,Clifton Court Forebay,2.6240963855421688e-5,79,0,3,1,0,26
+2019-09-19,Liberty Island,6.418478260869566e-5,86,0,2,4,0,52
+2019-09-20,Franks Tract,0,92,0,0,0,0,74
+2019-09-20,Mildred Island,0,18,0,0,0,0,24
+2019-09-20,Clifton Court Forebay,8.038461538461538e-5,58,0,6,1,0,44
+2019-09-20,Liberty Island,0,83,0,0,0,0,61
+2019-09-23,Franks Tract,0,127,0,0,0,0,39
+2019-09-23,Mildred Island,0,23,0,0,0,0,19
+2019-09-23,Clifton Court Forebay,2.5818181818181817e-5,73,0,4,0,0,32
+2019-09-23,Liberty Island,0,105,0,0,0,0,39
+2019-09-24,Franks Tract,0,112,0,0,0,0,54
+2019-09-24,Mildred Island,0,13,0,0,0,0,29
+2019-09-24,Clifton Court Forebay,1.1656716417910447e-5,66,0,1,0,0,42
+2019-09-24,Liberty Island,0,100,0,0,0,0,44
+2019-09-27,Clifton Court Forebay,0,73,0,0,0,0,36
+2019-09-28,Franks Tract,2.9158878504672895e-5,105,0,0,2,0,59
+2019-09-28,Clifton Court Forebay,7.6484375e-5,57,0,7,0,0,45
+2019-09-30,Liberty Island,5.9864077669902914e-5,97,0,3,3,0,41
+2019-10-01,Franks Tract,3.5390625e-5,126,0,0,2,0,38
+2019-10-01,Mildred Island,0,18,0,0,0,0,24
+2019-10-01,Clifton Court Forebay,4.143116883116883e-5,68,2,7,0,0,32
+2019-10-01,Liberty Island,5.475925925925926e-5,102,0,2,4,0,36
+2019-10-02,Franks Tract,0,99,0,0,0,0,67
+2019-10-02,Clifton Court Forebay,4.145070422535211e-5,68,0,1,2,0,38
+2019-10-02,Liberty Island,3.4584269662921346e-5,83,0,6,0,0,55
+2019-10-04,Franks Tract,1.753781512605042e-5,115,1,2,1,0,47
+2019-10-04,Mildred Island,0,23,0,0,0,0,19
+2019-10-04,Clifton Court Forebay,3.725925925925926e-5,72,1,8,0,0,28
+2019-10-04,Liberty Island,6.564205607476635e-5,96,3,6,2,0,37
+2019-10-05,Franks Tract,0,118,0,0,0,0,48
+2019-10-05,Mildred Island,0,22,0,0,0,0,20
+2019-10-05,Clifton Court Forebay,4.2851851851851855e-5,77,0,3,1,0,28
+2019-10-05,Liberty Island,0,105,0,0,0,0,39
+2019-10-06,Franks Tract,0,84,0,0,0,0,82
+2019-10-06,Clifton Court Forebay,1.4447457627118644e-4,52,0,2,5,0,50
+2019-10-06,Liberty Island,3.902777777777778e-6,71,0,1,0,0,72
+2019-10-08,Franks Tract,2.2105263157894736e-5,132,0,0,1,0,33
+2019-10-08,Mildred Island,0,23,0,0,0,0,19
+2019-10-08,Clifton Court Forebay,1.1275641025641025e-4,69,0,4,5,0,31
+2019-10-08,Liberty Island,0,89,0,0,0,0,55
+2019-10-09,Franks Tract,5.633333333333333e-5,118,0,2,3,0,43
+2019-10-09,Mildred Island,0,21,0,0,0,0,21
+2019-10-09,Clifton Court Forebay,2.234578313253012e-4,64,0,9,10,0,26
+2019-10-09,Liberty Island,3.0881415929203543e-4,94,0,5,14,0,31
+2019-10-12,Franks Tract,5.030597014925373e-5,130,0,1,3,0,32
+2019-10-12,Mildred Island,0,21,0,0,0,0,21
+2019-10-12,Clifton Court Forebay,2.7707317073170733e-4,64,0,7,11,0,27
+2019-10-12,Liberty Island,4.3598214285714286e-5,109,0,1,2,0,32
+2019-10-13,Franks Tract,1.057741935483871e-4,119,0,1,4,0,42
+2019-10-13,Mildred Island,0,16,0,0,0,0,26
+2019-10-13,Clifton Court Forebay,2.0843037974683544e-4,65,0,4,10,0,30
+2019-10-13,Liberty Island,7.110619469026549e-5,107,0,2,4,0,31
+2019-10-16,Clifton Court Forebay,2.76625e-4,33,0,2,5,0,69
+2019-10-17,Franks Tract,0,105,0,0,0,0,61
+2019-10-17,Mildred Island,0,20,0,0,0,0,22
+2019-10-17,Clifton Court Forebay,1.822972972972973e-4,59,0,8,7,0,35
+2019-10-17,Liberty Island,6.538461538461539e-5,61,2,0,2,0,79
+2019-10-20,Franks Tract,5.305084745762712e-6,117,0,1,0,0,48
+2019-10-20,Mildred Island,0,25,0,0,0,0,17
+2019-10-20,Clifton Court Forebay,3.10609756097561e-5,79,0,2,1,0,27
+2019-10-20,Liberty Island,0,109,0,0,0,0,35
+2019-10-21,Franks Tract,1.1089108910891089e-5,99,0,2,0,0,65
+2019-10-21,Mildred Island,0,15,0,0,0,0,27
+2019-10-21,Clifton Court Forebay,1.355263157894737e-5,75,0,0,1,0,33
+2019-10-21,Liberty Island,0,102,0,0,0,0,42
+2019-10-24,Franks Tract,1.2459016393442624e-5,121,0,0,1,0,44
+2019-10-24,Mildred Island,0,21,0,0,0,0,21
+2019-10-24,Clifton Court Forebay,5.1e-5,74,0,7,0,0,28
+2019-10-24,Liberty Island,0,99,0,0,0,0,45
+2019-10-25,Franks Tract,2.5677966101694915e-5,117,0,0,1,0,48
+2019-10-25,Mildred Island,0,12,0,0,0,0,30
+2019-10-25,Clifton Court Forebay,8.08939393939394e-5,59,0,5,2,0,43
+2019-10-25,Liberty Island,0,99,0,0,0,0,45
+2019-10-27,Liberty Island,1.8645454545454545e-4,99,0,0,11,0,34
+2019-10-28,Franks Tract,7.361111111111111e-6,143,0,0,1,0,22
+2019-10-28,Mildred Island,0,23,0,0,0,0,19
+2019-10-28,Clifton Court Forebay,8.013483146067416e-5,77,1,9,2,0,20
+2019-10-28,Liberty Island,2.635593220338983e-5,117,0,0,1,0,26
+2019-10-29,Franks Tract,0,109,0,0,0,0,57
+2019-10-29,Mildred Island,0,12,0,0,0,0,30
+2019-10-29,Clifton Court Forebay,0,75,0,0,0,0,34
+2019-10-29,Liberty Island,5.9000000000000004e-5,104,0,5,3,0,32
+2019-10-31,Franks Tract,0,124,0,0,0,0,42
+2019-10-31,Mildred Island,0,23,0,0,0,0,19
+2019-10-31,Clifton Court Forebay,3.274712643678161e-5,81,1,5,0,0,22
+2019-10-31,Liberty Island,2.935593220338983e-5,115,0,1,2,0,26
 2020-06-01,Mildred Island,0,12,0,0,0,0,30
 2020-06-01,Clifton Court Forebay,0,63,0,0,0,0,46
 2020-06-01,Liberty Island,0,97,0,0,0,0,47
@@ -278,161 +525,6 @@ Date,Region,AvgCI,NonDetect,Low,Moderate,High,VeryHigh,InvalidOrMissing
 2020-10-28,Liberty Island,3.802830188679245e-5,103,0,1,2,0,38
 2020-10-29,Mildred Island,0,15,0,0,0,0,27
 2020-10-29,Liberty Island,1.1409859154929577e-4,68,0,1,2,0,73
-2020-11-01,Franks Tract,0,119,0,0,0,0,47
-2020-11-01,Mildred Island,0,23,0,0,0,0,19
-2020-11-01,Clifton Court Forebay,3.2e-5,79,0,1,1,0,28
-2020-11-01,Liberty Island,2.6272727272727273e-5,108,0,1,1,0,34
-2020-11-02,Franks Tract,0,109,0,0,0,0,57
-2020-11-02,Mildred Island,0,24,0,0,0,0,18
-2020-11-02,Clifton Court Forebay,4.486153846153846e-5,62,1,0,2,0,44
-2020-11-02,Liberty Island,8.659999999999999e-5,98,0,0,2,0,44
-2020-11-05,Franks Tract,0,109,0,0,0,0,57
-2020-11-05,Mildred Island,0,22,0,0,0,0,20
-2020-11-05,Clifton Court Forebay,1.6025641025641026e-5,77,0,0,1,0,31
-2020-11-05,Liberty Island,0,102,0,0,0,0,42
-2020-11-08,Liberty Island,0,113,0,0,0,0,31
-2020-11-09,Franks Tract,1.0725806451612904e-6,123,1,0,0,0,42
-2020-11-09,Mildred Island,0,23,0,0,0,0,19
-2020-11-09,Clifton Court Forebay,0,81,0,0,0,0,28
-2020-11-09,Liberty Island,0,107,0,0,0,0,37
-2020-11-10,Franks Tract,0,90,0,0,0,0,76
-2020-11-10,Mildred Island,0,15,0,0,0,0,27
-2020-11-10,Clifton Court Forebay,3.0512820512820515e-6,76,2,0,0,0,31
-2020-11-10,Liberty Island,0,85,0,0,0,0,59
-2020-11-12,Franks Tract,0,115,0,0,0,0,51
-2020-11-12,Mildred Island,0,23,0,0,0,0,19
-2020-11-12,Clifton Court Forebay,3.0505882352941176e-5,82,0,3,0,0,24
-2020-11-12,Liberty Island,9.034782608695653e-6,113,0,2,0,0,29
-2020-11-16,Franks Tract,0,127,0,0,0,0,39
-2020-11-16,Mildred Island,0,24,0,0,0,0,18
-2020-11-16,Clifton Court Forebay,0,84,0,0,0,0,25
-2020-11-16,Liberty Island,0,113,0,0,0,0,31
-2020-11-20,Franks Tract,0,127,0,0,0,0,39
-2020-11-20,Mildred Island,0,30,0,0,0,0,12
-2020-11-20,Clifton Court Forebay,0,90,0,0,0,0,19
-2020-11-20,Liberty Island,1e-5,108,0,0,1,0,35
-2020-11-21,Franks Tract,2.6222222222222222e-5,89,0,0,1,0,76
-2020-11-21,Mildred Island,0,12,0,0,0,0,30
-2020-11-21,Clifton Court Forebay,0,69,0,0,0,0,40
-2020-11-21,Liberty Island,9.392156862745098e-5,97,0,0,5,0,42
-2020-11-24,Franks Tract,0,123,0,0,0,0,43
-2020-11-24,Mildred Island,0,26,0,0,0,0,16
-2020-11-24,Clifton Court Forebay,0,81,0,0,0,0,28
-2020-11-24,Liberty Island,0,112,0,0,0,0,32
-2020-11-25,Franks Tract,0,114,0,0,0,0,52
-2020-11-25,Mildred Island,0,21,0,0,0,0,21
-2020-11-25,Clifton Court Forebay,0,79,0,0,0,0,30
-2020-11-25,Liberty Island,4.266666666666667e-5,103,0,0,2,0,39
-2020-11-28,Franks Tract,0,130,0,0,0,0,36
-2020-11-28,Mildred Island,0,29,0,0,0,0,13
-2020-11-28,Clifton Court Forebay,0,87,0,0,0,0,22
-2020-11-28,Liberty Island,3.004424778761062e-5,110,0,2,1,0,31
-2020-11-29,Franks Tract,5.14392523364486e-5,103,0,2,2,0,59
-2020-11-29,Mildred Island,0,22,0,0,0,0,20
-2020-11-29,Clifton Court Forebay,0,78,0,0,0,0,31
-2020-11-29,Liberty Island,8.695652173913044e-6,114,0,0,1,0,29
-2020-12-02,Franks Tract,0,128,0,0,0,0,38
-2020-12-02,Mildred Island,0,24,0,0,0,0,18
-2020-12-02,Clifton Court Forebay,0,82,0,0,0,0,27
-2020-12-02,Liberty Island,0,114,0,0,0,0,30
-2020-12-03,Clifton Court Forebay,0,34,0,0,0,0,75
-2020-12-03,Liberty Island,0,70,0,0,0,0,74
-2020-12-05,Liberty Island,0,114,0,0,0,0,30
-2020-12-06,Mildred Island,0,21,0,0,0,0,21
-2020-12-06,Liberty Island,1.191304347826087e-6,114,1,0,0,0,29
-2020-12-07,Franks Tract,1.4829457364341087e-5,126,0,3,0,0,37
-2020-12-07,Mildred Island,0,16,0,0,0,0,26
-2020-12-07,Clifton Court Forebay,0,70,0,0,0,0,39
-2020-12-07,Liberty Island,7.55873015873016e-5,120,0,2,4,0,18
-2020-12-09,Franks Tract,0,133,0,0,0,0,33
-2020-12-09,Mildred Island,0,29,0,0,0,0,13
-2020-12-09,Clifton Court Forebay,0,88,0,0,0,0,21
-2020-12-09,Liberty Island,1.979032258064516e-5,121,0,2,1,0,20
-2020-12-10,Franks Tract,0,130,0,0,0,0,36
-2020-12-10,Mildred Island,0,23,0,0,0,0,19
-2020-12-10,Clifton Court Forebay,3.341463414634146e-6,80,2,0,0,0,27
-2020-12-10,Liberty Island,2.3909090909090908e-5,109,0,0,1,0,34
-2020-12-14,Franks Tract,0,128,0,0,0,0,38
-2020-12-14,Mildred Island,0,27,0,0,0,0,15
-2020-12-14,Clifton Court Forebay,0,81,0,0,0,0,28
-2020-12-14,Liberty Island,8.403361344537815e-6,118,0,0,1,0,25
-2020-12-17,Franks Tract,0,140,0,0,0,0,26
-2020-12-17,Mildred Island,0,29,0,0,0,0,13
-2020-12-17,Liberty Island,0,101,0,0,0,0,43
-2020-12-18,Franks Tract,0,124,0,0,0,0,42
-2020-12-18,Mildred Island,0,28,0,0,0,0,14
-2020-12-18,Clifton Court Forebay,0,87,0,0,0,0,22
-2020-12-18,Liberty Island,1.584070796460177e-5,112,0,0,1,0,31
-2020-12-26,Liberty Island,6.605263157894736e-6,37,0,1,0,0,106
-2020-12-29,Franks Tract,0,141,0,0,0,0,25
-2020-12-29,Mildred Island,0,26,0,0,0,0,16
-2020-12-29,Clifton Court Forebay,0,82,0,0,0,0,27
-2020-12-29,Liberty Island,0,118,0,0,0,0,26
-2021-05-01,Franks Tract,0,134,0,0,0,0,32
-2021-05-01,Mildred Island,0,30,0,0,0,0,12
-2021-05-01,Clifton Court Forebay,1.5326086956521741e-6,90,2,0,0,0,17
-2021-05-01,Liberty Island,0,109,0,0,0,0,35
-2021-05-02,Franks Tract,0,123,0,0,0,0,43
-2021-05-02,Mildred Island,0,22,0,0,0,0,20
-2021-05-02,Clifton Court Forebay,1.2065934065934065e-5,88,0,3,0,0,18
-2021-05-02,Liberty Island,0,113,0,0,0,0,31
-2021-05-05,Franks Tract,0,128,0,0,0,0,38
-2021-05-05,Mildred Island,0,26,0,0,0,0,16
-2021-05-05,Clifton Court Forebay,0,93,0,0,0,0,16
-2021-05-05,Liberty Island,0,105,0,0,0,0,39
-2021-05-06,Franks Tract,0,115,0,0,0,0,51
-2021-05-06,Mildred Island,0,23,0,0,0,0,19
-2021-05-06,Clifton Court Forebay,0,75,0,0,0,0,34
-2021-05-06,Liberty Island,0,111,0,0,0,0,33
-2021-05-09,Franks Tract,0,116,0,0,0,0,50
-2021-05-09,Mildred Island,0,23,0,0,0,0,19
-2021-05-09,Clifton Court Forebay,0,89,0,0,0,0,20
-2021-05-09,Liberty Island,5.9574468085106375e-6,93,0,1,0,0,50
-2021-05-10,Franks Tract,0,108,0,0,0,0,58
-2021-05-10,Mildred Island,0,16,0,0,0,0,26
-2021-05-10,Clifton Court Forebay,3.0404761904761906e-5,81,0,2,1,0,25
-2021-05-10,Liberty Island,2.401574803149606e-6,126,0,1,0,0,17
-2021-05-13,Franks Tract,0,122,0,0,0,0,44
-2021-05-13,Mildred Island,0,26,0,0,0,0,16
-2021-05-13,Clifton Court Forebay,0,80,0,0,0,0,29
-2021-05-13,Liberty Island,0,108,0,0,0,0,36
-2021-05-14,Franks Tract,0,111,0,0,0,0,55
-2021-05-14,Mildred Island,0,12,0,0,0,0,30
-2021-05-14,Clifton Court Forebay,0,79,0,0,0,0,30
-2021-05-14,Liberty Island,0,76,0,0,0,0,68
-2021-05-16,Liberty Island,0,112,0,0,0,0,32
-2021-05-17,Franks Tract,0,131,0,0,0,0,35
-2021-05-17,Mildred Island,0,18,0,0,0,0,24
-2021-05-17,Clifton Court Forebay,1.1735632183908047e-4,83,0,0,4,0,22
-2021-05-17,Liberty Island,0,106,0,0,0,0,38
-2021-05-18,Franks Tract,0,106,0,0,0,0,60
-2021-05-18,Clifton Court Forebay,1.8696551724137932e-4,74,0,6,7,0,22
-2021-05-18,Liberty Island,0,87,0,0,0,0,57
-2021-05-20,Franks Tract,0,129,0,0,0,0,37
-2021-05-20,Liberty Island,2.527777777777778e-6,107,0,1,0,0,36
-2021-05-21,Franks Tract,0,137,0,0,0,0,29
-2021-05-21,Mildred Island,0,28,0,0,0,0,14
-2021-05-21,Clifton Court Forebay,2.7733763440860215e-4,60,2,25,6,0,16
-2021-05-21,Liberty Island,4.062015503875969e-6,127,0,2,0,0,15
-2021-05-22,Franks Tract,0,111,0,0,0,0,55
-2021-05-22,Clifton Court Forebay,2.746329113924051e-4,44,5,25,5,0,30
-2021-05-22,Liberty Island,0,109,0,0,0,0,35
-2021-05-24,Franks Tract,0,136,0,0,0,0,30
-2021-05-24,Mildred Island,0,13,0,0,0,0,29
-2021-05-24,Clifton Court Forebay,2.1183936170212766e-4,70,1,14,9,0,15
-2021-05-24,Liberty Island,0,113,0,0,0,0,31
-2021-05-25,Franks Tract,0,130,0,0,0,0,36
-2021-05-25,Mildred Island,0,23,0,0,0,0,19
-2021-05-25,Clifton Court Forebay,1.3010752688172043e-4,87,0,0,6,0,16
-2021-05-25,Liberty Island,0,127,0,0,0,0,17
-2021-05-28,Franks Tract,0,140,0,0,0,0,26
-2021-05-28,Mildred Island,0,34,0,0,0,0,8
-2021-05-28,Clifton Court Forebay,3.967741935483871e-5,91,0,0,2,0,16
-2021-05-28,Liberty Island,0,115,0,0,0,0,29
-2021-05-29,Franks Tract,0,123,0,0,0,0,43
-2021-05-29,Mildred Island,0,26,0,0,0,0,16
-2021-05-29,Clifton Court Forebay,2.3043956043956044e-5,89,0,1,1,0,18
-2021-05-29,Liberty Island,0,98,0,0,0,0,46
 2021-06-01,Franks Tract,0,133,0,0,0,0,33
 2021-06-01,Mildred Island,0,29,0,0,0,0,13
 2021-06-01,Clifton Court Forebay,6.32967032967033e-6,90,0,1,0,0,18

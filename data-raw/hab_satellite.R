@@ -1,9 +1,9 @@
 # Code to prepare HAB satellite data sets:
-# 1) `hab_sat_ow_delta` - Pixel counts within each Cyano Index (CI) category for
+# `hab_sat_ow_delta` - Pixel counts within each Cyano Index (CI) category for
   # 4 open water regions in the upper San Francisco Estuary: Franks Tract, Mildred
   # Island, Clifton Court Forebay, and Liberty Island. Also includes a calculated
   # average Cyano Index value for each region and date in the data set. Summary
-  # statistics cover the spring through late fall (May-Dec) in 2020 and 2021.
+  # statistics cover the summer through fall (June-Oct) from 2019-2021.
 
 # Load packages
 library(dplyr)
@@ -47,13 +47,12 @@ if (download) {
     Sys.sleep(5)
   }
 
-  # Download data for May-December 2020
-  hab_2020 <- c(5:12)
-  for (i in hab_2020) {download_hab(2020, i)}
-
-  # Download data for May-October 2021
-  hab_2021 <- c(5:10)
-  for (i in hab_2021) {download_hab(2021, i)}
+  # Download data for June-October in 2019-2021
+  for (i in c(2019:2021)) {
+    for (j in c(6:10)) {
+      download_hab(i, j)
+    }
+  }
 
   # Only keep sentinel-3a .tif files
   fp_remove <- str_subset(dir(dir_hab_sat, full.names = TRUE), "sentinel-3a.+tif$", negate = TRUE)
