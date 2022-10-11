@@ -66,16 +66,15 @@ fp_hab_sat <- dir(here("data-raw/HAB_satellite_data"), pattern = "tif$", full.na
 df_hab_sat <-
   tibble(
     fp = fp_hab_sat,
-    strs_prx_obj = map(fp, read_stars, proxy = TRUE)
+    strs_prx = map(fp, read_stars, proxy = TRUE)
   ) %>%
   # pull out date components and convert to date
   mutate(
-    yr_chr = map_chr(fp, ~str_extract(.x, "(?<=sentinel-3a\\.)[:digit:]{4}")),
-    mo_day_chr = map_chr(fp, ~str_extract(.x, "[:digit:]{4}(?=\\.L3\\.CA_mosaic)")),
-    date_chr = map2_chr(yr_chr, mo_day_chr, ~str_c(.x, .y)),
-    strs_date = as_date(map_dbl(date_chr, ymd))
+    yr = str_extract(fp, "(?<=sentinel-3a\\.)[:digit:]{4}"),
+    mo_day = str_extract(fp, "[:digit:]{4}(?=\\.L3\\.CA_mosaic)"),
+    Date = ymd(paste0(yr, mo_day))
   ) %>%
-  select(strs_date, strs_prx_obj)
+  select(Date, strs_prx)
 
 # Import the polygon shapefile for the four open water regions in the Delta
 sf_ow_delta <- read_sf(here("data-raw/Spatial_data/Franks_Mildr_CCF_LibIsl.shp"))
@@ -84,7 +83,7 @@ sf_ow_delta <- read_sf(here("data-raw/Spatial_data/Franks_Mildr_CCF_LibIsl.shp")
 sf_ow_delta_c <- sf_ow_delta %>% rename(Region = HNAME)
 
 # Transform crs of open water regions shapefile to the crs of the HAB satellite data
-crs_hab_sat <- st_crs(df_hab_sat$strs_prx_obj[[1]])
+crs_hab_sat <- st_crs(df_hab_sat$strs_prx[[1]])
 sf_ow_delta_32611 <- st_transform(sf_ow_delta_c, crs = crs_hab_sat)
 
 # Create a bounding box of the open water regions shapefile which will be used to
@@ -92,36 +91,35 @@ sf_ow_delta_32611 <- st_transform(sf_ow_delta_c, crs = crs_hab_sat)
   # to ensure no desired data is removed.
 bbox_ow_delta <- st_bbox(st_buffer(sf_ow_delta_32611, 1000))
 
-# Create a vector of dates to exclude from the analysis since the imagery doesn't cover the Delta region
-dates_rm <-
-  ymd(
-    c(
-      "2020-12-22",
-      "2021-07-19",
-      "2021-07-22",
-      "2021-08-16"
-    )
-  )
-
 # Prepare HAB satellite data for zonal statistics
-df_hab_sat_clean <- df_hab_sat %>%
-  # Remove satellite objects that don't cover the Delta region
-  filter(!strs_date %in% dates_rm) %>%
+df_hab_sat_c <- df_hab_sat %>%
   mutate(
-    rast_obj_crop =
-      # Crop HAB satellite data to bounding box of the open water regions
-        # shapefile to make it easier to work with
-      map(strs_prx_obj, ~st_crop(.x, bbox_ow_delta) %>%
+    # Crop HAB satellite data to bounding box of the open water regions
+      # shapefile to make it easier to work with
+    strs_prx_crop = map(
+      strs_prx,
+      ~ st_crop(.x, bbox_ow_delta) %>%
         # rename attribute to be more descriptive
         setNames("pixel_val") %>%
         # Convert factor to numeric
-        mutate(pixel_val = as.numeric(as.character(pixel_val))) %>%
-        # Convert to raster object
-        st_as_stars() %>%
-        as("Raster")
-    )
+        mutate(pixel_val = as.numeric(as.character(pixel_val)))
+    ),
+    # Convert to stars object, assigning NA when conversion throws an error -
+      # most likely due to satellite data being out of range of the bounding box
+    strs_crop = map(
+      strs_prx_crop,
+      ~ tryCatch(st_as_stars(.x), error = function(e) NA)
+    ),
+    # Find dates where conversion resulted in an error
+    conv_error = is.na(chuck(strs_crop))
   ) %>%
-  select(-strs_prx_obj)
+  # Remove dates where conversion resulted in an error
+  filter(!conv_error) %>%
+  transmute(
+    Date,
+    # Convert to raster object
+    rast_crop = map(strs_crop, ~ as(.x, "Raster"))
+  )
 
 # Function to count the number of pixels within each CI category for the pixels
   # completely within the polygon (100% coverage fraction)
@@ -144,19 +142,19 @@ calc_avg_ci <- function(df) {
 }
 
 # Finish preparing the HAB satellite data for the four open water regions in the Delta
-hab_sat_ow_delta <- df_hab_sat_clean %>%
+hab_sat_ow_delta <- df_hab_sat_c %>%
   mutate(sf_fr_mil_ccf_lib = list(sf_ow_delta_32611)) %>%
   # Extract pixels from within each polygon
   mutate(
     sf_fr_mil_ccf_lib = map2(
       sf_fr_mil_ccf_lib,
-      rast_obj_crop,
+      rast_crop,
       ~ mutate(.x, df_rast_extract = exact_extract(.y, .x))
-    )
+    ),
+    # Convert sf object to data frame
+    df_fr_mil_ccf_lib = map(sf_fr_mil_ccf_lib, st_drop_geometry)
   ) %>%
-  # Convert sf object to data frame
-  mutate(df_fr_mil_ccf_lib = map(sf_fr_mil_ccf_lib, st_drop_geometry)) %>%
-  select(Date = strs_date, df_fr_mil_ccf_lib) %>%
+  select(Date, df_fr_mil_ccf_lib) %>%
   unnest(cols = df_fr_mil_ccf_lib) %>%
   # Count number of pixels in each CI category for each region and date
   mutate(df_ci_count = map(df_rast_extract, count_ci_cat)) %>%
@@ -177,7 +175,7 @@ hab_sat_ow_delta <- df_hab_sat_clean %>%
     # pixels with valid data (<= 250)
   mutate(
     PixelSum = rowSums(across(where(is.integer))),
-    PercValid = (1 - InvalidOrMissing/PixelSum) * 100
+    PercValid = (1 - InvalidOrMissing / PixelSum) * 100
   ) %>%
   # Only include days where there were greater than 25% valid pixels
   filter(PercValid > 25) %>%
