@@ -30,8 +30,12 @@ high}
 }
 }
 \source{
-\code{discretewq} data package (version 2.3.2):
+\itemize{
+\item \code{discretewq} data package (version 2.3.2):
 \url{https://github.com/sbashevkin/discretewq/tree/v2.3.2}
+\item California Department of Water Resources (DWR) Water Data Library (WDL):
+\url{https://wdl.water.ca.gov/WaterDataLibrary/}
+}
 }
 \usage{
 mc_vis_index_wq

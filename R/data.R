@@ -333,8 +333,11 @@
 #'   \item{Temperature}{Water temperature in degrees Celsius}
 #' }
 #'
-#' @source `discretewq` data package (version 2.3.2):
+#' @source
+#' * `discretewq` data package (version 2.3.2):
 #'   <https://github.com/sbashevkin/discretewq/tree/v2.3.2>
+#' * California Department of Water Resources (DWR) Water Data Library (WDL):
+#'   <https://wdl.water.ca.gov/WaterDataLibrary/>
 "mc_vis_index_wq"
 
 #' @title CyanoHAB incident reports in the upper San Francisco Estuary
