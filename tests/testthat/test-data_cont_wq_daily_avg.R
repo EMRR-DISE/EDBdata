@@ -98,9 +98,18 @@ test_that("Date is formatted correctly", {
   )))
 })
 
-test_that("Daily averages are greater than or equal to zero", {
+test_that("Dissolved oxygen values are within expected ranges", {
   expect_gte(min(cont_wq_daily_avg$DO, na.rm = TRUE), 0)
-  expect_gte(min(cont_wq_daily_avg$pH, na.rm = TRUE), 0)
+  expect_lte(max(cont_wq_daily_avg$DO, na.rm = TRUE), 20)
+})
+
+test_that("pH values are within expected ranges", {
+  expect_gte(min(cont_wq_daily_avg$pH, na.rm = TRUE), 5)
+  expect_lte(max(cont_wq_daily_avg$pH, na.rm = TRUE), 11)
+})
+
+test_that("Chlorophyll values are within expected ranges", {
   expect_gte(min(cont_wq_daily_avg$Chla, na.rm = TRUE), 0)
+  expect_lte(max(cont_wq_daily_avg$Chla, na.rm = TRUE), 200)
 })
 
