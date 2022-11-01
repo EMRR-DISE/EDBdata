@@ -48,6 +48,10 @@ This package provides the following data tables:
   temperature data collected at various locations in the Delta from
   2007-2021
 - `hab_incidents`: CyanoHAB incident reports in the Delta in 2021
+- `wtr_temp_daily_dd`: Daily average water temperatures and degree days
+  above 19 degrees Celsius for the Central Delta from 2015-2021
+- `air_temp_daily_dd`: Daily average air temperatures and degree days
+  above 19 degrees Celsius for the region near the Delta from 2015-2021
 
 ## Installation
 
@@ -69,6 +73,9 @@ Program through direct data requests
 
 California Department of Water Resources (DWR) Water Data Library (WDL):
 <https://wdl.water.ca.gov/WaterDataLibrary/>
+
+California Department of Water Resources (DWR) California Data Exchange
+Center (CDEC): <https://cdec.water.ca.gov/>
 
 USGS National Water Information System (NWIS):
 <https://nwis.waterdata.usgs.gov/nwis>

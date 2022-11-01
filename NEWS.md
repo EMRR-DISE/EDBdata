@@ -17,6 +17,8 @@
   * Added 2019 data
   * Restricted months to June-October since this is what we used in the report
   * Removed average Cyano Index values since we decided not to use this metric in the report
+* Added `wtr_temp_daily_dd` - daily average water temperatures and degree days above 19 degrees Celsius for the Central Delta from 2015-2021
+* Added `air_temp_daily_dd` - daily average air temperatures and degree days above 19 degrees Celsius for the region near the Delta from 2015-2021
 
 # EDBdata 0.4.0
 

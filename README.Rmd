@@ -33,6 +33,8 @@ This package provides the following data tables:
 * `hab_toxins`: Cyanotoxin concentrations in whole-water grab samples collected at various locations in the Delta
 * `mc_vis_index_wq`: *Microcystis* visual index, secchi depth, and water temperature data collected at various locations in the Delta from 2007-2021
 * `hab_incidents`: CyanoHAB incident reports in the Delta in 2021
+* `wtr_temp_daily_dd`: Daily average water temperatures and degree days above 19 degrees Celsius for the Central Delta from 2015-2021
+* `air_temp_daily_dd`: Daily average air temperatures and degree days above 19 degrees Celsius for the region near the Delta from 2015-2021
 
 ## Installation
 
@@ -50,6 +52,8 @@ San Francisco Estuary Institute (SFEI). Harmful Algal Blooms Analysis Tool. <htt
 Phytoplankton data was acquired from DWR's Environmental Monitoring Program through direct data requests
 
 California Department of Water Resources (DWR) Water Data Library (WDL): <https://wdl.water.ca.gov/WaterDataLibrary/>
+
+California Department of Water Resources (DWR) California Data Exchange Center (CDEC): <https://cdec.water.ca.gov/>
 
 USGS National Water Information System (NWIS): <https://nwis.waterdata.usgs.gov/nwis>
 
