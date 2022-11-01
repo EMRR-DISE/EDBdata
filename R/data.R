@@ -427,3 +427,66 @@
 #'
 #' @source Acquired through direct data requests
 "cont_wq_daily_max_frk"
+
+#' @title Daily average water temperature and degree days for the Central Delta
+#' @description A data set containing daily average water temperatures and
+#'   degree days above 19 degrees Celsius for the upper San Francisco Estuary
+#'   (Delta) from 2015-2021. Values are based on averages of six continuous
+#'   water quality stations located in the Central and Southern Delta: False
+#'   River near Oakley (FAL), Middle River near Holt (HLT), Holland Cut near
+#'   Bethel Island (HOL), Middle River at Middle River (MDM), Old River at
+#'   Quimbly (ORQ), and Old River at Franks Tract near Terminous (OSJ). Used in
+#'   the analyses for the Spring-Summer version of the 2022 HABs/Weeds report
+#'   for the Emergency Drought Barrier.
+#'
+#'   All water temperature data collected by NCRO (DWR's North Central Region
+#'   Office; FAL, HLT, HOL, ORQ, and OSJ stations) was downloaded from the Water
+#'   Data Library (WDL). Data collected by USGS (MDM station) was downloaded
+#'   from the National Water Information System (NWIS).
+#'
+#' @format data frame with 2,557 rows and 4 columns
+#' \describe{
+#'   \item{Year}{Calendar year of the measurement}
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{WaterTemp_Avg}{Daily average water temperature in degrees Celsius of
+#'     six continuous water quality stations located in the Central and Southern
+#'     Delta}
+#'   \item{WaterTemp_DD}{Daily accumulated degree days above 19C for the
+#'     averaged water temperature data at six stations located in the Central and
+#'     Southern Delta for each `Year`. Calculated with the [pollen::gdd()]
+#'     function.}
+#' }
+#'
+#' @source
+#' * California Department of Water Resources (DWR) Water Data Library (WDL):
+#'   <https://wdl.water.ca.gov/WaterDataLibrary/>
+#' * USGS National Water Information System (NWIS):
+#'   <https://nwis.waterdata.usgs.gov/nwis>
+"wtr_temp_daily_dd"
+
+#' @title Daily average air temperature and degree days for the Delta region
+#' @description A data set containing daily average air temperatures and degree
+#'   days above 19 degrees Celsius for the region near the upper San Francisco
+#'   Estuary (Delta) from 2015-2021. Values are based on averages of three
+#'   continuous weather observation stations located near the Delta: San Joaquin
+#'   River McCune station (SJR), Harvey O' Banks Pumping Plant (HBP), and San
+#'   Joaquin River at Mossdale (MSD). Used in the analyses for the Spring-Summer
+#'   version of the 2022 HABs/Weeds report for the Emergency Drought Barrier.
+#'
+#'   All air temperature data was collected by DWR and was downloaded from the
+#'   California Data Exchange Center (CDEC).
+#'
+#' @format data frame with 2,556 rows and 4 columns
+#' \describe{
+#'   \item{Year}{Calendar year of the measurement}
+#'   \item{Date}{Calendar date of the measurement in yyyy-mm-dd}
+#'   \item{AirTemp_Avg}{Daily average air temperature in degrees Celsius of
+#'     three continuous weather stations located near the Delta}
+#'   \item{AirTemp_DD}{Daily accumulated degree days above 19C for the averaged
+#'     air temperature data at three stations located near the Delta for each
+#'     `Year`. Calculated with the [pollen::gdd()] function.}
+#' }
+#'
+#' @source California Department of Water Resources (DWR) California Data
+#'   Exchange Center (CDEC): <https://cdec.water.ca.gov/>
+"air_temp_daily_dd"
