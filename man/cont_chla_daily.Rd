@@ -6,7 +6,7 @@
 \title{Daily values of continuous chlorophyll fluorescence data for stations
 within the EDB regions}
 \format{
-data frame with 7,612 rows and 7 columns
+data frame with 7,953 rows and 7 columns
 \describe{
 \item{Source}{Name of the source dataset. Is one of the following: DWR_CEMP
 (DWR's Continuous Environmental Monitoring Program), DWR_NCRO (DWR's North

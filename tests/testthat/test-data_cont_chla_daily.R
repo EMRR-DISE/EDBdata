@@ -15,7 +15,7 @@ test_that("No variables contain `NA` values", {
 })
 
 test_that("Data dimensions are correct", {
-  expect_equal(nrow(cont_chla_daily), 7612)
+  expect_equal(nrow(cont_chla_daily), 7953)
   expect_equal(ncol(cont_chla_daily), 7)
 
   name_check <- c(

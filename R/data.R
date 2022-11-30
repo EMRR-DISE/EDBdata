@@ -119,7 +119,7 @@
 #'   from the National Water Information System (NWIS) using the `dataRetrieval`
 #'   R package. Some of the data from USGS is considered provisional.
 #'
-#' @format data frame with 7,612 rows and 7 columns
+#' @format data frame with 7,953 rows and 7 columns
 #' \describe{
 #'   \item{Source}{Name of the source dataset. Is one of the following: DWR_CEMP
 #'     (DWR's Continuous Environmental Monitoring Program), DWR_NCRO (DWR's North

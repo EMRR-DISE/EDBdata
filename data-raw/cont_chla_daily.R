@@ -71,16 +71,21 @@ fp_chla_sp_edb <- sort(dir(
 fp_chla_sp_edb2 <- str_subset(fp_chla_sp_edb, "FAL_|HLT_.+2020|OSJ_.+2020", negate = TRUE)
 fp_chla_diff_fmt <- str_subset(fp_chla_sp_edb, "FAL_|HLT_.+2020|OSJ_.+2020")
 
+# Also remove BLP, HLT, and OSJ collected at end of 2021 since their formats are
+  # so different and need to be imported separately
+fp_chla_sp_edb3 <- str_subset(fp_chla_sp_edb2, "1231\\.csv$", negate = TRUE)
+fp_chla_diff_fmt2 <- str_subset(fp_chla_sp_edb2, "1231\\.csv$")
+
 # Function to extract the three letter station codes from their file paths
 extr_sta_code <- function(fp_str) {
   str_extract(fp_str, "(?<=Cont_Chla_Data/)[:upper:]{3}")
 }
 
-# Import continuous chlorophyll data from fp_edb_sp_chla2 into a nested dataframe
+# Import continuous chlorophyll data from fp_edb_sp_chla3 into a nested dataframe
 ndf_chla_orig1 <-
   tibble(
-    Station = map_chr(fp_chla_sp_edb2, extr_sta_code),
-    df_data = map(fp_chla_sp_edb2, ~ read_csv(.x, col_types = cols(.default = "c")))
+    Station = map_chr(fp_chla_sp_edb3, extr_sta_code),
+    df_data = map(fp_chla_sp_edb3, ~ read_csv(.x, col_types = cols(.default = "c")))
   )
 
 # Import continuous chlorophyll data for FAL (2020 and 2021), HLT (2020), and OSJ (2020)
@@ -96,6 +101,21 @@ ndf_chla_diff_fmt <-
         skip = .y,
         col_types = cols(.default = "c")
       )
+    )
+  )
+
+# Import continuous chlorophyll data for BLP, HLT, and OSJ collected at end of 2021
+ndf_chla_diff_fmt2 <-
+  tibble(
+    Station = map_chr(fp_chla_diff_fmt2, extr_sta_code),
+    df_data = map(fp_chla_diff_fmt2, ~ read_csv(.x, skip = 1, col_types = cols(.default = "c")))
+  ) %>%
+  # Remove first row and rename first column
+  mutate(
+    df_data = map(
+      df_data,
+      ~ slice(.x, -1) %>%
+      rename(DateTime = and)
     )
   )
 
@@ -143,7 +163,7 @@ ndf_chla_usgs <-
 
 # Combine all nested dataframes together
 ndf_chla_orig2 <-
-  bind_rows(ndf_chla_orig1, ndf_chla_diff_fmt, ndf_chla_usgs) %>%
+  bind_rows(ndf_chla_orig1, ndf_chla_diff_fmt, ndf_chla_diff_fmt2, ndf_chla_usgs) %>%
   arrange(Station)
 
 # Import coordinates for stations
@@ -159,6 +179,7 @@ vec_vars_keep <-
     "time",
     "value",
     "32316_00000",
+    "7004.00",
     "Quality",
     "qaqc",
     "Flag"
@@ -172,7 +193,7 @@ df_chla_clean1 <- ndf_chla_orig2 %>%
       df_data,
       ~select(.x, contains(vec_vars_keep)) %>%
         rename(DateTime = contains(c("date", "time"), ignore.case = FALSE)) %>%
-        rename(Chla = matches("value|32316_00000$")) %>%
+        rename(Chla = matches("value|32316_00000$|^7004")) %>%
         rename(Qual = matches("Qual|Flag|qaqc|_cd$"))
     )
   ) %>%
@@ -212,7 +233,10 @@ df_chla_clean2 <- df_chla_clean1 %>%
   filter(Year %in% 2020:2021) %>%
   # Remove NA values, values less than zero, and records with Qual code of "X" (Bad data)
   filter(!is.na(Chla), Chla >= 0) %>%
-  filter(Qual != "X" | is.na(Qual))
+  filter(Qual != "X" | is.na(Qual)) %>%
+  # Remove duplicates
+  select(-Qual) %>%
+  distinct()
 
 # Run a few quality checks on the 15-minute data before calculating daily
   # averages and medians
